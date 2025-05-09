@@ -1,0 +1,23 @@
+<div class="login auth-form">
+    <div class="auth-form__container grid grid-cols-5">
+        <div class="auth-form__image col-span-3 h-[100dvh]">
+            <mat-icon class="auth-form__return auth-form__return--login">west</mat-icon>
+            <img src="../../../assets/img/logo-com-cor-sem-letras.png" alt="Logo do Site Colorido">
+        </div>
+        <div class="auth-form__content col-span-2 min-h-[100dvh]">
+            <img src="../../../assets/img/logo-branca.png" alt="Logo do Site na cor Branca" class="auth-form__logo">
+            <h2 class="auth-form__title">Formulário de Login</h2>
+            <form class="auth-form__form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <input class="auth-form__input" type="text" placeholder="E-mail" formControlName="email">
+                <div class="auth-form__error" *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <div *ngIf="email.hasError('required')">Campo obrigatório</div>
+                </div>
+                <input class="auth-form__input" type="password" placeholder="Senha" formControlName="password">
+                <div class="auth-form__error" *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <div *ngIf="password.hasError('required')">Campo obrigatório</div>
+                </div>
+                <button class="auth-form__button">Entrar</button>
+            </form>
+        </div>
+    </div>
+</div>

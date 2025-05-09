@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@use './styles/reset';
+@use './styles/variables';
+@use './styles/auth-form';
+@use './styles/tailwind';
+
+
+html, body { height: 100%; }
+body { margin: 0; }

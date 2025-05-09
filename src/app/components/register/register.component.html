@@ -1,0 +1,55 @@
+<div class="register auth-form">
+    <div class="auth-form__container grid grid-cols-5">
+        <div class="auth-form__content col-span-2 min-h-[100dvh]">
+            <img src="../../../assets/img/logo-branca.png" alt="Logo do Site na cor Branca" class="auth-form__logo">
+            <h2 class="auth-form__title">Formulário de Cadastro</h2>
+            <form class="auth-form__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <input class="auth-form__input" type="text" placeholder="Nome Completo" formControlName="fullName">
+                <div class="auth-form__error" *ngIf="fullName.invalid && (fullName.dirty || fullName.touched)">
+                    <div *ngIf="fullName.hasError('required')">Campo obrigatório</div>
+                </div>
+                <input class="auth-form__input" type="text" placeholder="E-mail" formControlName="email">
+                <div class="auth-form__error" *ngIf="email.invalid && (email.dirty || email.touched)">
+                    <div *ngIf="email.hasError('required')">Campo obrigatório</div>
+                    <div *ngIf="email.hasError('pattern')">E-mail está formato inválido</div>
+                    <div *ngIf="email.hasError('emailIsAlreadyInUse')">Este e-mail já está em uso</div>
+                </div>
+                <input class="auth-form__input" type="text" placeholder="CPF" mask="000.000.000-00" formControlName="cpf">
+                <div class="auth-form__error" *ngIf="cpf.invalid && (cpf.dirty || cpf.touched)">
+                    <div *ngIf="cpf.hasError('required')">Campo obrigatório</div>
+                    <div *ngIf="cpf.hasError('mask')">O campo deve estar no formato 000.000.000-00</div>
+                    <div *ngIf="cpf.hasError('cpfIsAlreadyInUse')">Este CPF já está em uso</div>
+                </div>
+                <input class="auth-form__input" type="text" placeholder="Data de Nascimento" mask="00/00/0000" formControlName="birthDate">
+                <div class="auth-form__error" *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)">
+                    <div *ngIf="birthDate.hasError('required')">Campo obrigatório</div>
+                    <div *ngIf="birthDate.hasError('mask')">O campo deve estar no formado DD/MM/AAAA</div>
+                </div>
+                <input class="auth-form__input" type="text" placeholder="Número de Telefone" mask="(00) 00000-0000" formControlName="phone">
+                <div class="auth-form__error" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                    <div *ngIf="phone.hasError('required')">Campo obrigatório</div>
+                    <div *ngIf="phone.hasError('mask')">O campo deve estar no formato (00) 00000-0000</div>
+                </div>
+                <input class="auth-form__input" type="password" placeholder="Senha" formControlName="password">
+                <div class="auth-form__error" *ngIf="password.invalid && (password.dirty || password.touched)">
+                    <div *ngIf="password.hasError('required')">Campo obrigatório</div>
+                    <div *ngIf="password.hasError('minlength')">Senha deve ter no mínimo 8 caracteres</div>
+                    <div *ngIf="password.hasError('noUpperCaseLetter')">Senha deve ter no mínimo 1 letra maiúscula</div>
+                    <div *ngIf="password.hasError('noLowerCaseLetter')">Senha deve ter no mínimo 1 letra minúscula</div>
+                    <div *ngIf="password.hasError('noNumber')">Senha deve ter no mínimo 1 número</div>
+                    <div *ngIf="password.hasError('noSpecialChar')">Senha deve ter no mínimo 1 caractere especial</div>
+                </div>
+                <input class="auth-form__input" type="password" placeholder="Confirmar Senha" formControlName="passwordConfirmation">
+                <div class="auth-form__error" *ngIf="passwordConfirmation.invalid && (passwordConfirmation.dirty || passwordConfirmation.touched)">
+                    <div *ngIf="passwordConfirmation.hasError('required')">Campo obrigatório</div>
+                    <div *ngIf="passwordConfirmation.hasError('passwordMismatch')">As senhas devem ser iguais</div>
+                </div>
+                <button class="auth-form__button">Cadastrar</button>
+            </form>
+        </div>
+        <div class="auth-form__image col-span-3 h-[100dvh]">
+            <mat-icon class="auth-form__return auth-form__return--register">west</mat-icon>
+            <img src="../../../assets/img/logo-com-cor-sem-letras.png" alt="Logo do Site Colorido">
+        </div>
+    </div>
+</div>
