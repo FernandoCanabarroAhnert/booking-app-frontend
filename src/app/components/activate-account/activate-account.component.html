@@ -1,0 +1,22 @@
+<div class="activate-account auth-form">
+    <div class="auth-form__container grid grid-cols-5">
+        <div class="auth-form__content col-span-2 min-h-[100dvh]">
+            <img src="../../../assets/img/logo-branca.png" alt="Logo do Site na cor Branca" class="auth-form__logo">
+            <h2 class="auth-form__title">Ativação de Conta</h2>
+            <form class="auth-form__form" [formGroup]="activateAccountForm" (ngSubmit)="onSubmit()">
+                <input class="auth-form__input" type="text" placeholder="Código de Ativação" formControlName="code">
+                <div class="auth-form__error" *ngIf="code.invalid && (code.dirty || code.touched)">
+                    <p *ngIf="code.hasError('required')">Campo obrigatório</p>
+                    <p *ngIf="code.hasError('codeNotFound')">Código não encontrado</p>
+                    <p *ngIf="code.hasError('userNotFound')">Usuário não encontrado</p>
+                </div>
+                <p class="auth-form__error" *ngIf="activateAccountForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde</p>
+                <button class="auth-form__button">Ativar Conta</button>
+            </form>
+        </div>
+        <div class="auth-form__image col-span-3 h-[100dvh]">
+            <mat-icon class="auth-form__return auth-form__return--register">west</mat-icon>
+            <img src="../../../assets/img/logo-com-cor-sem-letras.png" alt="Logo do Site Colorido">
+        </div>
+    </div>
+</div>

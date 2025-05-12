@@ -27,6 +27,10 @@ export class AuthService {
       );
   }
 
+  activateAccount(code: string): Observable<void> {
+    return this._http.put<void>(`${this._baseUrl}/activate-account`, { code });
+  }
+
   verifyIfEmailIsAlreadyInUse(email: string): Observable<{ alreadyExists: boolean }> {
     return this._http.get<{ alreadyExists: boolean }>(`${this._baseUrl}/verify-email`, { params: { email } });
   }

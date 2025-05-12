@@ -9,7 +9,8 @@ import { passwordConfirmationValidator } from '../../validators/password-confirm
 import { CommonModule } from '@angular/common';
 import { IRegistrationRequest } from '../../interfaces/register-request.interface';
 import { AuthService } from '../../services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -28,11 +29,12 @@ export class RegisterComponent implements OnInit {
 
   registerForm!: FormGroup;
 
-  private emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  private readonly emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   private readonly _fb = inject(FormBuilder);
   private readonly _emailValidator = inject(EmailValidatorService);
   private readonly _cpfValidator = inject(CpfValidatorService);
-  private _authService = inject(AuthService);
+  private readonly _authService = inject(AuthService);
+  private readonly _router = inject(Router);
 
   ngOnInit(): void {
       this.registerForm = this._fb.group({
@@ -91,7 +93,27 @@ export class RegisterComponent implements OnInit {
       phone: this.phone.value,
       password: this.password.value,
     }
-    this._authService.register(request).subscribe();
+    this._authService.register(request).subscribe({
+      next: () => this._router.navigate(['/activate-account']),
+      error: (error: HttpErrorResponse) => {
+        const EMAIL_ALREADY_IN_USE_ERROR = error.status === 409 && error.error.message.includes('E-mail');
+        const CPF_ALREADY_IN_USE_ERROR = error.status === 409 && error.error.message.includes('CPF');
+        const INVALID_DATA_ERROR = error.status === 422;
+        const SERVER_ERROR = error.status === 500;
+        if (EMAIL_ALREADY_IN_USE_ERROR) {
+          this.email.setErrors({ emailIsAlreadyInUse: true });
+        }
+        if (CPF_ALREADY_IN_USE_ERROR) {
+          this.cpf.setErrors({ cpfIsAlreadyInUse: true });
+        }
+        if (INVALID_DATA_ERROR) {
+          this.registerForm.setErrors({ invalidData: true });
+        }
+        if (SERVER_ERROR) {
+          this.registerForm.setErrors({ serverError: true });
+        }
+      }
+    });
   }
 
 }

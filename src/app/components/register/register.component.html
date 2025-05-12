@@ -44,6 +44,8 @@
                     <div *ngIf="passwordConfirmation.hasError('required')">Campo obrigatório</div>
                     <div *ngIf="passwordConfirmation.hasError('passwordMismatch')">As senhas devem ser iguais</div>
                 </div>
+                <p class="auth-form__error" *ngIf="registerForm.hasError('invalidData')">Dados Inválidos. Revise-os e tente novamente</p>
+                <p class="auth-form__error" *ngIf="registerForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde</p>
                 <button class="auth-form__button">Cadastrar</button>
             </form>
             <p class="auth-form__router">Já tem uma conta? <a class="auth-form__link" routerLink="/login">Efetuar login</a></p>
