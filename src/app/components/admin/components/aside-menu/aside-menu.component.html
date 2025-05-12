@@ -1,0 +1,41 @@
+<div class="aside-menu">
+    <div class="aside-menu__profile">
+        <img src="../../../../../assets/img/admin-icon.png" alt="">
+        <div class="aside-menu__infos">
+            <span class="text-center text-white m-0 text-lg font-thin">Fernando Canabarro Ahnert</span>
+            <span class="text-center text-white m-0 text-lg font-thin">Gerente</span>
+        </div>
+    </div>
+    <aside class="aside-menu__container">
+        <ul class="aside-menu__list">
+            <li class="aside-menu__link" routerLink="/admin/dashboard" routerLinkActive="aside-menu__link--active">
+                <mat-icon class="aside-menu__icon">analytics</mat-icon>
+                <span class="aside-menu__text">Dashboard</span>
+            </li>
+            <li class="aside-menu__link" routerLink="/admin/bookings" routerLinkActive="aside-menu__link--active">
+                <mat-icon class="aside-menu__icon">calendar_month</mat-icon>
+                <span class="aside-menu__text">Gestão de Reservas</span>
+            </li>
+            <li class="aside-menu__link" routerLink="/admin/hotels" routerLinkActive="aside-menu__link--active">
+                <mat-icon class="aside-menu__icon">apartment</mat-icon>
+                <span class="aside-menu__text">Gestão de Hotéis</span>
+            </li>
+            <li class="aside-menu__link" routerLink="/admin/rooms" routerLinkActive="aside-menu__link--active">
+                <mat-icon class="aside-menu__icon">room_preferences</mat-icon>
+                <span class="aside-menu__text">Gestão de Quartos</span>
+            </li>
+            <li class="aside-menu__link" routerLink="/admin/users" routerLinkActive="aside-menu__link--active">
+                <mat-icon class="aside-menu__icon">groups</mat-icon>
+                <span class="aside-menu__text">Gestão de Usuários</span>
+            </li>
+            <li class="aside-menu__link" routerLink="/admin/reports" routerLinkActive="aside-menu__link--active">
+                <mat-icon class="aside-menu__icon">description</mat-icon>
+                <span class="aside-menu__text">Relatórios e Análises</span>
+            </li>
+        </ul>
+    </aside>
+    <div class="aside-menu__link aside-menu__link--logout" (click)="logout()">
+        <mat-icon class="aside-menu__icon">logout</mat-icon>
+        <span class="aside-menu__text">Logout</span>
+    </div>
+</div>

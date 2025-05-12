@@ -18,6 +18,7 @@
                 </div>
                 <div class="auth-form__error">
                     <div *ngIf="loginForm.hasError('invalidCredentials')">Credencias inválidas</div>
+                    <div *ngIf="loginForm.hasError('accountNotActivated')">Conta do Usuário ainda não foi ativada</div>
                     <div *ngIf="loginForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde</div>
                 </div>
                 <button class="auth-form__button">Entrar</button>

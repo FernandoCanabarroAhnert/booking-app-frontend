@@ -1,0 +1,68 @@
+@use '../../../../../styles/variables' as variables;
+
+.aside-menu {
+    height: 100%;
+    background-color: variables.$green-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5rem 1.5rem;
+    gap: 2.5rem;
+
+    &__profile {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+    }
+
+    &__infos {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    &__container {
+        width: 100%;
+    }
+
+    &__list {
+        width: 100%;
+    }
+
+    &__link {
+        width: 100%;
+        padding: 1.5rem;
+        color: #fff;
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        cursor: pointer;
+        &--active {
+            background-color: #fff;
+            color: variables.$green-color;
+            border-radius: 1rem;
+            .aside-menu__text {
+                font-weight: 500;
+            }
+        }
+        &--logout {
+            padding: 0 1.5rem;
+        }
+    }
+
+    &__icon {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 1.75rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__text {
+        font-size: 1.325rem;
+        font-weight: 200;
+    }
+
+}

@@ -14,7 +14,16 @@ export const routes: Routes = [
     {
         path: 'login',
         title: 'Login',
-        loadComponent: () => import('./components/login/login.component').then(m => m.LoginComponent)
+        loadComponent: () => import('./components/guest-login/guest-login.component').then(m => m.GuestLoginComponent)
+    },
+    {
+        path: 'login/admin',
+        title: 'Login de Funcionário/Admin',
+        loadComponent: () => import('./components/admin-login/admin-login.component').then(m => m.AdminLoginComponent)
+    },
+    {
+        path: 'admin',
+        loadChildren: () => import('./components/admin/admin.routes').then(m => m.adminRoutes)
     },
     {
         path: 'rooms/:roomId',

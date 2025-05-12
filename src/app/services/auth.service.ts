@@ -17,7 +17,7 @@ export class AuthService {
     return this._http.post<void>(`${this._baseUrl}/register`, request);
   }
 
-  login(request: ILoginRequest): Observable<ILoginResponse> {
+  guestLogin(request: ILoginRequest): Observable<ILoginResponse> {
     return this._http.post<ILoginResponse>(`${this._baseUrl}/login`, request)
       .pipe(
         map(response => {
@@ -25,6 +25,20 @@ export class AuthService {
           return response;
         })
       );
+  }
+
+  adminLogin(request: ILoginRequest): Observable<ILoginResponse> {
+    return this._http.post<ILoginResponse>(`${this._baseUrl}/login/admin`, request)
+      .pipe(
+        map(response => {
+          localStorage.setItem('access-token', response.token);
+          return response;
+        })
+      );
+  }
+
+  logout() {
+    localStorage.removeItem('access-token');
   }
 
   activateAccount(code: string): Observable<void> {

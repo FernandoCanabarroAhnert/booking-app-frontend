@@ -15,10 +15,10 @@ import { HttpErrorResponse } from '@angular/common/http';
     MatIcon,
     RouterLink
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  templateUrl: './guest-login.component.html',
+  styleUrl: './guest-login.component.scss'
 })
-export class LoginComponent implements OnInit {
+export class GuestLoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
@@ -46,15 +46,19 @@ export class LoginComponent implements OnInit {
       this.loginForm.markAllAsTouched();
       return;
     }
-    this._authService.login(this.loginForm.value).subscribe({
+    this._authService.guestLogin(this.loginForm.value).subscribe({
       next: () => {
-        this._router.navigate(['/home']);
+        this._router.navigate(['/rooms/1']);
       },
       error: (error: HttpErrorResponse) => {
         const AUTHORIZATION_ERROR = error.status === 401;
+        const FORBIDDEN_ERROR = error.status === 403;
         const SERVER_ERROR = error.status === 500;
         if (AUTHORIZATION_ERROR) {
           this.loginForm.setErrors({ invalidCredentials: true })
+        }
+        if (FORBIDDEN_ERROR) {
+          this.loginForm.setErrors({ accountNotActivated: true })
         }
         if (SERVER_ERROR) {
           this.loginForm.setErrors({ serverError: true })

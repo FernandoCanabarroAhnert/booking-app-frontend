@@ -1,0 +1,25 @@
+.admin-login {
+    background-image: url('../../../assets/img/admin-login-bg.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+        gap: 1.5rem;
+    }
+
+    &__input {
+        &::placeholder {
+            color: #fff
+        }
+    }
+
+    &__logo {
+        width: 20rem;
+    }
+
+
+}
