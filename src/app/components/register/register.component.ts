@@ -9,6 +9,7 @@ import { passwordConfirmationValidator } from '../../validators/password-confirm
 import { CommonModule } from '@angular/common';
 import { IRegistrationRequest } from '../../interfaces/register-request.interface';
 import { AuthService } from '../../services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,8 @@ import { AuthService } from '../../services/auth.service';
     CommonModule,
     MatIconModule,
     NgxMaskDirective,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'

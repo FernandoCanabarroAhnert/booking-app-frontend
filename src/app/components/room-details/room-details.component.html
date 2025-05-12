@@ -1,0 +1,129 @@
+<div class="room-details">
+    <div class="room-details__main">
+        <app-header></app-header>
+        <div class="container mx-auto pb-12">
+            <div class="room-details__breadcrumb">Hotel {{ room.hotel.name }} <mat-icon>arrow_right_alt</mat-icon> Quarto № {{ room.number }}, {{ room.type | roomType }}</div>
+            <div class="grid grid-cols-2">
+                <div class="room-details__images">
+                    <img *ngIf="room?.images?.length" [src]="room.images[0].base64Image" alt="Imagem Principal" class="room-details__image room-details__image--main">
+                    <div class="room-details__minor-images grid grid-cols-3">
+                        @if (room.images && room.images.length > 1) {
+                            <ng-container *ngFor="let image of room.images; let i = index" >
+                                <img *ngIf="i !== 0"
+                                    [src]="image.base64Image" 
+                                    alt="Imagem Menor" 
+                                    class="room-details__image col-span-1"
+                                    [ngClass]="{
+                                        'room-details__image--bl-corner': i === 0,
+                                        'room-details__image--br-corner': i === 2
+                                    }">
+                            </ng-container>
+                        }
+                    </div>
+                </div>
+                <div class="room-details__booking">
+                    <app-booking-form 
+                        [capacity]="room.capacity" 
+                        [pricePerNight]="room.pricePerNight"
+                        [unavailableDates]="room.unavailableDates"></app-booking-form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mx-auto grid grid-cols-2 py-20 px-6 border-b-2 border-gray-300">  
+        <h3 class="room-details__title col-span-2">Informações Gerais</h3>
+        <div class="room-details__info border-r-2 border-gray-300">
+            <p class="room-details__subtitle">Hotel: <span class="room-details__text">{{ room.hotel.name }}</span></p>
+            <p class="room-details__subtitle">Preço por noite: <span class="room-details__text">{{ room.pricePerNight | currency: 'BRL'}}</span></p>
+            <p class="room-details__subtitle">Número: <span class="room-details__text">{{ room.number }}</span></p>
+            <p class="room-details__subtitle">Andar: <span class="room-details__text">{{ room.floor }}</span></p>
+            <p class="room-details__subtitle">Tipo: <span class="room-details__text">{{ room.type | roomType}} </span></p>
+            <p class="room-details__subtitle">Capacidade: <span class="room-details__text">{{ room.capacity }}</span></p>
+            <p class="room-details__subtitle">Descrição:</p>
+            <p class="room-details__text px-6">{{ room.description }}</p>
+        </div>
+        <div class="room-details__info">
+            <div class="flex w-full gap-4 mb-8">
+                <img src="../../../assets/img/dive-icon.png" class="w-8 h-8">
+                <div>
+                    <p class="room-details__subtitle">Aproveite para dar um mergulho:</p>
+                    <span class="room-details__text">Este é um dos poucos lugares da região com piscina</span>
+                </div>
+            </div>
+            <div class="flex w-full gap-4 mb-8">
+                <img src="../../../assets/img/gym-icon.png" class="w-8 h-8">
+                <div>
+                    <p class="room-details__subtitle">Academia em Casa:</p>
+                    <span class="room-details__text">Para o seu treino: esteira, bicicleta ergométrica, tapete de ioga e halteres e/ou anilhas</span>
+                </div>
+            </div>
+            <div class="flex w-full gap-4 mb-8">
+                <img src="../../../assets/img/self-check-in-icon.png" class="w-8 h-8">
+                <div>
+                    <p class="room-details__subtitle">Self Check-In:</p>
+                    <span class="room-details__text">Você pode fazer check-in com a ajuda de funcionários do prédio</span>
+                </div>
+            </div>
+        </div>
+        <div class="w-full border-t-2 border-300-gray col-span-2 my-12"></div>
+        <h3 class="room-details__title col-span-2">O que esse lugar oferece</h3>
+        <div class="room-details__info border-r-2 border-gray-300">
+            <div class="w-full flex gap-8 items-center">
+                <div class="flex w-full gap-4 items-center mb-8">
+                    <img src="../../../assets/img/city-icon.png" class="w-8 h-8">
+                    <span class="room-details__text">Vista para o horizonte da cidade</span>
+                </div>
+                <div class="flex w-full gap-4 items-center mb-8">
+                    <img src="../../../assets/img/horizon-icon.png" class="w-8 h-8">
+                    <span class="room-details__text">Vista para as águas</span>
+                </div>
+            </div>
+            <div class="w-full flex gap-8 items-center">
+                <div class="flex w-full gap-4 items-center mb-8">
+                    <img src="../../../assets/img/kitchen-icon.png" class="w-8 h-8">
+                    <span class="room-details__text">Cozinha</span>
+                </div>
+                <div class="flex w-full gap-4 items-center mb-8">
+                    <img src="../../../assets/img/wifi-icon.png" class="w-8 h-8">
+                    <span class="room-details__text">Wi-fi rápido (300MBs)</span>
+                </div>
+            </div>
+            <div class="w-full flex gap-8 items-center">
+                <div class="flex w-full gap-4 items-center mb-8">
+                    <img src="../../../assets/img/car-icon.png" class="w-8 h-8">
+                    <span class="room-details__text">Estacionamento gratuito na garagem da propriedade</span>
+                </div>
+                <div class="flex w-full gap-4 items-center mb-8">
+                    <img src="../../../assets/img/dive-icon.png" class="w-8 h-8">
+                    <span class="room-details__text">Piscina externa compartilhada - 24/7, borda infinita e terraço</span>
+                </div>
+            </div>
+            <div class="w-full flex gap-8 items-center">
+                <div class="flex w-full gap-4 items-center mb-8">
+                    <img src="../../../assets/img/pet-icon.png" class="w-8 h-8">
+                    <span class="room-details__text">Permitido animais</span>
+                </div>
+                <div class="flex w-full gap-4 items-center mb-8">
+                    <img src="../../../assets/img/tv-icon.png" class="w-8 h-8">
+                    <span class="room-details__text">Smart TVs com no mínimo 46 polegadas</span>
+                </div>
+            </div>
+        </div>
+        <div class="w-full border-t-2 border-300-gray col-span-2 my-12"></div>
+        <div class="col-span-2">
+            <h3 class="room-details__title col-span-2">Dados do Hotel</h3>
+            <div class="grid grid-cols-2">
+                <img [src]="room.hotel.cardDisplayImage.base64Image" alt="" class="pr-6 border-r-2 border-gray-300">
+                <div class="room-details__info">
+                    <p class="room-details__subtitle">Nome: <span class="room-details__text">{{ room.hotel.name }}</span></p>
+                    <p class="room-details__subtitle">Endereço: <span class="room-details__text">{{ hotelFullAddress() }}</span></p>
+                    <p class="room-details__subtitle">Telefone: <span class="room-details__text">{{ room.hotel.phone }}</span></p>
+                    <p class="room-details__subtitle">Descrição:</p>
+                    <p class="room-details__text px-6">{{ room.hotel.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-room-details-footer [capacity]="room.capacity"></app-room-details-footer>
+    <app-footer></app-footer>
+</div>

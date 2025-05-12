@@ -64,6 +64,18 @@
         }
     }
 
+    &__router {
+        font-size: 1.1rem;
+    }
+
+    &__link {
+        cursor: pointer;
+        color: variables.$light-color;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
     &__return {
         position: absolute;
         top: 2rem;

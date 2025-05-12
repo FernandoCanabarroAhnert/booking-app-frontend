@@ -1,0 +1,50 @@
+<div class="booking-form">
+    <div class="booking-form__warn">
+        <img src="../../../../../assets/img/price-tag.png" alt=""> Os preços incluem todas as taxas
+    </div>
+    <div class="booking-form__main">
+        <p class="booking-form__price"><span>{{ totalPrice  | currency: 'BRL' }}</span> por {{ nights }} {{ nights == 1 ? 'noite' : 'noites' }}</p>
+        <form class="booking-form__form" [formGroup]="range">
+            <p class="booking-form__text">Selecione a data de Check-in e de Check-Out:</p>
+            <div class="booking-form__datepicker">
+                <mat-form-field>
+                    <mat-label>Data de Check-In:</mat-label>
+                    <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkin" formControlName="start" [min]="today" (dateChange)="onCheckInChange($event)" (click)="console()">
+                    <mat-datepicker-toggle matIconSuffix [for]="checkin"></mat-datepicker-toggle>
+                    <mat-datepicker #checkin></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Data de Check-Out:</mat-label>
+                    <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkout" formControlName="end" [min]="checkOutMinDate" (dateChange)="onCheckOutChange($event)">
+                    <mat-datepicker-toggle matIconSuffix [for]="checkout"></mat-datepicker-toggle>
+                    <mat-datepicker #checkout></mat-datepicker>
+                </mat-form-field>
+            </div>
+            @if (checkIn.hasError('matDatepickerFilter')) {
+                <p class="text-red-500">Data de Check-In Inválida</p>
+            }
+            <div class="booking-form__infos grid grid-cols-2">
+                <div class="booking-form__date booking-form__date--start">
+                    <p>{{ 'Check-in' | uppercase }}</p>
+                    <span>{{ range.value.start | date: 'dd/MM/yyyy'  }}</span>
+                </div>
+                <div class="booking-form__date booking-form__date--end">
+                    <p>{{ 'Check-out' | uppercase }}</p>
+                    <span>{{ range.value.end | date: 'dd/MM/yyyy'  }}</span>
+                </div>
+                <div id="guests-quantity" class="booking-form__guests col-span-2">
+                    <mat-form-field class="w-full">
+                        <mat-label>Hóspedes</mat-label>
+                        <mat-select>
+                            @for (value of capacityOptions; track value) {
+                                <mat-option [value]="value">{{value}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <button class="booking-form__submit">Reservar</button>
+            <p class="text-center">Você ainda não será cobrado</p>
+        </form>
+    </div>
+</div>

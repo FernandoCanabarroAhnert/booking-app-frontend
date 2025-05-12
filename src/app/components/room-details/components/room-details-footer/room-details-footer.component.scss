@@ -1,0 +1,49 @@
+@use '../../../../../styles/variables' as variables;
+
+.room-details-footer {
+    padding: 4rem 2rem;
+
+    &__title {
+        font-size: 2rem;
+    }
+
+    &__body {
+        padding: 2rem;
+    }
+
+    &__infos {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    &__subtitle {
+        font-size: 1.25rem;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+    }
+
+    &__item {
+        font-size: 1rem;
+        color: #777;
+        transition: all .3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+            color: variables.$light-brown-color;
+        }
+    }
+
+    &__link {
+        text-decoration: underline;
+        font-weight: 500;
+        font-size: 1.05rem;
+        cursor: pointer;
+    }
+
+}

@@ -16,8 +16,13 @@
                 <div class="auth-form__error" *ngIf="password.invalid && (password.dirty || password.touched)">
                     <div *ngIf="password.hasError('required')">Campo obrigatório</div>
                 </div>
+                <div class="auth-form__error">
+                    <div *ngIf="loginForm.hasError('invalidCredentials')">Credencias inválidas</div>
+                    <div *ngIf="loginForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde</div>
+                </div>
                 <button class="auth-form__button">Entrar</button>
             </form>
+            <p class="auth-form__router">Ainda não tem uma conta? <a class="auth-form__link" routerLink="/register">Cadastre-se</a></p>
         </div>
     </div>
 </div>

@@ -1,0 +1,91 @@
+@use '../../../styles/variables' as variables;
+
+.header {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        width: 12.5%;
+    }
+
+    &__title {
+        font-size: 4.5rem !important;
+        text-align: center;
+    }
+
+    &__icons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        width: 15%;
+    }
+
+    &__user-icon {
+        border: 1px solid variables.$light-color;
+        border-radius: 2rem;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        padding: .5rem;
+    }
+
+    mat-icon {
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
+        cursor: pointer;
+        transition: all .3s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+            color: variables.$light-brown-color;
+            transform: scale(1.05);
+        }
+    }
+
+    &__bottom {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__nav {
+        position: relative;
+        top: -3.5rem;
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__option {
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: variables.$dark-brown-color;
+        cursor: pointer;
+        transition: all .3s ease-in-out;
+        &:hover {
+            color: variables.$light-brown-color;
+        }
+    }
+
+    &__search {
+        font-size: 2rem !important;
+        width: 3rem !important;
+        height: 3rem !important;
+        border-radius: 50%;
+        background-color: variables.$green-color;
+        padding: 1rem;
+    }
+
+}
