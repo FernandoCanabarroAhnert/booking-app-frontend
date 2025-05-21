@@ -1,0 +1,70 @@
+@use '../../../../../styles/variables' as variables;
+
+.create-booking-dialog {
+    padding: 1.5rem;
+
+    &__stepper {
+        position: relative;
+    }
+
+    &__booking-data, &__payment-data, &__confirmation {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    &__datepicker {
+        display: flex;
+        justify-content: space-around;
+    }
+
+     &__select {
+        display: flex;
+        justify-content: center;
+    }
+
+    &__subtitle {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: variables.$dark-brown-color;
+    }
+
+    &__text {
+        font-size: 1.125rem;
+        color: variables.$light-brown-color;
+    }
+
+    &__errors {
+        display: flex;
+        width: 100%;
+        color: red;
+        justify-content: space-around;
+        padding: 0 1rem;
+    }
+
+    &__error {
+        font-size: 1rem;
+    }
+
+}
+
+:host ::ng-deep .mat-step-icon-selected, :host ::ng-deep .mat-step-icon-state-edit {
+    background-color: variables.$light-brown-color;
+}
+
+:host ::ng-deep .mat-mdc-unelevated-button.mat-primary {
+    --mdc-filled-button-container-color: #698167;
+}
+
+:host ::ng-deep .mat-mdc-outlined-button.mat-primary {
+    --mdc-outlined-button-label-text-color: #698167;
+}
+
+:host ::ng-deep  .mat-mdc-radio-button.mat-accent {
+    --mdc-radio-selected-icon-color: #2d2109;
+    --mdc-radio-selected-focus-icon-color: #2d2109;
+    --mdc-radio-selected-hover-icon-color: #2d2109;
+    --mdc-radio-selected-pressed-icon-color: #2d2109;
+    --mat-radio-checked-ripple-color: #2d2109;
+}

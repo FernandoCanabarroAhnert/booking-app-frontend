@@ -1,0 +1,19 @@
+<div class="pix flex flex-col justify-center items-center text-center p-6">
+    <span class="text-3xl font-thin mb-4">Escaneie o código QR para pagar</span>
+    <div class="flex gap-6 items-center">
+        <p class="text-base flex gap-4 items-center font-thin"><img class="w-[2.375rem]" src="../../../../../assets/img/pix/icon-phone.png">Acesse seu app de pagamentos</p>
+        <p class="text-base flex gap-4 items-center font-thin"><img class="w-[2.375rem]" src="../../../../../assets/img/pix/icon-pix.png">Escolha pagar via pix</p>
+    </div>
+    <div class="w-full flex justify-center">
+        <p class="text-base flex gap-4 items-center font-thin"><img class="w-[2.375rem]" src="../../../../../assets/img/pix/pix-code.png">Escaneie o seguinte código</p>
+    </div>
+    <img src="../../../../../assets/img/pix/qrcode.png" alt="" class="w-[250px]">
+    <p class="text-base flex gap-4 items-center font-thin mt-3"><img class="w-[2.375rem]" src="../../../../../assets/img/pix/clock.png">Pague e será creditado na hora</p>
+    <div class="border-2 border-gray-300"></div>
+    <span class="text-xl font-thin mb-4">Ou copie este código para fazer o pagamento:</span>
+    <p class="text-lg flex gap-4 items-center">08979530dfdsf548700ausgaygs0000000 
+        <button [matTooltip]="iconToolTipMessage" (click)="swapIcon($event)" class="flex items-center">
+            <mat-icon (click)="copyText()" class="cursor-pointer">content_copy</mat-icon>
+        </button>
+    </p>
+</div>

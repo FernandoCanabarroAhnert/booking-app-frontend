@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   imports: [
     RouterOutlet, 
     LoadingComponent,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,0 +1,54 @@
+@use '../../../../../../../styles/variables' as variables;
+
+.boleto {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    padding: 1.5rem;
+
+    &__title {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        font-weight: 100;
+    }
+
+    &__subtitle {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        font-weight: 100;
+    }
+
+    &__code {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.125rem;
+        line-height: 1.75rem
+    }
+
+    &__copy {
+        display: flex;
+        align-items: center;
+    }
+
+    &__button {
+        width: 100%;
+        text-align: center;
+        background-color: variables.$dark-brown-color;
+        border: 1px solid variables.$dark-brown-color;
+        color: #fff;
+        border-radius: 1rem;
+        padding: 1.25rem;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease-in-out;
+        &:hover {
+            background-color: variables.$light-brown-color;
+        }
+    }
+
+}

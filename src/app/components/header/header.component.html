@@ -8,9 +8,33 @@
         </div>
         <div class="header__icons">
             <mat-icon>language</mat-icon>
-            <div class="header__user-icon">
-                <mat-icon>menu</mat-icon>
-                <mat-icon>account_circle</mat-icon>
+            <div class="header__accordion">
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                        <mat-expansion-panel-header>
+                            <div class="header__user-icon">
+                                <mat-panel-title>
+                                    <mat-icon>menu</mat-icon>
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                    <mat-icon>account_circle</mat-icon>
+                                </mat-panel-description>
+                            </div>
+                        </mat-expansion-panel-header>
+                        @if (isAuthenticated) {
+                            <ul class="header__links">
+                                <li class="header__link">Meus dados</li>
+                                <li class="header__link" (click)="logout()">Sair</li>
+                            </ul>
+                        }
+                        @if (!isAuthenticated) {
+                            <ul class="header__links">
+                                <li class="header__link" routerLink="/login">Login</li>
+                                <li class="header__link" routerLink="/login/admin">Login Admin</li>
+                            </ul>
+                        }
+                    </mat-expansion-panel>
+                </mat-accordion>
             </div>
         </div>
     </div>

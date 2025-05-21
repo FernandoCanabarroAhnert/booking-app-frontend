@@ -2,8 +2,8 @@
     <div class="room-details__main">
         <app-header></app-header>
         <div class="container mx-auto pb-12">
-            <div class="room-details__breadcrumb">Hotel {{ room.hotel.name }} <mat-icon>arrow_right_alt</mat-icon> Quarto № {{ room.number }}, {{ room.type | roomType }}</div>
-            <div class="grid grid-cols-2">
+            <div class="room-details__breadcrumb text-lg xl:text-4xl font-thin">Hotel {{ room.hotel.name }} <mat-icon>arrow_right_alt</mat-icon> Quarto № {{ room.number }}, {{ room.type | roomType }}</div>
+            <div class="grid lg:grid-cols-2">
                 <div class="room-details__images">
                     <img *ngIf="room?.images?.length" [src]="room.images[0].base64Image" alt="Imagem Principal" class="room-details__image room-details__image--main">
                     <div class="room-details__minor-images grid grid-cols-3">
@@ -23,6 +23,7 @@
                 </div>
                 <div class="room-details__booking">
                     <app-booking-form 
+                        [roomId]="room.id"
                         [capacity]="room.capacity" 
                         [pricePerNight]="room.pricePerNight"
                         [unavailableDates]="room.unavailableDates"></app-booking-form>

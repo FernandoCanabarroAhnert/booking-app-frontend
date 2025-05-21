@@ -1,0 +1,27 @@
+<div class="credit-card grid grid-cols-6">
+    <div class="col-span-1 credit-card__radio">
+        <mat-radio-button [value]="creditCard.id"></mat-radio-button>
+    </div>
+    <div class="col-span-5 credit-card__infos">
+        <div class="credit-card__row">
+            <div class="credit-card__info">
+                <b class="credit-card__subtitle">Nome do Titular:</b> 
+                <p class="credit-card__text">{{ creditCard.holderName }}</p>
+            </div>
+            <div class="credit-card__info">
+                <b class="credit-card__subtitle">Bandeira:</b>
+                <p class="credit-card__text">{{ creditCard.brand | creditCardBrand }}</p>
+            </div>
+        </div>
+        <div class="credit-card__row">
+            <div class="credit-card__info">
+                <b class="credit-card__subtitle">Número do cartão:</b>
+                <p class="credit-card__text">{{ creditCard.lastFourDigits }}</p>
+            </div>
+            <div class="credit-card__info">
+                <b class="credit-card__subtitle">Validade:</b>
+                <p class="credit-card__text">{{ creditCard.expirationDate }}</p>
+            </div>
+        </div>
+    </div>
+</div>

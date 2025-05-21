@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { PaymentTypeEnum } from '../enums/payment-type.enum';
+import { paymentTypeEnumMap } from '../utils/payment-type-enum-map';
 
 @Pipe({
   name: 'paymentType',
@@ -8,12 +9,6 @@ import { PaymentTypeEnum } from '../enums/payment-type.enum';
 export class PaymentTypePipe implements PipeTransform {
 
   transform(value: number): string {
-    const paymentTypeEnumMap: { [key in PaymentTypeEnum]: string } = {
-      [PaymentTypeEnum.DINHEIRO]: 'Dinheiro',
-      [PaymentTypeEnum.CARTAO]: 'Cartão',
-      [PaymentTypeEnum.PIX]: 'Pix',
-      [PaymentTypeEnum.BOLETO]: 'Boleto'
-    }
     return paymentTypeEnumMap[value as PaymentTypeEnum];
   }
 

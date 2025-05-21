@@ -1,0 +1,110 @@
+<div class="create-booking-dialog">
+  <mat-stepper
+    class="example-stepper"
+    [orientation]="(stepperOrientation | async)!"
+    [animationDuration]="'1000'">
+    <mat-step class="create-booking-dialog__stepper" [stepControl]="bookingData" label="Dados da Reserva">
+      <div class="create-booking-dialog__booking-data">
+        <form [formGroup]="bookingData">
+            <div class="create-booking-dialog__datepicker">
+              <mat-form-field>
+                <mat-label>Data de Check-In:</mat-label>
+                  <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkin" formControlName="checkIn" [min]="today" (dateChange)="onCheckInChange($event)">
+                  <mat-datepicker-toggle matIconSuffix [for]="checkin"></mat-datepicker-toggle>
+                  <mat-datepicker #checkin></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                  <mat-label>Data de Check-Out:</mat-label>
+                  <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkout" formControlName="checkOut" [min]="checkOutMinDate" (dateChange)="onCheckOutChange($event)">
+                  <mat-datepicker-toggle matIconSuffix [for]="checkout"></mat-datepicker-toggle>
+                  <mat-datepicker #checkout></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="create-booking-dialog__errors">
+                @if (checkIn.hasError('matDatepickerFilter')) {
+                    <p class="create-booking-dialog__error">Data de Check-In Inválida</p>
+                }
+                @if (checkOut.hasError('matDatepickerFilter')) {
+                    <p class="create-booking-dialog__error">Data de Check-Out Inválida</p>
+                }
+            </div>
+            <div class="create-booking-dialog__select">
+              <mat-form-field class="w-[80%]" >
+                <mat-label>Hóspedes</mat-label>
+                <mat-select formControlName="guestsQuantity">
+                    @for (value of capacityOptions; track value) {
+                        <mat-option [value]="value">{{value}}</mat-option>
+                    }
+                </mat-select>
+              </mat-form-field>
+            </div>
+        </form>
+      </div>
+      <div class="flex gap-4">
+        <button mat-flat-button matStepperNext color="primary">Próximo</button>
+      </div>
+    </mat-step>
+    <mat-step class="create-booking-dialog__stepper" [stepControl]="paymentData" label="Dados do Pagamento">
+      <div class="create-booking-dialog__payment-data">
+        <form [formGroup]="paymentData">
+        <mat-radio-group aria-label="Select an option" formControlName="paymentType">
+          <mat-radio-button *ngFor="let value of paymentKeys; let i = index" [value]="value">{{ value | paymentType }}</mat-radio-button>
+        </mat-radio-group>
+        @if (paymentType.invalid && (paymentType.touched || paymentType.dirty)) {
+          <mat-error *ngIf="paymentType.hasError('required')" class="create-booking-dialog__error">Campo Requerido</mat-error>
+        }
+        <app-cartao 
+          *ngIf="paymentType.value === 2"
+          [totalPrice]="totalPrice" 
+          (selectedCreditCardEmitter)="onCreditCardSelected($event)"
+          (selectedInstallmentQuantityEmitter)="onInstallmentQuantitySelected($event)">
+        </app-cartao>
+        <app-pix *ngIf="paymentType.value === 3"></app-pix>
+        <app-boleto *ngIf="paymentType.value === 4" (printBoletoEmitter)="printBoleto()"></app-boleto>
+      </form>
+      </div>
+      <div class="flex gap-4">
+          <button mat-stroked-button color="primary" matStepperPrevious>Voltar</button>
+          <button mat-flat-button matStepperNext color="primary">Próximo</button>
+        </div>
+    </mat-step>
+    <mat-step class="create-booking-dialog__stepper" label="Confirmação dos Dados">
+      <div class="create-booking-dialog__confirmation">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <p class="create-booking-dialog__subtitle">{{ 'Check-in' | uppercase }}</p>
+            <span class="create-booking-dialog__text">{{ checkIn.value | date: 'dd/MM/yyyy'  }}</span>
+          </div>
+          <div>
+            <p class="create-booking-dialog__subtitle">{{ 'Check-Out' | uppercase }}</p>
+            <span class="create-booking-dialog__text">{{ checkOut.value | date: 'dd/MM/yyyy'  }}</span>
+          </div>
+          <div>
+            <p class="create-booking-dialog__subtitle">{{ 'Hóspedes' | uppercase }}</p>
+            <span class="create-booking-dialog__text">{{ guestsQuantity.value }}</span>
+          </div>
+          <div>
+            <p class="create-booking-dialog__subtitle">{{ 'Método de Pagamento' | uppercase }}</p>
+            <span class="create-booking-dialog__text">{{ paymentType.value | paymentType }}</span>
+          </div>
+          <div>
+            <p class="create-booking-dialog__subtitle">{{ 'Noites' | uppercase }}</p>
+            <span class="create-booking-dialog__text">{{ nights }}</span>
+          </div>
+          <div>
+            <p class="create-booking-dialog__subtitle">{{ 'Valor Total' | uppercase }}</p>
+            <span class="create-booking-dialog__text">{{ totalPrice | currency: 'BRL' }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col text-lg">
+          <mat-error *ngIf="bookingData.hasError('invalidData')" class="create-booking-dialog__error">Dados da Reserva Inválidos. Por favor revise-os.</mat-error>
+          <mat-error *ngIf="paymentData.hasError('invalidData')" class="create-booking-dialog__error">Dados do Pagamento Inválidos. Por favor revise-os.</mat-error>
+      </div>
+      <mat-dialog-actions class="flex gap-4">
+        <button mat-stroked-button color="primary" matStepperPrevious>Voltar</button>
+        <button mat-flat-button matStepperNext color="primary" (click)="closeDialog()">Finalizar</button>
+      </mat-dialog-actions>
+    </mat-step>
+  </mat-stepper>
+</div>

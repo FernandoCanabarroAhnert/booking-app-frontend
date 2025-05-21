@@ -73,6 +73,14 @@
         }
     }
 
+    &__errors {
+        display: flex;
+        width: 100%;
+        color: red;
+        justify-content: space-between;
+        padding: 0 1rem;
+    }
+
     &__submit {
         width: 100%;
         text-align: center;
@@ -106,4 +114,9 @@
 }
 :host ::ng-deep #guests-quantity .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-line-ripple::before {
     border-bottom-color: variables.$light-brown-color !important;
+}
+
+:host ::ng-deep #guests-quantity {
+    --mat-select-focused-arrow-color: #a89172 !important; 
+    --mdc-filled-text-field-focus-label-text-color: #a89172 !important;
 }

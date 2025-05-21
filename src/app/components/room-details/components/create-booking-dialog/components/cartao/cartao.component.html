@@ -1,0 +1,94 @@
+<div class="cartao">
+    <span class="cartao__title">Pagamento via cartão de crédito</span>
+    @if (creditCards$ | async; as creditCards) {
+        <app-credit-card 
+            class="w-3/4"
+            *ngFor="let creditCard of creditCards" 
+            [creditCard]="creditCard"
+            (click)="selectedCreditCardEmit(creditCard.id)"></app-credit-card>
+    }
+    <div class="w-full flex" [ngClass]="{ 'justify-end': !isAddCreditCardExpansionOpen, 'justify-center': isAddCreditCardExpansionOpen }">
+        <mat-accordion [ngClass]="{ 'w-3/7': !isAddCreditCardExpansionOpen, 'w-full': isAddCreditCardExpansionOpen }">
+            <mat-expansion-panel hideToggle 
+                    (opened)="isAddCreditCardExpansionOpen = true"
+                    (closed)="isAddCreditCardExpansionOpen = false">
+                <mat-expansion-panel-header>
+                <mat-panel-title class="text-xl font-thin text-center">
+                    Adicionar Cartão
+                    <mat-icon class="w-4 ml-auto">{{ isAddCreditCardExpansionOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+                    @if (isAddCreditCardExpansionOpen) {
+                        <form [formGroup]="addCreditCardForm" (ngSubmit)="onSubmit()">
+                            <div class="w-full flex justify-evenly">
+                                <div class="cartao__field">
+                                    <mat-form-field>
+                                        <mat-label>Nome do Titular</mat-label>
+                                        <input matInput type="text" placeholder="Ex.: Fulano da Silva" formControlName="holderName">
+                                    </mat-form-field>
+                                    @if (holderName.invalid && (holderName.touched || holderName.dirty)) {
+                                        <mat-error *ngIf="holderName.hasError('required')">Campo Requerido</mat-error>
+                                    }
+                                </div>
+                                <div class="cartao__field">
+                                    <mat-form-field>
+                                        <mat-label>Número do Cartão</mat-label>
+                                        <input matInput type="text" placeholder="Ex.: 1234 1234 1234 1234" mask="0000 0000 0000 0000" formControlName="cardNumber">
+                                    </mat-form-field>
+                                    @if (cardNumber.invalid && (cardNumber.touched || cardNumber.dirty)) {
+                                        <mat-error *ngIf="cardNumber.hasError('required')">Campo Requerido</mat-error>
+                                        <mat-error *ngIf="cardNumber.hasError('mask')">Formato inválido</mat-error>
+                                    }
+                                </div>
+                            </div>
+                            <div class="w-full flex justify-evenly">
+                                <div class="cartao__field">
+                                    <mat-form-field>
+                                        <mat-label>CVV</mat-label>
+                                        <input matInput type="text" placeholder="Ex.: 123" mask="000" formControlName="cvv">
+                                    </mat-form-field>
+                                    @if (cvv.invalid && (cvv.touched || cvv.dirty)) {
+                                        <mat-error *ngIf="cvv.hasError('required')">Campo Requerido</mat-error>
+                                        <mat-error *ngIf="cvv.hasError('mask')">Formato inválido</mat-error>
+                                    }
+                                </div>
+                                <div class="cartao__field">
+                                    <mat-form-field>
+                                        <mat-label>Data de Expiração</mat-label>
+                                        <input matInput type="text" placeholder="Ex.: 10/2026" mask="00/0000" formControlName="expirationDate">
+                                        <mat-hint>MM/AAAA</mat-hint>
+                                    </mat-form-field>
+                                    @if (expirationDate.invalid && (expirationDate.touched || expirationDate.dirty)) {
+                                        <mat-error *ngIf="expirationDate.hasError('required')">Campo Requerido</mat-error>
+                                        <mat-error *ngIf="expirationDate.hasError('mask')">Formato inválido</mat-error>
+                                    }
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-4 mb-6">
+                                <mat-label class="cartao__label">Bandeira</mat-label>
+                                <mat-radio-group aria-label="Select an option" formControlName="brand">
+                                    <mat-radio-button [value]="1">Visa</mat-radio-button>
+                                    <mat-radio-button [value]="2">MasterCard</mat-radio-button>
+                                </mat-radio-group>
+                                @if (brand.invalid && (brand.touched || brand.dirty)) {
+                                    <mat-error *ngIf="brand.hasError('required')">Campo Requerido</mat-error>
+                                }
+                            </div>
+                            <button class="cartao__submit">Adicionar</button>
+                            <mat-error *ngIf="addCreditCardForm.hasError('invalidData')">Dados Inválidos. Por favor, revise-os</mat-error>
+                            <mat-error *ngIf="addCreditCardForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde</mat-error>
+                        </form>
+                    }
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <div class="w-full border-2 border-400-gray my-6"></div>
+    <mat-form-field class="w-full">
+        <mat-label>Quantidade de Parcelas:</mat-label>
+        <mat-select formControlName="guestsQuantity">
+            @for (value of installments.keys(); track value) {
+                <mat-option (onSelectionChange)="selectedInstallmentQuantityEmit($event)" [value]="value">{{value}}x de {{ installments.get(value) | currency: 'BRL' }}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+</div>
