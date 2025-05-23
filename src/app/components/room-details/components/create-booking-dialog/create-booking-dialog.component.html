@@ -1,32 +1,34 @@
-<div class="create-booking-dialog">
+<div class="create-booking-dialog md:p-6">
   <mat-stepper
     class="example-stepper"
     [orientation]="(stepperOrientation | async)!"
     [animationDuration]="'1000'">
     <mat-step class="create-booking-dialog__stepper" [stepControl]="bookingData" label="Dados da Reserva">
-      <div class="create-booking-dialog__booking-data">
+      <div class="create-booking-dialog__booking-data lg:p-4">
         <form [formGroup]="bookingData">
-            <div class="create-booking-dialog__datepicker">
-              <mat-form-field>
-                <mat-label>Data de Check-In:</mat-label>
-                  <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkin" formControlName="checkIn" [min]="today" (dateChange)="onCheckInChange($event)">
-                  <mat-datepicker-toggle matIconSuffix [for]="checkin"></mat-datepicker-toggle>
-                  <mat-datepicker #checkin></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field>
-                  <mat-label>Data de Check-Out:</mat-label>
-                  <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkout" formControlName="checkOut" [min]="checkOutMinDate" (dateChange)="onCheckOutChange($event)">
-                  <mat-datepicker-toggle matIconSuffix [for]="checkout"></mat-datepicker-toggle>
-                  <mat-datepicker #checkout></mat-datepicker>
-              </mat-form-field>
-            </div>
-            <div class="create-booking-dialog__errors">
+            <div class="create-booking-dialog__datepicker flex flex-col md:flex-row md:gap-5 justify-around">
+              <div class="flex flex-col">
+                <mat-form-field>
+                  <mat-label>Data de Check-In:</mat-label>
+                    <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkin" formControlName="checkIn" [min]="today" (dateChange)="onCheckInChange($event)">
+                    <mat-datepicker-toggle matIconSuffix [for]="checkin"></mat-datepicker-toggle>
+                    <mat-datepicker #checkin></mat-datepicker>
+                </mat-form-field>
                 @if (checkIn.hasError('matDatepickerFilter')) {
                     <p class="create-booking-dialog__error">Data de Check-In Inválida</p>
                 }
+              </div>
+              <div class="flex flex-col">
+                <mat-form-field>
+                    <mat-label>Data de Check-Out:</mat-label>
+                    <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkout" formControlName="checkOut" [min]="checkOutMinDate" (dateChange)="onCheckOutChange($event)">
+                    <mat-datepicker-toggle matIconSuffix [for]="checkout"></mat-datepicker-toggle>
+                    <mat-datepicker #checkout></mat-datepicker>
+                </mat-form-field>
                 @if (checkOut.hasError('matDatepickerFilter')) {
                     <p class="create-booking-dialog__error">Data de Check-Out Inválida</p>
                 }
+              </div>
             </div>
             <div class="create-booking-dialog__select">
               <mat-form-field class="w-[80%]" >
@@ -45,7 +47,7 @@
       </div>
     </mat-step>
     <mat-step class="create-booking-dialog__stepper" [stepControl]="paymentData" label="Dados do Pagamento">
-      <div class="create-booking-dialog__payment-data">
+      <div class="create-booking-dialog__payment-data md:p-4">
         <form [formGroup]="paymentData">
         <mat-radio-group aria-label="Select an option" formControlName="paymentType">
           <mat-radio-button *ngFor="let value of paymentKeys; let i = index" [value]="value">{{ value | paymentType }}</mat-radio-button>
@@ -69,30 +71,30 @@
         </div>
     </mat-step>
     <mat-step class="create-booking-dialog__stepper" label="Confirmação dos Dados">
-      <div class="create-booking-dialog__confirmation">
+      <div class="create-booking-dialog__confirmation md:p-4">
         <div class="grid grid-cols-2 gap-4">
           <div>
-            <p class="create-booking-dialog__subtitle">{{ 'Check-in' | uppercase }}</p>
+            <p class="create-booking-dialog__subtitle text-[1rem] md:text-[1.25rem]">{{ 'Check-in' | uppercase }}</p>
             <span class="create-booking-dialog__text">{{ checkIn.value | date: 'dd/MM/yyyy'  }}</span>
           </div>
           <div>
-            <p class="create-booking-dialog__subtitle">{{ 'Check-Out' | uppercase }}</p>
+            <p class="create-booking-dialog__subtitle text-[1rem] md:text-[1.25rem]">{{ 'Check-Out' | uppercase }}</p>
             <span class="create-booking-dialog__text">{{ checkOut.value | date: 'dd/MM/yyyy'  }}</span>
           </div>
           <div>
-            <p class="create-booking-dialog__subtitle">{{ 'Hóspedes' | uppercase }}</p>
+            <p class="create-booking-dialog__subtitle text-[1rem] md:text-[1.25rem]">{{ 'Hóspedes' | uppercase }}</p>
             <span class="create-booking-dialog__text">{{ guestsQuantity.value }}</span>
           </div>
           <div>
-            <p class="create-booking-dialog__subtitle">{{ 'Método de Pagamento' | uppercase }}</p>
+            <p class="create-booking-dialog__subtitle text-[1rem] md:text-[1.25rem]">{{ 'Método de Pagamento' | uppercase }}</p>
             <span class="create-booking-dialog__text">{{ paymentType.value | paymentType }}</span>
           </div>
           <div>
-            <p class="create-booking-dialog__subtitle">{{ 'Noites' | uppercase }}</p>
+            <p class="create-booking-dialog__subtitle text-[1rem] md:text-[1.25rem]">{{ 'Noites' | uppercase }}</p>
             <span class="create-booking-dialog__text">{{ nights }}</span>
           </div>
           <div>
-            <p class="create-booking-dialog__subtitle">{{ 'Valor Total' | uppercase }}</p>
+            <p class="create-booking-dialog__subtitle text-[1rem] md:text-[1.25rem]">{{ 'Valor Total' | uppercase }}</p>
             <span class="create-booking-dialog__text">{{ totalPrice | currency: 'BRL' }}</span>
           </div>
         </div>

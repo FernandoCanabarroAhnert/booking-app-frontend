@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ICreditCardResponse } from '../../interfaces/credit-card-response.interface';
+import { ICreditCardResponse } from '../../interfaces/credit-card/credit-card-response.interface';
 import { CreditCardBrandPipe } from '../../pipes/credit-card-brand.pipe';
 import { MatRadioModule } from '@angular/material/radio';
 

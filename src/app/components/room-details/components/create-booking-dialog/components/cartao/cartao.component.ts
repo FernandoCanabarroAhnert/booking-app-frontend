@@ -12,9 +12,11 @@ import { MatIcon } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
 import { NgxMaskDirective } from 'ngx-mask';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ICreditCardRequest } from '../../../../../../interfaces/credit-card-request.interface';
+import { ICreditCardRequest } from '../../../../../../interfaces/credit-card/credit-card-request.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { SnackBarService } from '../../../../../../services/snack-bar.service';
+import { PaginationComponent } from '../../../../../pagination/pagination.component';
+import { IPageResponse } from '../../../../../../interfaces/page/page-response.interface';
 
 @Component({
   selector: 'app-cartao',
@@ -28,7 +30,8 @@ import { SnackBarService } from '../../../../../../services/snack-bar.service';
     MatIcon,
     MatRadioModule,
     NgxMaskDirective,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginationComponent
   ],
   templateUrl: './cartao.component.html',
   styleUrl: './cartao.component.scss'
@@ -46,7 +49,7 @@ export class CartaoComponent implements OnInit, OnChanges {
   private readonly _snackBarService = inject(SnackBarService);
   private readonly _fb = inject(FormBuilder);
 
-  creditCards$!: Observable<CreditCardList>;
+  creditCards$!: Observable<IPageResponse<CreditCardList>>;
   installments!: Map<number, number>;
   isAddCreditCardExpansionOpen = false;
 
@@ -96,6 +99,10 @@ export class CartaoComponent implements OnInit, OnChanges {
     }
   }
 
+  onPageChange(page: number) {
+    this.getMyCreditCards(page);
+  }
+
   onSubmit() {
     if (this.addCreditCardForm.invalid) {
       this.addCreditCardForm.markAllAsTouched();
@@ -122,8 +129,8 @@ export class CartaoComponent implements OnInit, OnChanges {
     })
   }
 
-  private getMyCreditCards() {
-    this.creditCards$ = this._creditCardService.getMyCreditCards().pipe(map(pageable => pageable.content));
+  private getMyCreditCards(page: number = 1, size: number = 2): void {
+    this.creditCards$ = this._creditCardService.getMyCreditCards(page, size);
   }
 
   private createCreditCardRequest(): ICreditCardRequest {

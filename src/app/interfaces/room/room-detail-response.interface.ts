@@ -1,5 +1,5 @@
-import { IHotelResponse } from "./hotel-response.interface";
-import { IImageResponse } from "./image-response.interface";
+import { IHotelResponse } from "../hotel/hotel-response.interface";
+import { IImageResponse } from "../images/image-response.interface";
 
 export interface IRoomDetailResponse {
     id: number;
@@ -9,6 +9,8 @@ export interface IRoomDetailResponse {
     pricePerNight: number;
     description: string;
     capacity: number;
+    ratingsQuantity: number;
+    averageRating: number;
     hotel: IHotelResponse;
     unavailableDates: Date[];
     images: IImageResponse[];

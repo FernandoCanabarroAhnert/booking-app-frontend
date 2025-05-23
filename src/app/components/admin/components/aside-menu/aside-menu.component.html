@@ -2,8 +2,8 @@
     <div class="aside-menu__profile">
         <img src="../../../../../assets/img/admin-icon.png" alt="">
         <div class="aside-menu__infos">
-            <span class="text-center text-white m-0 text-lg font-thin">Fernando Canabarro Ahnert</span>
-            <span class="text-center text-white m-0 text-lg font-thin">Gerente</span>
+            <span class="text-center text-white m-0 text-lg font-thin">{{ userFullName }}</span>
+            <span class="text-center text-white m-0 text-lg font-thin">{{ isAdmin ? 'Gerente' : 'Funcionário'  }}</span>
         </div>
     </div>
     <aside class="aside-menu__container">
@@ -16,7 +16,7 @@
                 <mat-icon class="aside-menu__icon">calendar_month</mat-icon>
                 <span class="aside-menu__text">Gestão de Reservas</span>
             </li>
-            <li class="aside-menu__link" routerLink="/admin/hotels" routerLinkActive="aside-menu__link--active">
+            <li *ngIf="isAdmin" class="aside-menu__link" routerLink="/admin/hotels" routerLinkActive="aside-menu__link--active">
                 <mat-icon class="aside-menu__icon">apartment</mat-icon>
                 <span class="aside-menu__text">Gestão de Hotéis</span>
             </li>
@@ -28,7 +28,7 @@
                 <mat-icon class="aside-menu__icon">groups</mat-icon>
                 <span class="aside-menu__text">Gestão de Usuários</span>
             </li>
-            <li class="aside-menu__link" routerLink="/admin/reports" routerLinkActive="aside-menu__link--active">
+            <li *ngIf="isAdmin" class="aside-menu__link" routerLink="/admin/reports" routerLinkActive="aside-menu__link--active">
                 <mat-icon class="aside-menu__icon">description</mat-icon>
                 <span class="aside-menu__text">Relatórios e Análises</span>
             </li>

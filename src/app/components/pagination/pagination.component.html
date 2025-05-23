@@ -1,0 +1,34 @@
+<div class="pagination">
+    <p class="pagination__infos">
+        Listando {{ numberOfElements }} de {{ totalElements }} itens | Página {{ currentPage }} de {{ totalPages }}
+    </p>
+    <div class="pagination__nav">
+        <div *ngIf="currentPage > 1" class="pagination__item pagination__item--first" (click)="onPageChange(1)"> <- </div>
+        <div *ngIf="currentPage > 1" class="pagination__item" (click)="onPageChange(currentPage - 1)"> < </div>
+        @if (totalPages <= 10) {
+            <div *ngFor="let page of returnArrayForIteration(totalPages)"
+                [class]="page === currentPage ? 'pagination__item pagination__item--active' : 'pagination__item'" 
+                (click)="onPageChange(page)">{{ page }}</div>
+        }
+        @if (totalPages > 10) {
+            @if (currentPage <= 5 || currentPage >= totalPages - 4) {
+                <div *ngFor="let page of returnArrayForIteration(5)"
+                    [class]="page === currentPage ? 'pagination__item pagination__item--active' : 'pagination__item'" 
+                    (click)="onPageChange(page)">{{ page }}</div>
+                <div class="pagination__item" (click)="onPageChange(6)">...</div>
+                <div *ngFor="let page of returnArrayForIteration(5)"
+                    [class]="currentPage === page + totalPages - 5 ? 'pagination__item pagination__item--active' : 'pagination__item'" 
+                    (click)="onPageChange(page + totalPages - 5)">{{ page }}</div>
+            }
+            @if (currentPage > 5 && currentPage < totalPages - 4) {
+                <div class="pagination__item" (click)="currentPage - 5">...</div>
+                <div *ngFor="let page of returnArrayForIteration(9)"
+                    [class]="currentPage === currentPage - 5 + page ? 'pagination__item pagination__item--active' : 'pagination__item'" 
+                    (click)="onPageChange(currentPage - 5 + page)">{{ currentPage - 5 + page }}</div>
+                <div class="pagination__item" (click)="onPageChange(currentPage + 5)">...</div>
+            }
+        }
+        <div *ngIf="currentPage < totalPages" class="pagination__item" (click)="onPageChange(currentPage + 1)"> > </div>
+        <div *ngIf="currentPage < totalPages" class="pagination__item pagination__item--last" (click)="onPageChange(totalPages)"> -> </div>
+    </div>
+</div>

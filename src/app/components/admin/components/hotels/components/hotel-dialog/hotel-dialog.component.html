@@ -1,0 +1,146 @@
+<div class="hotel-dialog">
+    <span class="text-3xl font-thin">{{ dialogTitle }}</span>
+    @if (isCreateForm || isUpdateForm) {
+        <form [formGroup]="hotelForm" class="flex flex-col">
+            <div class="flex gap-8">
+                <div class="hotel-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Nome</mat-label>
+                        <input matInput type="text" placeholder="Ex.: Hotel Ybanté" formControlName="name">
+                    </mat-form-field>
+                    @if (name.invalid && (name.touched || name.dirty)) {
+                        <mat-error *ngIf="name.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+                <div class="hotel-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Quantidade de Quartos</mat-label>
+                        <input matInput type="number" placeholder="Ex.: 40" formControlName="roomQuantity">
+                    </mat-form-field>
+                    @if (roomQuantity.invalid && (roomQuantity.touched || roomQuantity.dirty)) {
+                        <mat-error *ngIf="roomQuantity.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+            </div>
+            <div class="hotel-dialog__field">
+                <mat-form-field>
+                    <mat-label>Descrição</mat-label>
+                    <input matInput type="text" placeholder="Ex.: Hotel moderno..." formControlName="description">
+                </mat-form-field>
+                @if (description.invalid && (description.touched || description.dirty)) {
+                    <mat-error *ngIf="description.hasError('required')">Campo Requerido</mat-error>
+                }
+            </div>
+            
+            <div class="flex gap-8">
+                <div class="hotel-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>CEP</mat-label>
+                        <input matInput type="text" placeholder="Ex.: 12240-560" formControlName="zipCode" mask="00000-000" (blur)="getAddressFromViaCep()">
+                    </mat-form-field>
+                    @if (zipCode.invalid && (zipCode.touched || zipCode.dirty)) {
+                        <mat-error *ngIf="zipCode.hasError('required')">Campo Requerido</mat-error>
+                        <mat-error *ngIf="zipCode.hasError('mask')">Formato Inválido</mat-error>
+                    }
+                </div>
+                <div class="hotel-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Rua</mat-label>
+                        <input matInput type="text" placeholder="Ex.: Rua Ipiranga" formControlName="street">
+                    </mat-form-field>
+                    @if (street.invalid && (street.touched || street.dirty)) {
+                        <mat-error *ngIf="street.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+            </div>
+            <div class="flex gap-8">
+                <div class="hotel-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Estado</mat-label>
+                        <input matInput type="text" placeholder="Ex.: São Paulo" formControlName="state">
+                    </mat-form-field>
+                    @if (state.invalid && (state.touched || state.dirty)) {
+                        <mat-error *ngIf="state.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+                <div class="hotel-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Cidade</mat-label>
+                        <input matInput type="text" placeholder="Ex.: Porto Alegre" formControlName="city">
+                    </mat-form-field>
+                    @if (city.invalid && (city.touched || city.dirty)) {
+                        <mat-error *ngIf="city.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+            </div>
+            <div class="flex gap-8">
+                <div class="hotel-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Número</mat-label>
+                        <input matInput type="text" placeholder="Ex.: 1440" formControlName="number">
+                    </mat-form-field>
+                    @if (number.invalid && (number.touched || number.dirty)) {
+                        <mat-error *ngIf="number.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+                <div class="hotel-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Telefone</mat-label>
+                        <input matInput type="text" placeholder="Ex.: (11) 9999-9999" mask="(00) 0000-0000" formControlName="phone">
+                    </mat-form-field>
+                    @if (phone.invalid && (phone.touched || phone.dirty)) {
+                        <mat-error *ngIf="phone.hasError('required')">Campo Requerido</mat-error>
+                        <mat-error *ngIf="phone.hasError('mask')">Formato Inválido</mat-error>
+                    }
+                </div>
+            </div>
+            <input type="file" class="hotel-dialog__upload-button" multiple (change)="watchImageInputChange($event)">
+            @if (images) {
+                <div class="hotel-dialog__images grid grid-cols-3 mb-6">
+                    @for (image of images; track image; let i = $index) {
+                        <div class="hotel-dialog__image-container">
+                            <mat-icon class="hotel-dialog__delete-image" matTooltip="Deletar Imagem" (click)="deleteImage(i)">close</mat-icon>
+                            <img class="hotel-dialog__image" [src]="image.url">
+                        </div>
+                    }
+                </div>
+            }
+            <div class="w-full flex gap-6">
+                <button class="hotel-dialog__button" (click)="onCloseDialog()">{{ buttonAction }}</button>
+            </div>
+        </form>
+    }
+    @if (isView) {
+        <div class="grid grid-cols-2">
+            <div class="hotel-dialog__view-item">
+                <span class="hotel-dialog__subtitle">Nome:</span>
+                <p class="hotel-dialog__text">{{ hotelData.name }}</p>
+            </div>
+            <div class="hotel-dialog__view-item">
+                <span class="hotel-dialog__subtitle">Qtde. de Quartos:</span>
+                <p class="hotel-dialog__text">{{ hotelData.roomQuantity }}</p>
+            </div>
+            <div class="hotel-dialog__view-item col-span-2">
+                <span class="hotel-dialog__subtitle">Descrição:</span>
+                <p class="hotel-dialog__text">{{ hotelData.description }}</p>
+            </div>
+            <div class="hotel-dialog__view-item col-span-2">
+                <span class="hotel-dialog__subtitle">Endereço Completo:</span>
+                <p class="hotel-dialog__text">{{ getHotelFullAddress(hotelData) }}</p>
+            </div>
+            <div class="hotel-dialog__view-item">
+                <span class="hotel-dialog__subtitle">Telefone:</span>
+                <p class="hotel-dialog__text">{{ hotelData.phone }}</p>
+            </div>
+            <div class="hotel-dialog__view-item">
+                <span class="hotel-dialog__subtitle">Avaliação:</span>
+                <p class="hotel-dialog__text">{{ hotelData.averageRating }}</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-3">
+            @for (image of hotelData.images; track image; let i = $index) {
+                <img [src]="image.base64Image" class="hotel-dialog__image">
+            }
+        </div>
+    }
+</div>

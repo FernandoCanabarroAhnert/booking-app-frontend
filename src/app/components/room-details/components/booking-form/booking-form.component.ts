@@ -9,11 +9,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CreateBookingDialogComponent } from '../create-booking-dialog/create-booking-dialog.component';
 import { BookingService } from '../../../../services/booking.service';
-import { ICreateBooking } from '../../../../interfaces/create-booking.interface';
 import { AuthService } from '../../../../services/auth.service';
 import { Router } from '@angular/router';
 import { SnackBarService } from '../../../../services/snack-bar.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ICreateBooking } from '../../../../interfaces/booking/create-booking.interface';
 
 @Component({
   selector: 'app-booking-form',
@@ -127,7 +127,7 @@ export class BookingFormComponent {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        const data: ICreateBooking = this.createBookingDate(result);
+        const data: ICreateBooking = this.createBookingData(result);
         this._bookingService.createSelfBooking(data).subscribe({
           next: () => {
             this._snackBarService.showSnackBar('Reserva criada com sucesso!', 'Fechar');
@@ -152,7 +152,7 @@ export class BookingFormComponent {
     return data;
   }
 
-  private createBookingDate(result: any): ICreateBooking {
+  private createBookingData(result: any): ICreateBooking {
     const data: ICreateBooking = {
       roomId: this.roomId,
       checkIn: result.bookingData.checkIn,

@@ -1,9 +1,9 @@
 <div class="boleto">
-    <span class="boleto__title">Pagamento via boleto</span>
-    <span class="boleto__subtitle">Para pagar pelo Internet Banking, copie a linha digitável ou escaneie
+    <span class="boleto__title text-xl sm:text-2xl">Pagamento via boleto</span>
+    <span class="boleto__subtitle text-base sm:text-lg">Para pagar pelo Internet Banking, copie a linha digitável ou escaneie
         o código de barras. Para pagar em qualquer banco, caixa eletrônico ou lotérica, por favor, imprima o boleto.</span>
-    <img src="../../../../../../../assets/img/boleto/codigo-barra.png" alt="Código de Barras" class="w-3/4">
-    <span class="boleto__code">55664.48814 8947.5479 77841.48415 2 8897787000070000 
+    <img src="../../../../../../../assets/img/boleto/codigo-barra.png" alt="Código de Barras" class="w-full sm:w-3/4">
+    <span class="boleto__code text-base sm:text-lg">55664.48814 8947.5479 77841.48415 2 8897787000070000 
         <button [matTooltip]="iconToolTipMessage" (click)="swapIcon($event)" class="boleto__copy">
             <mat-icon (click)="copyText()" class="cursor-pointer">content_copy</mat-icon>
         </button>

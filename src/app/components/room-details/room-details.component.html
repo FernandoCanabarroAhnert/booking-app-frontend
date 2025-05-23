@@ -1,8 +1,8 @@
 <div class="room-details">
     <div class="room-details__main">
         <app-header></app-header>
-        <div class="container mx-auto pb-12">
-            <div class="room-details__breadcrumb text-lg xl:text-4xl font-thin">Hotel {{ room.hotel.name }} <mat-icon>arrow_right_alt</mat-icon> Quarto № {{ room.number }}, {{ room.type | roomType }}</div>
+        <div class="container mx-auto pt-8 sm:pt-0 pb-12">
+            <div class="room-details__breadcrumb text-lg xl:text-4xl font-thin text-center px-4 flex items-center">Hotel {{ room.hotel.name }} <mat-icon>arrow_right_alt</mat-icon> Quarto № {{ room.number }}, {{ room.type | roomType }}</div>
             <div class="grid lg:grid-cols-2">
                 <div class="room-details__images">
                     <img *ngIf="room?.images?.length" [src]="room.images[0].base64Image" alt="Imagem Principal" class="room-details__image room-details__image--main">
@@ -21,7 +21,7 @@
                         }
                     </div>
                 </div>
-                <div class="room-details__booking">
+                <div class="room-details__booking mt-6 lg:mt-0">
                     <app-booking-form 
                         [roomId]="room.id"
                         [capacity]="room.capacity" 
@@ -30,10 +30,17 @@
                 </div>
             </div>
         </div>
+        <div class="container mx-auto room-details__rating col-span-2 flex flex-col sm:flex-row items-center gap-4 p-6">
+            <div class="flex items-center gap-4">
+                <span class="text-2xl">{{ room.averageRating }}</span>
+                <app-stars-rating [rating]="room.averageRating"></app-stars-rating>
+            </div>
+            <span class="text-xl font-thin">Quantidade de avaliações: {{ room.ratingsQuantity }}</span>
+        </div>
     </div>
-    <div class="container mx-auto grid grid-cols-2 py-20 px-6 border-b-2 border-gray-300">  
-        <h3 class="room-details__title col-span-2">Informações Gerais</h3>
-        <div class="room-details__info border-r-2 border-gray-300">
+    <div class="container mx-auto flex flex-col md:grid md:grid-cols-2 py-20 px-6 border-b-2 border-gray-300">  
+        <h3 class="room-details__title md:col-span-2">Informações Gerais</h3>
+        <div class="room-details__info py-6 sm:p-6 border-b-2 md:border-b-0 md:border-r-2 border-gray-300">
             <p class="room-details__subtitle">Hotel: <span class="room-details__text">{{ room.hotel.name }}</span></p>
             <p class="room-details__subtitle">Preço por noite: <span class="room-details__text">{{ room.pricePerNight | currency: 'BRL'}}</span></p>
             <p class="room-details__subtitle">Número: <span class="room-details__text">{{ room.number }}</span></p>
@@ -43,7 +50,7 @@
             <p class="room-details__subtitle">Descrição:</p>
             <p class="room-details__text px-6">{{ room.description }}</p>
         </div>
-        <div class="room-details__info">
+        <div class="room-details__info py-6 pt-12 sm:p-6">
             <div class="flex w-full gap-4 mb-8">
                 <img src="../../../assets/img/dive-icon.png" class="w-8 h-8">
                 <div>
@@ -67,8 +74,8 @@
             </div>
         </div>
         <div class="w-full border-t-2 border-300-gray col-span-2 my-12"></div>
-        <h3 class="room-details__title col-span-2">O que esse lugar oferece</h3>
-        <div class="room-details__info border-r-2 border-gray-300">
+        <h3 class="room-details__title md:col-span-2">O que esse lugar oferece</h3>
+        <div class="room-details__info py-6 sm:p-6 md:border-r-2 border-gray-300">
             <div class="w-full flex gap-8 items-center">
                 <div class="flex w-full gap-4 items-center mb-8">
                     <img src="../../../assets/img/city-icon.png" class="w-8 h-8">
@@ -112,10 +119,10 @@
         </div>
         <div class="w-full border-t-2 border-300-gray col-span-2 my-12"></div>
         <div class="col-span-2">
-            <h3 class="room-details__title col-span-2">Dados do Hotel</h3>
-            <div class="grid grid-cols-2">
-                <img [src]="room.hotel.cardDisplayImage.base64Image" alt="" class="pr-6 border-r-2 border-gray-300">
-                <div class="room-details__info">
+            <h3 class="room-details__title md:col-span-2">Dados do Hotel</h3>
+            <div class="grid md:grid-cols-2">
+                <img [src]="room.hotel.cardDisplayImage.base64Image" alt="" class="pr-6 md:border-r-2 md:border-gray-300">
+                <div class="room-details__info py-6 sm:p-6">
                     <p class="room-details__subtitle">Nome: <span class="room-details__text">{{ room.hotel.name }}</span></p>
                     <p class="room-details__subtitle">Endereço: <span class="room-details__text">{{ hotelFullAddress() }}</span></p>
                     <p class="room-details__subtitle">Telefone: <span class="room-details__text">{{ room.hotel.phone }}</span></p>
@@ -125,6 +132,7 @@
             </div>
         </div>
     </div>
+    <app-room-details-ratings [roomId]="room.id">room-details-ratings</app-room-details-ratings>
     <app-room-details-footer [capacity]="room.capacity"></app-room-details-footer>
     <app-footer></app-footer>
 </div>

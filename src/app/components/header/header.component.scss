@@ -5,27 +5,11 @@
     flex-direction: column;
     background-color: transparent;
 
-    &__top {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    &__logo {
-        width: 12.5%;
-    }
-
-    &__title {
-        font-size: 4.5rem !important;
-        text-align: center;
-    }
-
     &__icons {
         display: flex;
         gap: 1rem;
         justify-content: center;
         align-items: center;
-        width: 15%;
     }
 
     &__accordion {
@@ -65,16 +49,12 @@
 
     &__nav {
         position: relative;
-        top: -3.5rem;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
     }
 
     &__option {
         font-size: 1.05rem;
         font-weight: 500;
+        text-transform: uppercase;
         color: variables.$dark-brown-color;
         cursor: pointer;
         transition: all .3s ease-in-out;

@@ -1,9 +1,8 @@
-import { IImageResponse } from "./image-response.interface";
-
-export interface IHotelResponse {
+export interface IBaseHotelResponse {
     id: number;
     name: string;
     description: string;
+    averageRating: number;
     roomQuantity: number;
     street: string;
     number: string;
@@ -11,5 +10,4 @@ export interface IHotelResponse {
     zipCode: string;
     state: string;
     phone: string;
-    cardDisplayImage: IImageResponse;
 }

@@ -1,1 +1,59 @@
-<p>hotels works!</p>
+<div class="hotels">
+    <div class="hotels__header">
+        <div class="flex flex-col gap-4">
+            <span class="text-5xl font-thin">Gestão de Hotéis</span>
+            <div class="hotels__title-decoration"></div>
+        </div>
+        <div class="flex justify-between items-center w-full">
+            <form class="hotels__search" [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
+                <input type="text" class="hotels__input" placeholder="Pesquisar" formControlName="query"/>
+                <button class="hotels__button hotels__button--light hotels__button--search"><mat-icon>search</mat-icon></button>
+            </form>
+            <button class="hotels__button hotels__button--dark" (click)="onCreateButtonClick()">Adicionar</button>
+        </div>
+    </div>
+    @if (hotels$ | async; as response) {
+        <table mat-table [dataSource]="response.content" class="mat-elevation-z8 my-4">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Id</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.id }} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Nome</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.name }} </td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Descrição</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.description }} </td>
+            </ng-container>
+            <ng-container matColumnDef="roomQuantity">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Qtde. Quartos</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.roomQuantity }} </td>
+            </ng-container>
+            <ng-container matColumnDef="fullAddress">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Endereço</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ hotelFullAddress(element) }} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Ações</th>
+                <td mat-cell *matCellDef="let element" class="content-center">
+                    <button class="hotels__action-button hotels__action-button--view" (click)="onViewButtonClick(element.id)"><mat-icon class="hotels__icon">visibility</mat-icon></button>
+                    <button class="hotels__action-button hotels__action-button--edit mx-3" (click)="onEditButtonClick(element.id)"><mat-icon class="hotels__icon">edit</mat-icon></button>
+                    <button class="hotels__action-button hotels__action-button--delete"><mat-icon class="hotels__icon">delete</mat-icon></button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+         <div class="hotels__exports">
+            <button class="hotels__button hotels__button--light" (click)="onPdfExportButtonClick()">Exportar para PDF<mat-icon>upload_file</mat-icon></button>
+            <button class="hotels__button hotels__button--dark" (click)="onExcelExportButtonClick()">Exportar para Excel<mat-icon>table_view</mat-icon></button>
+        </div>
+        <app-pagination [currentPage]="response.number + 1"
+            [totalPages]="response.totalPages"
+            [numberOfElements]="response.numberOfElements"
+            [totalElements]="response.totalElements"
+            (onPageChangeEmitter)="onPageChange($event)"></app-pagination>
+    }
+</div>

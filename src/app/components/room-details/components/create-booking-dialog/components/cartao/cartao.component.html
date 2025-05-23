@@ -1,11 +1,18 @@
 <div class="cartao">
-    <span class="cartao__title">Pagamento via cartão de crédito</span>
-    @if (creditCards$ | async; as creditCards) {
+    <span class="cartao__title text-center text-xl md:text-2xl">Pagamento via cartão de crédito</span>
+    @if (creditCards$ | async; as response) {
         <app-credit-card 
-            class="w-3/4"
-            *ngFor="let creditCard of creditCards" 
+            class="w-full md:w-3/4"
+            *ngFor="let creditCard of response.content" 
             [creditCard]="creditCard"
             (click)="selectedCreditCardEmit(creditCard.id)"></app-credit-card>
+        <app-pagination
+            [currentPage]="response.number + 1"
+            [totalPages]="response.totalPages"
+            [numberOfElements]="response.numberOfElements"
+            [totalElements]="response.totalElements"
+            (onPageChangeEmitter)="onPageChange($event)"
+        ></app-pagination>
     }
     <div class="w-full flex" [ngClass]="{ 'justify-end': !isAddCreditCardExpansionOpen, 'justify-center': isAddCreditCardExpansionOpen }">
         <mat-accordion [ngClass]="{ 'w-3/7': !isAddCreditCardExpansionOpen, 'w-full': isAddCreditCardExpansionOpen }">
@@ -20,7 +27,7 @@
                 </mat-expansion-panel-header>
                     @if (isAddCreditCardExpansionOpen) {
                         <form [formGroup]="addCreditCardForm" (ngSubmit)="onSubmit()">
-                            <div class="w-full flex justify-evenly">
+                            <div class="w-full flex flex-col md:flex-row md:justify-evenly">
                                 <div class="cartao__field">
                                     <mat-form-field>
                                         <mat-label>Nome do Titular</mat-label>
@@ -41,7 +48,7 @@
                                     }
                                 </div>
                             </div>
-                            <div class="w-full flex justify-evenly">
+                            <div class="w-full flex flex-col md:flex-row md:justify-evenly">
                                 <div class="cartao__field">
                                     <mat-form-field>
                                         <mat-label>CVV</mat-label>
@@ -64,7 +71,7 @@
                                     }
                                 </div>
                             </div>
-                            <div class="flex flex-col gap-4 mb-6">
+                            <div class="flex flex-col gap-4 my-6">
                                 <mat-label class="cartao__label">Bandeira</mat-label>
                                 <mat-radio-group aria-label="Select an option" formControlName="brand">
                                     <mat-radio-button [value]="1">Visa</mat-radio-button>

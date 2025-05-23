@@ -1,12 +1,12 @@
 <div class="header">
-    <div class="header__top">
-        <div class="header__logo">
+    <div class="header__top gap-12 flex flex-row justify-between items-center">
+        <div class="header__logo w-[180px] sm:w-[220px] md:w-[250px] lg:w-[300px]">
             <img src="../../../assets/img/logo-com-cor-sem-letras.png" alt="Logo do Site Colorida">
         </div>
-        <div class="header__title">
+        <div class="header__title hidden sm:flex sm:text-[2rem] md:text-[2.5rem] lg:text-[4.5rem] mr-[1rem] sm:mr-[2rem]">
             Ybanté
         </div>
-        <div class="header__icons">
+        <div class="header__icons mr-[1rem] sm:mr-[2rem]">
             <mat-icon>language</mat-icon>
             <div class="header__accordion">
                 <mat-accordion>
@@ -39,13 +39,17 @@
         </div>
     </div>
     <div class="header__bottom">
-        <div class="header__nav">
-            <p class="header__option">Qualquer lugar</p>
-            <p class="header__option">|</p>
-            <p class="header__option">Qualquer semana</p>
-            <p class="header__option">|</p>
-            <p class="header__option">Hóspedes</p>
-            <mat-icon class="header__search">search</mat-icon>
+        <div class="header__nav flex flex-col gap-3 items-center sm:flex-row sm:justify-center lg:top-[-3.5rem]">
+            <div class="flex flex-row gap-3">
+                <span class="header__option">Qualquer lugar</span>
+                <span class="header__option hidden sm:flex">|</span>
+                <span class="header__option">Qualquer semana</span>
+                <span class="header__option hidden sm:flex">|</span>
+            </div>
+            <div class="flex flex-row gap-3 items-center">
+                <span class="header__option">Hóspedes</span>
+                <mat-icon class="header__search">search</mat-icon>
+            </div>
         </div>
     </div>
 </div>

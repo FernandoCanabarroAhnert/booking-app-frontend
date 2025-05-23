@@ -7,7 +7,7 @@ import { CpfValidatorService } from '../../validators/cpf-validator.service';
 import { passwordValidator } from '../../validators/password.validator';
 import { passwordConfirmationValidator } from '../../validators/password-confirmation.validator';
 import { CommonModule } from '@angular/common';
-import { IRegistrationRequest } from '../../interfaces/register-request.interface';
+import { IRegistrationRequest } from '../../interfaces/register/register-request.interface';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';

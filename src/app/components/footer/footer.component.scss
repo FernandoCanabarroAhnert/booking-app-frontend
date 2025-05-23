@@ -4,12 +4,6 @@
     border-top: 1px solid variables.$light-color;
     padding: 2rem;
 
-    &__left {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-    }
-
     &__brand {
         font-size: 1.1rem;
         margin: 0;
@@ -17,9 +11,6 @@
 
     &__links {
         list-style-type: disc;
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
     }
 
     &__link {
@@ -29,12 +20,6 @@
         &:hover {
             color: variables.$light-brown-color;
         }
-    }
-
-    &__right {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
     }
 
     &__language, &__currency {

@@ -1,4 +1,4 @@
-import { IPaymentRequest } from "./payment-request.interface";
+import { IPaymentRequest } from "../payment/payment-request.interface";
 
 export interface ICreateBooking {
     roomId: number;

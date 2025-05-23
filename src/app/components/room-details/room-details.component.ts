@@ -4,10 +4,12 @@ import { BookingFormComponent } from './components/booking-form/booking-form.com
 import { MatIconModule } from '@angular/material/icon';
 import { FooterComponent } from '../footer/footer.component';
 import { RoomDetailsFooterComponent } from './components/room-details-footer/room-details-footer.component';
-import { IRoomDetailResponse } from '../../interfaces/room-detail-response.interface';
+import { IRoomDetailResponse } from '../../interfaces/room/room-detail-response.interface';
 import { RoomService } from '../../services/room.service';
 import { CommonModule } from '@angular/common';
 import { RoomTypePipe } from '../../pipes/room-type.pipe';
+import { StarsRatingComponent } from '../stars-rating/stars-rating.component';
+import { RoomDetailsRatingsComponent } from './components/room-details-ratings/room-details-ratings.component';
 
 @Component({
   selector: 'app-room-details',
@@ -19,7 +21,9 @@ import { RoomTypePipe } from '../../pipes/room-type.pipe';
     FooterComponent,
     RoomDetailsFooterComponent,
     CommonModule,
-    RoomTypePipe
+    RoomTypePipe,
+    StarsRatingComponent,
+    RoomDetailsRatingsComponent
   ],
   templateUrl: './room-details.component.html',
   styleUrl: './room-details.component.scss'
