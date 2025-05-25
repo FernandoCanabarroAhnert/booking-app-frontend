@@ -12,56 +12,52 @@ import { IUserResponse } from '../interfaces/user/user-response.interface';
 })
 export class AuthService {
 
-  private _authenticationSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  readonly isAuthenticated$ = this._authenticationSubject.asObservable();
-
-  private _isOnlyOperatorRole: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  readonly isOnlyOperatorRole$ = this._isOnlyOperatorRole.asObservable();
-
-  private _isAdminRole: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  readonly isAdminRole$ = this._isAdminRole.asObservable();
-
   private readonly _http = inject(HttpClient);
   private readonly _baseUrl = 'http://localhost:8080/api/v1/auth';
+
+  static isAuthenticated(): boolean {
+    const token = localStorage.getItem('access-token');
+    return token ? true : false;
+  }
+
+  static isAdmin(): boolean {
+    return this.obtainRolesFromToken().includes('ROLE_ADMIN');
+  }
+
+  static isOnlyOperator(): boolean {
+    return this.obtainRolesFromToken().includes('ROLE_OPERATOR') && !this.obtainRolesFromToken().includes('ROLE_ADMIN');
+  }
+
+  private static obtainRolesFromToken(): string[] {
+    const token = localStorage.getItem('access-token');
+    const decodedToken: any = jwtDecode(token as string);
+    return decodedToken.authorities as string[];
+  }
 
   register(request: IRegistrationRequest): Observable<void> {
     return this._http.post<void>(`${this._baseUrl}/register`, request);
   }
 
   guestLogin(request: ILoginRequest): Observable<ILoginResponse> {
-    return this.login('login', request, (response) => response);
+    return this.login('login', request);
   }
 
   adminLogin(request: ILoginRequest): Observable<ILoginResponse> {
-    return this.login('login/admin', request, (response) => {
-      const token: any = jwtDecode(response.token);
-      const roles = token.authorities as string[];
-      const isOnlyOperatorRole = roles.includes('ROLE_OPERATOR') && !roles.includes('ROLE_ADMIN');
-      const isAdminRole = roles.includes('ROLE_ADMIN');
-      if (isOnlyOperatorRole) {
-        this._isOnlyOperatorRole.next(true);
-      }
-      if (isAdminRole) {
-        this._isAdminRole.next(true);
-      }
-      return response;
-    })
+    return this.login('login/admin', request)
   }
 
-  private login(path: string, request: ILoginRequest, callback: (response: ILoginResponse) => ILoginResponse): Observable<ILoginResponse> {
+  private login(path: string, request: ILoginRequest): Observable<ILoginResponse> {
     return this._http.post<ILoginResponse>(`${this._baseUrl}/${path}`, request)
       .pipe(
         map(response => {
           localStorage.setItem('access-token', response.token);
-          this._authenticationSubject.next(true);
-          return callback(response);
+          return response;
         })
       );
   }
 
   logout() {
     localStorage.removeItem('access-token');
-    this._authenticationSubject.next(false);
   }
 
   activateAccount(code: string): Observable<void> {

@@ -1,0 +1,91 @@
+@use '../../../../../styles/variables' as variables;
+
+.users {
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    &__search {
+        display: flex;
+        align-items: center;
+    }
+
+    &__input {
+        padding: .75rem;
+        font-size: 1.1rem;
+        border: 1px solid variables.$dark-brown-color;
+        border-top-left-radius: .5rem;
+        border-bottom-left-radius: .5rem;
+        &:focus {
+            outline: none;
+            border-color: variables.$dark-brown-color;
+        }
+    }
+
+    &__title-decoration {
+        width: 15%;
+        border: 2px solid variables.$light-color;
+    }
+
+    &__button {
+        position: relative;
+        border-radius: .5rem;
+        padding: .75rem 1.5rem;
+        font-size: 1.375rem;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        &:active {
+            bottom: -1px;
+        }
+        &--dark {
+            background-color: variables.$dark-brown-color;
+        }
+        &--light {
+            background-color: variables.$light-brown-color;
+        }
+        &--search {
+            border-radius: 0;
+            border-top-right-radius: .5rem;
+            border-bottom-right-radius: .5rem;
+        }   
+    }
+
+    &__action-button {
+        border-radius: .5rem;
+        padding: .375rem;
+        &--view {
+            background-color: #28a745;
+            color: white;
+        }
+        &--edit {
+            background-color: #007bff;
+            color: white;
+        }
+        &--delete {
+            background-color: #dc3545;
+            color: white;
+        }
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__exports {
+        width: 100%;
+        display: flex;
+        gap: 1.5rem;
+    }
+
+}

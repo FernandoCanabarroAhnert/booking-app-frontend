@@ -1,1 +1,64 @@
-<p>users works!</p>
+<div class="users">
+    <div class="users__header">
+        <div class="flex flex-col gap-4">
+            <span class="text-5xl font-thin">Gestão de Usuários</span>
+            <div class="users__title-decoration"></div>
+        </div>
+        <div class="flex justify-between items-center w-full">
+            <form class="users__search" [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
+                <input type="text" class="users__input" placeholder="Pesquisar" formControlName="query"/>
+                <button class="users__button users__button--light users__button--search"><mat-icon>search</mat-icon></button>
+            </form>
+            <button class="users__button users__button--dark" (click)="onCreateButtonClick()">Adicionar</button>
+        </div>
+    </div>
+    @if (users$ | async; as response) {
+        <table mat-table [dataSource]="response.content" class="mat-elevation-z8 my-4">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Id</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.id }} </td>
+            </ng-container>
+            <ng-container matColumnDef="fullName">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Nome</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.fullName }} </td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef class="content-center">E-mail</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.email }} </td>
+            </ng-container>
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Telefone</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.phone }} </td>
+            </ng-container>
+            <ng-container matColumnDef="cpf">
+                <th mat-header-cell *matHeaderCellDef class="content-center">CPF</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.cpf }} </td>
+            </ng-container>
+            <ng-container matColumnDef="birthDate">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Data Nasc.</th>
+                <td mat-cell *matCellDef="let element" class="content-center"> {{ element.birthDate | date: 'dd/MM/yyyy' }} </td>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="content-center">Ações</th>
+                <td mat-cell *matCellDef="let element" class="content-center">
+                    <button class="users__action-button users__action-button--view" (click)="onViewButtonClick(element.id)"><mat-icon class="users__icon">visibility</mat-icon></button>
+                    <button class="users__action-button users__action-button--edit mx-3" (click)="onEditButtonClick(element.id)"><mat-icon class="users__icon">edit</mat-icon></button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        @if (isAdmin) {
+            <div class="users__exports">
+                <button class="users__button users__button--light" (click)="onPdfExportButtonClick()">Exportar para PDF<mat-icon>upload_file</mat-icon></button>
+                <button class="users__button users__button--dark" (click)="onExcelExportButtonClick()">Exportar para Excel<mat-icon>table_view</mat-icon></button>
+            </div>
+        }
+        <app-pagination [currentPage]="response.number + 1"
+            [totalPages]="response.totalPages"
+            [numberOfElements]="response.numberOfElements"
+            [totalElements]="response.totalElements"
+            (onPageChangeEmitter)="onPageChange($event)"></app-pagination>
+    }
+</div>

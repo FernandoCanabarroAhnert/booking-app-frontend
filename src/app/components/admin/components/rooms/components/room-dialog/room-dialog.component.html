@@ -1,0 +1,146 @@
+<div class="room-dialog">
+    <span class="text-3xl font-thin">{{ dialogTitle }}</span>
+    @if (isCreateForm || isUpdateForm) {
+        <form [formGroup]="roomForm" class="flex flex-col">
+            <div class="flex gap-8">
+                <div class="room-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Número</mat-label>
+                        <input matInput type="text" placeholder="Ex.: 55" formControlName="number">
+                    </mat-form-field>
+                    @if (number.invalid && (number.touched || number.dirty)) {
+                        <mat-error *ngIf="number.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+                <div class="room-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Andar</mat-label>
+                        <input matInput type="number" placeholder="Ex.: 3" formControlName="floor">
+                    </mat-form-field>
+                    @if (floor.invalid && (floor.touched || floor.dirty)) {
+                        <mat-error *ngIf="floor.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+            </div>
+            <div class="room-dialog__field">
+                <mat-form-field>
+                    <mat-label>Descrição</mat-label>
+                    <input matInput type="text" placeholder="Ex.: Quarto espaçoso e bem iluminado..." formControlName="description">
+                </mat-form-field>
+                @if (description.invalid && (description.touched || description.dirty)) {
+                    <mat-error *ngIf="description.hasError('required')">Campo Requerido</mat-error>
+                }
+            </div>
+            
+            <div class="flex gap-8">
+                <div class="room-dialog__field w-1/2">
+                    <mat-form-field>
+                    <mat-label>Tipo de Quarto</mat-label>
+                    <mat-select formControlName="type">
+                        @for (type of roomTypes; track type) {
+                            <mat-option [value]="type">{{ type | roomType }}</mat-option>
+                        }
+                    </mat-select>
+                    </mat-form-field>
+                    @if (type.invalid && (type.touched || type.dirty)) {
+                        <mat-error *ngIf="type.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+                <div class="room-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Preço da Diária</mat-label>
+                        <span *ngIf="pricePerNightInput.value.length > 0" matTextPrefix>R$</span>
+                        <input #pricePerNightInput type="text" matInput placeholder="R$5000,00" formControlName="pricePerNight"
+                            mask="separator.2" thousandSeparator="." decimalSeparator=",">
+                    </mat-form-field>
+                    @if (pricePerNight.invalid && (pricePerNight.touched || pricePerNight.dirty)) {
+                        <mat-error *ngIf="pricePerNight.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+            </div>
+            <div class="flex gap-8">
+                <div class="room-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Capacidade</mat-label>
+                        <input matInput type="number" placeholder="Ex.: 5" formControlName="capacity">
+                    </mat-form-field>
+                    @if (capacity.invalid && (capacity.touched || capacity.dirty)) {
+                        <mat-error *ngIf="capacity.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+                @if (isAdmin) {
+                    <div class="room-dialog__field w-1/2">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Hotel</mat-label>
+                            <input type="text" matInput [formControl]="hotel" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            @for (option of filteredHotelsList | async; track option) {
+                                <mat-option [value]="option">{{ option.name }}</mat-option>
+                            }
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                }
+            </div>
+            <input type="file" class="room-dialog__upload-button" multiple (change)="watchImageInputChange($event)">
+            @if (images) {
+                <div class="room-dialog__images grid grid-cols-3 mb-6">
+                    @for (image of images; track image; let i = $index) {
+                        <div class="room-dialog__image-container">
+                            <mat-icon class="room-dialog__delete-image" matTooltip="Deletar Imagem" (click)="deleteImage(i)">close</mat-icon>
+                            <img class="room-dialog__image" [src]="image.url">
+                        </div>
+                    }
+                </div>
+            }
+            <div class="w-full flex gap-6">
+                <button class="room-dialog__button" (click)="onCloseDialog()">{{ buttonAction }}</button>
+            </div>
+        </form>
+    }
+    @if (isView) {
+        <div class="grid grid-cols-3">
+            <div class="room-dialog__view-item">
+                <span class="room-dialog__subtitle">Número do Quarto:</span>
+                <p class="room-dialog__text">{{ roomData.number }}</p>
+            </div>
+            <div class="room-dialog__view-item">
+                <span class="room-dialog__subtitle">Andar do Quarto:</span>
+                <p class="room-dialog__text">{{ roomData.floor }}</p>
+            </div>
+            <div class="room-dialog__view-item">
+                <span class="room-dialog__subtitle">Tipo do Quarto:</span>
+                <p class="room-dialog__text">{{ roomData.type | roomType }}</p>
+            </div>
+            <div class="room-dialog__view-item">
+                <span class="room-dialog__subtitle">Diária do Quarto:</span>
+                <p class="room-dialog__text">{{ roomData.pricePerNight | currency: 'BRL' }}</p>
+            </div>
+            <div class="room-dialog__view-item">
+                <span class="room-dialog__subtitle">Capacidade do Quarto:</span>
+                <p class="room-dialog__text">{{ roomData.capacity }}</p>
+            </div>
+            <div class="room-dialog__view-item col-span-2">
+                <span class="room-dialog__subtitle">Descrição do Quarto:</span>
+                <p class="room-dialog__text">{{ roomData.description }}</p>
+            </div>
+            <div class="room-dialog__view-item">
+                <span class="room-dialog__subtitle">Avaliação do Quarto:</span>
+                <p class="room-dialog__text">{{ roomData.averageRating }}</p>
+            </div>
+            <div class="room-dialog__view-item">
+                <span class="room-dialog__subtitle">Nome do Hotel:</span>
+                <p class="room-dialog__text">{{ roomData.hotel.name }}</p>
+            </div>
+            <div class="room-dialog__view-item col-span-2">
+                <span class="room-dialog__subtitle">Endereço Completo:</span>
+                <p class="room-dialog__text">{{ getHotelFullAddress(roomData.hotel) }}</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-3">
+            @for (image of roomData.images; track image; let i = $index) {
+                <img [src]="image.base64Image" class="room-dialog__image">
+            }
+        </div>
+    }
+</div>

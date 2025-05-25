@@ -6,7 +6,7 @@ export interface IUserResponse {
     email: string;
     phone: string;
     cpf: string;
-    birthDate: Date;
+    birthDate: string;
     createdAt: Date;
     activated: boolean;
     roles: IRole[];

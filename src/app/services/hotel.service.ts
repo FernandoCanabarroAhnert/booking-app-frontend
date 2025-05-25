@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { IPageResponse } from '../interfaces/page/page-response.interface';
 import { HotelList } from '../types/hotel-list.type';
 import { IHotelDetailResponse } from '../interfaces/hotel/hotel-detail-response.interface';
+import { IHotelSearchResponse } from '../interfaces/hotel/hotel-search-response.interface';
+import { IRoomResponse } from '../interfaces/room/room-response.interface';
+import { RoomList } from '../types/room-list.type';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +16,17 @@ export class HotelService {
   private readonly _http = inject(HttpClient);
   private readonly _baseUrl = 'http://localhost:8080/api/v1/hotels';
 
+  findAllByName(name: string): Observable<IHotelSearchResponse[]> {
+    const headers = new HttpHeaders().set('authorization', `Bearer ${localStorage.getItem('access-token')}`);  
+    return this._http.get<IHotelSearchResponse[]>(`${this._baseUrl}/search`, { params: { name }, headers });
+  }
+
   findAllHotels(page: number, size: number, name: string = ''): Observable<IPageResponse<HotelList>> {
     return this._http.get<IPageResponse<HotelList>>(`${this._baseUrl}`, { params: { page: page - 1, size, name } })
+  }
+
+  findAllRoomsByHotelId(id: number, page: number, size: number): Observable<IPageResponse<RoomList>> {
+    return this._http.get<IPageResponse<RoomList>>(`${this._baseUrl}/${id}/rooms`, { params: { page: page - 1, size } });
   }
 
   findById(id: number): Observable<IHotelDetailResponse> {

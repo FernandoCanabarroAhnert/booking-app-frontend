@@ -1,0 +1,150 @@
+<div class="user-dialog">
+    <span class="text-3xl font-thin">{{ dialogTitle }}</span>
+    @if (isCreateForm || isUpdateForm) {
+        <form [formGroup]="userForm" class="flex flex-col">
+            <div class="flex gap-8">
+                <div class="user-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Nome Completo</mat-label>
+                        <input matInput type="text" placeholder="Ex.: Fulano da Silva" formControlName="fullName">
+                    </mat-form-field>
+                    @if (fullName.invalid && (fullName.touched || fullName.dirty)) {
+                        <mat-error *ngIf="fullName.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+                <div class="user-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>E-mail</mat-label>
+                        <input matInput type="text" placeholder="Ex.: fulano@gmail.com" formControlName="email">
+                    </mat-form-field>
+                    @if (email.invalid && (email.touched || email.dirty)) {
+                        <mat-error *ngIf="email.hasError('required')">Campo Requerido</mat-error>
+                        <mat-error *ngIf="email.hasError('emailIsAlreadyInUse')">Este e-mail já está em uso</mat-error>
+                    }
+                </div>
+            </div>
+            <div class="flex gap-8">
+                @if (isCreateForm) {
+                    <div class="user-dialog__field w-1/2">
+                        <mat-form-field>
+                            <mat-label>Senha</mat-label>
+                            <input matInput type="text" placeholder="Ex.: Quarto espaçoso e bem iluminado..." formControlName="password">
+                        </mat-form-field>
+                        @if (password.invalid && (password.touched || password.dirty)) {
+                            <mat-error *ngIf="password.hasError('required')">Campo obrigatório</mat-error>
+                            <mat-error *ngIf="password.hasError('minlength')">Senha deve ter no mínimo 8 caracteres</mat-error>
+                            <mat-error *ngIf="password.hasError('noUpperCaseLetter')">Senha deve ter no mínimo 1 letra maiúscula</mat-error>
+                            <mat-error *ngIf="password.hasError('noLowerCaseLetter')">Senha deve ter no mínimo 1 letra minúscula</mat-error>
+                            <mat-error *ngIf="password.hasError('noNumber')">Senha deve ter no mínimo 1 número</mat-error>
+                            <mat-error *ngIf="password.hasError('noSpecialChar')">Senha deve ter no mínimo 1 caractere especial</mat-error>
+                        }
+                    </div>
+                }
+                <div class="user-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>CPF:</mat-label>
+                        <input matInput type="text" placeholder="Ex.: 123.456.789.10" mask="000.000.000-00" formControlName="cpf">
+                    </mat-form-field>
+                    @if (cpf.invalid && (cpf.touched || cpf.dirty)) {
+                        <mat-error *ngIf="cpf.hasError('required')">Campo Requerido</mat-error>
+                        <mat-error *ngIf="cpf.hasError('mask')">Formato Inválido</mat-error>
+                        <mat-error *ngIf="cpf.hasError('cpfIsAlreadyInUse')">Este CPF já está em uso</mat-error>
+                    }
+                </div>
+            </div>
+            @if (isAdmin) {
+                <div class="flex gap-8">
+                    <div class="user-dialog__field w-1/2">
+                        <mat-form-field>
+                            <mat-label>Funções</mat-label>
+                            <mat-select formControlName="roles" multiple>
+                                @for (role of rolesIds; track role) {
+                                    <mat-option [value]="role">{{ role | rolePipe }}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                        @if (roles.invalid && (roles.touched || roles.dirty)) {
+                            <mat-error *ngIf="roles.hasError('required')">Campo Requerido</mat-error>
+                        }
+                    </div>
+                    @if (roles.value.includes(2) || roles.value.includes(3)) {
+                    <div class="user-dialog__field w-1/2">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Hotel</mat-label>
+                            <input type="text" matInput [formControl]="hotel" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                @for (option of filteredHotelsList | async; track option) {
+                                    <mat-option [value]="option">{{ option.name }}</mat-option>
+                                }
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                    }
+                </div>
+            }
+            <div class="flex gap-8">
+                <div class="user-dialog__field w-1/2">
+                    <mat-form-field>
+                        <mat-label>Telefone</mat-label>
+                        <input matInput type="text" placeholder="Ex.: (11) 99999-9999" mask="(00) 00000-0000" formControlName="phone">
+                    </mat-form-field>
+                    @if (phone.invalid && (phone.touched || phone.dirty)) {
+                        <mat-error *ngIf="phone.hasError('required')">Campo Requerido</mat-error>
+                        <mat-error *ngIf="phone.hasError('mask')">Formato Inválido</mat-error>
+                    }
+                </div>
+                <div class="user-dialog__field w-1/2">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Data de Nascimento</mat-label>
+                        <input type="text" matInput formControlName="birthDate" mask="00/00/0000" placeholder="Ex.: 01/01/2000">
+                    </mat-form-field>
+                    @if (birthDate.invalid && (birthDate.touched || birthDate.dirty)) {
+                        <mat-error *ngIf="birthDate.hasError('required')">Campo Requerido</mat-error>
+                        <mat-error *ngIf="birthDate.hasError('mask')">Formato Inválido</mat-error>
+                    }
+                </div>
+            </div>
+            @if (isAdmin && isUpdateForm) {
+                <div class="py-6 flex flex-col gap-4">
+                    <mat-label class="user-dialog__subtitle">Conta Ativada</mat-label>
+                    <mat-slide-toggle formControlName="activated"></mat-slide-toggle>
+                </div>
+            }
+            <div class="w-full flex gap-6">
+                <button class="user-dialog__button" (click)="onCloseDialog()">{{ buttonAction }}</button>
+            </div>
+        </form>
+    }
+    @if (isView) {
+        <div class="grid grid-cols-3">
+            <div class="user-dialog__view-item">
+                <span class="user-dialog__subtitle">Nome Completo:</span>
+                <p class="user-dialog__text">{{ userData.fullName }}</p>
+            </div>
+            <div class="user-dialog__view-item col-span-2">
+                <span class="user-dialog__subtitle">E-mail:</span>
+                <p class="user-dialog__text">{{ userData.email }}</p>
+            </div>
+            <div class="user-dialog__view-item">
+                <span class="user-dialog__subtitle">CPF:</span>
+                <p class="user-dialog__text">{{ userData.cpf }}</p>
+            </div>
+            <div class="user-dialog__view-item">
+                <span class="user-dialog__subtitle">Telefone:</span>
+                <p class="user-dialog__text">{{ userData.phone }}</p>
+            </div>
+            <div class="user-dialog__view-item">
+                <span class="user-dialog__subtitle">Data de Nascimento:</span>
+                <p class="user-dialog__text">{{ userData.birthDate | date: 'dd/MM/yyyy' }}</p>
+            </div>
+            <div class="user-dialog__view-item">
+                <span class="user-dialog__subtitle">Conta Ativada:</span>
+                <p class="user-dialog__text">{{ userData.activated ? 'Sim' : 'Não' }}</p>
+            </div>
+            <div class="user-dialog__view-item col-span-2">
+                <span class="user-dialog__subtitle">Função:</span>
+                <p class="user-dialog__text">{{ getUserRolesForView() }}</p>
+            </div>
+        </div>
+    }
+</div>

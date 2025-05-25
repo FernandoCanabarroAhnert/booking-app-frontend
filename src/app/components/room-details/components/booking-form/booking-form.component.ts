@@ -115,29 +115,28 @@ export class BookingFormComponent {
   }
 
   openDialog() {
-    this._authService.isAuthenticated$.subscribe(isLoggedId => {
-      // if (!isLoggedId) {
-      //   this._snackBarService.showSnackBar('Você precisa estar logado para fazer uma reserva!', 'Fechar');
-      //   this._router.navigate(['/login']);
-      //   return;
-      // }
-      const dialogRef = this._matDialog.open(CreateBookingDialogComponent, {
-        width: '750px',
-        data: this.sendDialogData()
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        const data: ICreateBooking = this.createBookingData(result);
-        this._bookingService.createSelfBooking(data).subscribe({
-          next: () => {
-            this._snackBarService.showSnackBar('Reserva criada com sucesso!', 'Fechar');
-          },
-          error: (error: HttpErrorResponse) => {
-            console.error(error);
-          }
-        })
-      })
+    const isLoggedId = AuthService.isAuthenticated();
+    if (!isLoggedId) {
+      this._snackBarService.showSnackBar('Você precisa estar logado para fazer uma reserva!', 'Fechar');
+      this._router.navigate(['/login']);
+      return;
+    }
+    const dialogRef = this._matDialog.open(CreateBookingDialogComponent, {
+      width: '750px',
+      data: this.sendDialogData()
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      const data: ICreateBooking = this.createBookingData(result);
+      this._bookingService.createSelfBooking(data).subscribe({
+        next: () => {
+          this._snackBarService.showSnackBar('Reserva criada com sucesso!', 'Fechar');
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error(error);
+        }
+      })
+    })
   }
 
   private sendDialogData() {

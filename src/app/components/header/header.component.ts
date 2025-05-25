@@ -24,11 +24,11 @@ export class HeaderComponent implements OnInit {
   private readonly _authService = inject(AuthService);
 
   ngOnInit(): void {
-      this.listenToAuthState();
+    this.listenToAuthState();
   }
 
   listenToAuthState(): void {
-    this._authService.isAuthenticated$.subscribe(value => this.isAuthenticated = value);
+    this.isAuthenticated = AuthService.isAuthenticated();
   }
 
   logout(): void {

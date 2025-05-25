@@ -52,41 +52,7 @@ export class HotelDialogComponent implements OnInit {
   private readonly _data = inject(MAT_DIALOG_DATA);
 
   ngOnInit(): void {
-    if (this._data.isCreateForm) {
-      this.dialogTitle = 'Cadastrar Hotel';
-      this.buttonAction = 'Cadastrar';
-      this.isCreateForm = true;
-      this.createForm();
-    }
-    if (this._data.isUpdateForm) {
-      this.dialogTitle = 'Atualizar Hotel';
-      this.buttonAction = 'Atualizar';
-      this.isUpdateForm = true;
-      this.createForm();
-      this.hotelData = this._data.hotel;
-      this.hotelForm.patchValue({
-        name: this.hotelData.name,
-        description: this.hotelData.description,
-        roomQuantity: this.hotelData.roomQuantity,
-        zipCode: this.hotelData.zipCode,
-        street: this.hotelData.street,
-        number: this.hotelData.number,
-        city: this.hotelData.city,
-        state: this.hotelData.state,
-        phone: this.hotelData.phone
-      });
-      this.images = this.hotelData.images.map((image: IImageResponse) => {
-        return {
-          file: null,
-          url: image.base64Image
-        }
-      })
-    }
-    if (this._data.isView) {
-      this.dialogTitle = 'Visualizar Hotel';
-      this.isView = true;
-      this.hotelData = this._data.hotel;
-    }
+    this.setDialogData();
   }
 
   get name(): FormControl {
@@ -214,6 +180,44 @@ export class HotelDialogComponent implements OnInit {
       state: ['', Validators.required],
       phone: ['', Validators.required]
     })
+  }
+
+  private setDialogData() {
+    if (this._data.isCreateForm) {
+      this.dialogTitle = 'Cadastrar Hotel';
+      this.buttonAction = 'Cadastrar';
+      this.isCreateForm = true;
+      this.createForm();
+    }
+    if (this._data.isUpdateForm) {
+      this.dialogTitle = 'Atualizar Hotel';
+      this.buttonAction = 'Atualizar';
+      this.isUpdateForm = true;
+      this.createForm();
+      this.hotelData = this._data.hotel;
+      this.hotelForm.patchValue({
+        name: this.hotelData.name,
+        description: this.hotelData.description,
+        roomQuantity: this.hotelData.roomQuantity,
+        zipCode: this.hotelData.zipCode,
+        street: this.hotelData.street,
+        number: this.hotelData.number,
+        city: this.hotelData.city,
+        state: this.hotelData.state,
+        phone: this.hotelData.phone
+      });
+      this.images = this.hotelData.images.map((image: IImageResponse) => {
+        return {
+          file: null,
+          url: image.base64Image
+        }
+      })
+    }
+    if (this._data.isView) {
+      this.dialogTitle = 'Visualizar Hotel';
+      this.isView = true;
+      this.hotelData = this._data.hotel;
+    }
   }
  
 }

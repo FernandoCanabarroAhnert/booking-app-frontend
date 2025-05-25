@@ -18,25 +18,22 @@ import { AuthService } from '../../../../services/auth.service';
 })
 export class AsideMenuComponent implements OnInit {
 
-  isAdmin: boolean = false;
-  isOnlyOperator: boolean = false;
-  userFullName: string = '';
-
   private readonly _router = inject(Router);
   private readonly _authService = inject(AuthService);
 
+  isAdmin: boolean = false;
+  isOnlyOperator: boolean = false;
+
+  userFullName: string = '';
+  
   ngOnInit(): void {
     this.obtainCurrentUserAuthority();
     this.obtainUserFullName();
   }
 
   obtainCurrentUserAuthority() {
-    this._authService.isAdminRole$.subscribe(isAdmin => {
-      this.isAdmin = isAdmin;
-    });
-    this._authService.isOnlyOperatorRole$.subscribe(isOnlyOperator => {
-      this.isOnlyOperator = isOnlyOperator;
-    });
+    this.isAdmin = AuthService.isAdmin();
+    this.isOnlyOperator = AuthService.isOnlyOperator();
   }
 
   obtainUserFullName() {

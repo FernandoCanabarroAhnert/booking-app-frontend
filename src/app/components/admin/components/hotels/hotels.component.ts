@@ -51,12 +51,6 @@ export class HotelsComponent implements OnInit {
     return this.searchForm.get('query') as FormControl;
   }
 
-  createHotelQueryForm() {
-    this.searchForm = this._fb.group({
-      query: ['']
-    });
-  }
-
   onSearchSubmit() {
     this.findAllHotels(1, 10, this.query.value);
   }
@@ -159,6 +153,12 @@ export class HotelsComponent implements OnInit {
 
   private findAllHotels(page: number = 1, size: number = 10, query: string = '') {
     this.hotels$ = this._hotelService.findAllHotels(page, size, query);
+  }
+ 
+  private createHotelQueryForm() {
+    this.searchForm = this._fb.group({
+      query: ['']
+    });
   }
 
 }
