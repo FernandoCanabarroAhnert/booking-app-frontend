@@ -15,6 +15,9 @@ export class StarsRatingComponent {
   @Input({ required: true })
   rating: number = 0;
 
+  @Input()
+  color: 'green' | 'yellow' = 'yellow';
+
   get fullStars(): number[] {
     return Array(Math.floor(this.rating)).fill(0);
   }

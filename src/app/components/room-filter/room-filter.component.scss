@@ -1,0 +1,45 @@
+@use '../../../styles/variables' as variables;
+
+.room-filter {
+    display: flex;
+
+    &__form {
+        display: flex;
+        align-items: center;
+    }
+
+    &__input {
+        border-width: 3px 2px;
+        border-style: solid;
+        border-color: variables.$green-color;
+    }
+
+    &__button {
+        height: 100%;
+        font-size: 1.25rem;
+        font-weight: 500;
+        letter-spacing: .175rem;
+        color: #fff;
+        background-color: variables.$green-color;
+        border-width: 3px 3px 3px 2px;
+        border-style: solid;
+        border-color: variables.$green-color;
+        border-top-right-radius: .5rem;
+        border-bottom-right-radius: .5rem;
+        padding: 0 1.5rem;
+        transition: all .4s ease-in-out;
+        &:hover {
+            background-color: transparent;
+            color: variables.$green-color;
+        }
+    }
+
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+}
+
+::ng-deep .tooltip-alert {
+    --mdc-plain-tooltip-container-color: #d4111e !important;
+}

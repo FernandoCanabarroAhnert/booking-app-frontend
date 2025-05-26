@@ -1,0 +1,35 @@
+<div class="room-filter">
+    <form [formGroup]="roomFilterForm" (ngSubmit)="city.value === '' ? tooltip.show() : onSubmit()" class="room-filter__form">
+        <mat-form-field 
+            class="room-filter__input room-filter__input--first" 
+            #tooltip="matTooltip"
+            matTooltipPosition="below"
+            matTooltip="Por favor, insira um destino para começar a pesquisar."
+            matTooltipClass="tooltip-alert">
+            <mat-label>Cidade</mat-label>
+            <input matInput type="text" placeholder="Ex.: Gramado" formControlName="city">
+        </mat-form-field>
+        <mat-form-field class="room-filter__input">
+            <mat-label>Selecione as datas</mat-label>
+            <mat-date-range-input [formGroup]="roomFilterForm" [rangePicker]="picker" disabled>
+                <input matStartDate formControlName="checkIn" placeholder="Check In">
+                <input matEndDate formControlName="checkOut" placeholder="Check Out">
+            </mat-date-range-input>
+            <mat-datepicker-toggle [disabled]="false" matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker [disabled]="false" #picker></mat-date-range-picker>
+        </mat-form-field>
+        <mat-form-field class="room-filter__input">
+            <mat-label>Tipo de Quarto</mat-label>
+            <mat-select formControlName="types" multiple>
+                @for (type of roomTypes; track type) {
+                    <mat-option [value]="type.value">{{ type.enum | roomType }}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="room-filter__input">
+            <mat-label>Qtde. de Hóspedes</mat-label>
+            <input matInput type="number" formControlName="capacity">
+        </mat-form-field>
+        <button class="room-filter__button">Pesquisar</button>
+    </form>
+</div>

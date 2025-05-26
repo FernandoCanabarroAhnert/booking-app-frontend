@@ -5,9 +5,15 @@
     &__star {
         width: 2rem;
         height: 2rem;
-        &--half, &--fill {
-            color: #ffff39;
-        }
+    }
+
+    &--yellow {
+        color: #ffff39;
+    }
+
+    &--green {
+        color: #698167;
     }
 
 }
+

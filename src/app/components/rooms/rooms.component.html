@@ -1,0 +1,27 @@
+<div class="rooms">
+    <app-header></app-header>
+    <div class="container mx-auto flex flex-col items-center gap-12 min-h-[100dvh] py-6">
+        <div class="w-full flex justify-center">
+            <app-room-filter (onFilterSubmitEmitter)="onRoomFilterSubmit($event)"></app-room-filter>
+        </div>
+        <div class="w-full flex items-center justify-start gap-8">
+            <span class="text-7xl font-thin">Quartos</span>
+            <button [matTooltip]="'Ordenar por preço ' + tooltipText" (click)="onPriceSort()" class="rooms__sort-button">
+                <mat-icon class="rooms_icon">attach_money</mat-icon>
+                <mat-icon class="rooms_icon">{{ priceSortDirection === 'asc' ? 'arrow_downward' : 'arrow_upward' }}</mat-icon>
+            </button>
+        </div>
+        @if (rooms$ | async; as rooms) {
+            <div class="grid grid-cols-4 gap-6">
+                @for (room of rooms.content; track room) {
+                    <app-room-card [room]="room" [routerLink]="[room.id]"></app-room-card>
+                }
+            </div>
+            <app-pagination [currentPage]="rooms.number + 1"
+                [totalPages]="rooms.totalPages"
+                [numberOfElements]="rooms.numberOfElements"
+                [totalElements]="rooms.totalElements"
+                (onPageChangeEmitter)="onPageChange($event)"></app-pagination>
+        }
+    </div>  
+</div>

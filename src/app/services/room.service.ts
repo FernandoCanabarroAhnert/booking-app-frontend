@@ -14,8 +14,18 @@ export class RoomService {
   private readonly _http = inject(HttpClient);
   private readonly baseUrl: string = 'http://localhost:8080/api/v1/rooms';
 
-  findAllRooms(page: number, size: number): Observable<IPageResponse<RoomList>> {
-    return this._http.get<IPageResponse<RoomList>>(this.baseUrl, { params: { page: page - 1, size } });
+  findAllRoomsWithFilter(page: number, size: number, checkIn: string, 
+                        checkOut: string, city: string = '', 
+                        capacity: number = 1, types: string[] = [''],
+                        sort: string = 'id,asc',
+                        minPrice: number | string = '', maxPrice: number | string = ''): Observable<IPageResponse<RoomList>> {
+    return this._http.get<IPageResponse<RoomList>>(
+      `${this.baseUrl}/query`, 
+      { params: { page: page - 1, size, sort, checkIn, checkOut, city, capacity, types, minPrice, maxPrice } });
+  }
+
+  findAllRooms(page: number, size: number, sort: string = 'id,asc'): Observable<IPageResponse<RoomList>> {
+    return this._http.get<IPageResponse<RoomList>>(this.baseUrl, { params: { page: page - 1, size, sort } });
   }
 
   findById(id: number): Observable<IRoomDetailResponse> {

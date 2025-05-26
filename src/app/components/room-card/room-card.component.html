@@ -1,0 +1,14 @@
+ <div class="room-card">
+    <div class="room-card__image-container">
+        <img class="room-card__image" [src]="room.cardDisplayImage.base64Image">
+    </div>
+    <div class="room-card__content">
+        <h3 class="room-card__name">Quarto № {{ room.number }}, {{ room.type | roomType }}</h3>
+        <p class="room-features">• {{ room.capacity }} hóspede(s) • {{ room.hotelName }}</p>
+        <div class="room-card__price">{{ room.pricePerNight | currency: 'BRL' }}/noite</div>
+        <div class="room-card__rating">
+            <app-stars-rating [rating]="room.averageRating" [color]="'green'"></app-stars-rating>
+            <span>{{ room.averageRating }} ({{ room.ratingsQuantity }} avaliações)</span>
+        </div>
+    </div>
+</div>

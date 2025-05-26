@@ -1,0 +1,24 @@
+@use '../../../styles/variables' as variables;
+
+.rooms {
+    background-image: url('../../../assets/img/room-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    &__sort-button {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        background-color: variables.$green-color;
+        padding: 1rem;
+        border-radius: .5rem;
+    }
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+}

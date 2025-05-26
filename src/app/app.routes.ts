@@ -26,6 +26,11 @@ export const routes: Routes = [
         loadChildren: () => import('./components/admin/admin.routes').then(m => m.adminRoutes)
     },
     {
+        path: 'rooms',
+        title: 'Quartos',
+        loadComponent: () => import('./components/rooms/rooms.component').then(m => m.RoomsComponent)
+    },
+    {
         path: 'rooms/:roomId',
         title: 'Detalhes do Quarto',
         loadComponent: () => import('./components/room-details/room-details.component').then(m => m.RoomDetailsComponent)
