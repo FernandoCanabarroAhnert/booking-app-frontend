@@ -1,0 +1,8 @@
+<div class="delete-confirmation-dialog">
+    <span class="text-3xl font-thin">Deletar {{ data.resource }}</span>
+    <span class="text-lg font-thin">Você tem certeza disso? Esta ação <b>não pode</b> ser revertida</span>
+    <div class="w-full flex justify-start gap-6">
+        <div class="delete-confirmation-dialog__button delete-confirmation-dialog__button--light-color" [mat-dialog-close]="false">Cancelar</div>
+        <div class="delete-confirmation-dialog__button delete-confirmation-dialog__button--dark-color" [mat-dialog-close]="true">Sim</div>
+    </div>
+</div>

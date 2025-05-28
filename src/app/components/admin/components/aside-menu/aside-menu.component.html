@@ -1,9 +1,9 @@
 <div class="aside-menu">
     <div class="aside-menu__profile">
-        <img src="../../../../../assets/img/admin-icon.png" alt="">
-        <div class="aside-menu__infos">
-            <span class="text-center text-white m-0 text-lg font-thin">{{ userFullName }}</span>
-            <span class="text-center text-white m-0 text-lg font-thin">{{ isAdmin ? 'Gerente' : 'Funcionário'  }}</span>
+        <mat-icon class="aside-menu__icon aside-menu__icon--user">account_circle</mat-icon>
+        <div class="w-full flex flex-col items-center text-center gap-2 pt-2 mr-2">
+            <span class="aside-menu__text aside-menu__text--bold">{{ userFullName }}</span>
+            <span class="aside-menu__text">{{ isAdmin ? 'Gerente' : 'Funcionário'  }}</span>
         </div>
     </div>
     <aside class="aside-menu__container">

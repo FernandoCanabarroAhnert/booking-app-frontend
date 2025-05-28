@@ -17,6 +17,7 @@ import { IRoomDetailResponse } from '../../../../interfaces/room/room-detail-res
 import { RoomDialogComponent } from './components/room-dialog/room-dialog.component';
 import { RoomTypePipe } from '../../../../pipes/room-type.pipe';
 import { IHotelSearchResponse } from '../../../../interfaces/hotel/hotel-search-response.interface';
+import { DeleteConfirmationDialogComponent } from '../../../delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-rooms',
@@ -62,6 +63,13 @@ export class RoomsComponent {
 
   onPdfExportButtonClick() {
     this._roomService.exportToPdf().subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+    })
+  }
+
+  onPdfExportGroupByHotelButtonClick() {
+    this._roomService.exportToPdfGroupByHotel().subscribe(blob => {
       const url = window.URL.createObjectURL(blob);
       window.open(url);
     })
@@ -122,6 +130,38 @@ export class RoomsComponent {
         });
       }
     });
+  }
+
+  onDeleteButtonClick(roomId: number) {
+    const dialogRef = this._matDialog.open(DeleteConfirmationDialogComponent, {
+      width: '500px',
+      data: {
+        resource: 'Quarto'
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+      this._roomService.deleteRoom(roomId).subscribe({
+        next: () => {
+          this._snackBarServce.showSnackBar('Quarto deletado com sucesso!', 'Fechar');
+          this.findAllRooms();
+        },
+        error: (error: HttpErrorResponse) => {
+          const BAD_REQUEST_ERROR = error.status === 400;
+          const NOT_FOUND_ERROR = error.status === 404;
+          const INTERNAL_SERVER_ERROR = error.status === 500;
+          if (BAD_REQUEST_ERROR) {
+            this._snackBarServce.showSnackBar('Quarto não pode ser excluído pois há reservas ativas cadastradas nele', 'Fechar');
+          }
+          if (NOT_FOUND_ERROR) {
+            this._snackBarServce.showSnackBar('Quarto não encontrado', 'Fechar');
+          }
+          if (INTERNAL_SERVER_ERROR) {
+            this._snackBarServce.showSnackBar('Um erro inesperado ocorreu. Tente novamente mais tarde.', 'Fechar');
+          }
+        }
+      })
+    })
   }
 
   private openDialog(option: 'view' | 'create' | 'update', room?: IRoomDetailResponse, callback?: (result: any) => void, ) {

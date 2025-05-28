@@ -1,0 +1,65 @@
+<div class="booking-pdf-dialog">
+    <div class="w-full flex flex-col">
+        <span class="booking-pdf-dialog__title">Gerar Relatório PDF</span>
+        <div class="booking-pdf-dialog__title-decoration"></div>
+    </div>
+    <form [formGroup]="bookingPdfForm" class="booking-pdf-dialog__form">
+        <div class="booking-pdf-dialog__row">
+            <div class="booking-pdf-dialog__field">
+                <mat-form-field class="room-filter__input">
+                    <mat-label>Selecione as datas</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate formControlName="checkIn" placeholder="Check In">
+                        <input matEndDate formControlName="checkOut" placeholder="Check Out">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+                </mat-form-field>
+            </div>
+            <div class="booking-pdf-dialog__field">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Hotel</mat-label>
+                    <input type="text" matInput [formControl]="hotel" [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                        @for (option of filteredHotelsList | async; track option) {
+                            <mat-option [value]="option">{{ option.name }}</mat-option>
+                        }
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="booking-pdf-dialog__row">
+            <div class="booking-pdf-dialog__field">
+                <mat-form-field class="booking-pdf-dialog__input">
+                    <mat-label>Valor mínimo</mat-label>
+                    <span *ngIf="minPrice.value.length > 0" matTextPrefix>R$</span>
+                    <input #minPrice type="text" matInput placeholder="R$400,00" formControlName="minAmount"
+                        mask="separator.2" thousandSeparator="." decimalSeparator=",">
+                </mat-form-field>
+                @if (minAmount.invalid && (minAmount.dirty || minAmount.touched)) {
+                    <mat-error *ngIf="minAmount.hasError('min')">Valor inválido</mat-error>
+                }
+            </div>
+            <div class="booking-pdf-dialog__field">
+                <mat-form-field class="booking-pdf-dialog__input">
+                    <mat-label>Valor máximo</mat-label>
+                    <span *ngIf="maxPrice.value.length > 0" matTextPrefix>R$</span>
+                    <input #maxPrice type="text" matInput placeholder="R$8500,00" formControlName="maxAmount"
+                        mask="separator.2" thousandSeparator="." decimalSeparator=",">
+                </mat-form-field>
+                @if (maxAmount.invalid && (maxAmount.dirty || maxAmount.touched)) {
+                    <mat-error *ngIf="maxAmount.hasError('min')">Valor inválido</mat-error>
+                }
+            </div>
+        </div>
+        <div class="booking-pdf-dialog__row booking-pdf-dialog__options">
+            <mat-checkbox formControlName="dinheiro" value="DINHEIRO">Dinheiro</mat-checkbox>
+            <mat-checkbox formControlName="cartao" value="DINHEIRO">Cartão</mat-checkbox>
+            <mat-checkbox formControlName="pix" value="DINHEIRO">Pix</mat-checkbox>
+            <mat-checkbox formControlName="boleto" value="DINHEIRO">Boleto</mat-checkbox>
+        </div>
+        <div class="w-full flex justify-start">
+            <button class="booking-pdf-dialog__button" (click)="onSubmit()">Gerar PDF</button>
+        </div>
+    </form>
+</div>

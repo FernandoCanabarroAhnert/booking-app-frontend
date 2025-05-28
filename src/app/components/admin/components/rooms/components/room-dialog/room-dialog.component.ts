@@ -108,7 +108,6 @@ export class RoomDialogComponent {
     return hotel && hotel.name ? hotel.name : '';
   }
 
-
   setDialogData() {
     if (this._data.isCreateForm) {
       this.dialogTitle = 'Cadastrar Quarto';

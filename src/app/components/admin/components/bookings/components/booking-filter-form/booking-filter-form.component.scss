@@ -1,0 +1,29 @@
+@use '../../../../../../../styles/variables' as variables;
+
+.booking-filter-form {
+    width: 100%;
+
+    &__form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    &__button {
+        margin-bottom: 1rem;
+        padding: .5rem;
+        border-radius: 50%;
+        background-color: variables.$light-brown-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+    }
+}

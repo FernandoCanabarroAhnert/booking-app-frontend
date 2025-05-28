@@ -19,5 +19,7 @@ export class RoomCardComponent {
 
   @Input({ required: true })
   room!: IRoomResponse;
+  @Input()
+  showRating: boolean = true;
 
 }

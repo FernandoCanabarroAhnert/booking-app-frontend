@@ -1,0 +1,17 @@
+<div class="container mx-auto flex flex-col gap-6 items-center pt-8">
+    <div class="w-full flex justify-center">
+        <app-room-filter [showCityFilter]="!this.isOnlyOperator" (onFilterSubmitEmitter)="onFilterSubmit($event)"></app-room-filter>
+    </div>
+    @if (rooms$ | async; as response) {
+        <div class="grid grid-cols-4 gap-4">
+                @for (room of response.content; track room) {
+                    <app-room-card [room]="room" [showRating]="false" (click)="showCreateDialog(room.id)"></app-room-card>
+                }
+        </div>
+        <app-pagination [currentPage]="response.number + 1"
+            [totalPages]="response.totalPages"
+            [numberOfElements]="response.numberOfElements"
+            [totalElements]="response.totalElements"
+            (onPageChangeEmitter)="queryRooms($event)"></app-pagination>
+    }
+</div>

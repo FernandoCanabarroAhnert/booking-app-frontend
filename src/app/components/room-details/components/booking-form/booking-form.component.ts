@@ -51,7 +51,6 @@ export class BookingFormComponent {
 
   private readonly _bookingService = inject(BookingService);
   private readonly _matDialog = inject(MatDialog);
-  private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
   private readonly _snackBarService = inject(SnackBarService);
 

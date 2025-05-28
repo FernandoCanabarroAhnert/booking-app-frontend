@@ -12,6 +12,10 @@
         border-width: 3px 2px;
         border-style: solid;
         border-color: variables.$green-color;
+        &--first {
+            border-top-left-radius: 1.625rem;
+            border-bottom-left-radius: 1.625rem;
+        }
     }
 
     &__button {
@@ -24,14 +28,20 @@
         border-width: 3px 3px 3px 2px;
         border-style: solid;
         border-color: variables.$green-color;
-        border-top-right-radius: .5rem;
-        border-bottom-right-radius: .5rem;
-        padding: 0 1.5rem;
+        border-top-right-radius: 1.625rem;
+        border-bottom-right-radius: 1.625rem;
+        padding: 0 .325rem;
         transition: all .4s ease-in-out;
-        &:hover {
-            background-color: transparent;
-            color: variables.$green-color;
-        }
+    }
+
+    &__icon {
+        border-radius: 50%;
+        background-color: transparent;
+        padding: 1.625rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
     }
 
 }
@@ -40,6 +50,7 @@
     display: none !important;
 }
 
-::ng-deep .tooltip-alert {
-    --mdc-plain-tooltip-container-color: #d4111e !important;
+:host ::ng-deep #first .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+    border-top-left-radius: 1.625rem !important;
+    border-bottom-left-radius: 1.625rem !important;
 }

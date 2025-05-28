@@ -17,11 +17,12 @@ export class RoomService {
   findAllRoomsWithFilter(page: number, size: number, checkIn: string, 
                         checkOut: string, city: string = '', 
                         capacity: number = 1, types: string[] = [''],
+                        hotelId: number | string = '',
                         sort: string = 'id,asc',
                         minPrice: number | string = '', maxPrice: number | string = ''): Observable<IPageResponse<RoomList>> {
     return this._http.get<IPageResponse<RoomList>>(
       `${this.baseUrl}/query`, 
-      { params: { page: page - 1, size, sort, checkIn, checkOut, city, capacity, types, minPrice, maxPrice } });
+      { params: { page: page - 1, size, sort, checkIn, checkOut, city, capacity, types, hotelId, minPrice, maxPrice } });
   }
 
   findAllRooms(page: number, size: number, sort: string = 'id,asc'): Observable<IPageResponse<RoomList>> {
@@ -46,10 +47,21 @@ export class RoomService {
     return this._http.put<void>(`${this.baseUrl}/${id}`, room, { headers });
   }
 
+  deleteRoom(id: number): Observable<void> {
+    const headers = new HttpHeaders().set('authorization', `Bearer ${localStorage.getItem('access-token')}`); 
+    return this._http.delete<void>(`${this.baseUrl}/${id}`, { headers });
+  }
+
   exportToPdf() {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
     const options = { headers, responseType: 'blob' as const };
     return this._http.get(`${this.baseUrl}/pdf`, options);
+  }
+
+  exportToPdfGroupByHotel() {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
+    const options = { headers, responseType: 'blob' as const };
+    return this._http.get(`${this.baseUrl}/pdf/group-by-hotel`, options);
   }
 
   exportToExcel() {

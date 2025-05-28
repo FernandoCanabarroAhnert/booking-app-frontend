@@ -1,0 +1,203 @@
+<div class="booking-dialog">
+    <span class="text-3xl font-thin">{{ dialogTitle }}</span>
+    @if (isCreateForm || isUpdateForm) {
+        <form [formGroup]="bookingForm" class="flex flex-col">
+            <div class="flex gap-8">
+                <div class="booking-dialog__field w-1/2">
+                    <mat-form-field class="w-full">
+                        <mat-label>Data de Check-In:</mat-label>
+                        <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkin" formControlName="checkIn" [min]="today" (dateChange)="onCheckInChange($event)">
+                        <mat-datepicker-toggle matIconSuffix [for]="checkin"></mat-datepicker-toggle>
+                        <mat-datepicker #checkin></mat-datepicker>
+                    </mat-form-field>
+                    @if ((checkIn.hasError('matDatepickerFilter') && isCreateForm) 
+                            || 
+                        (checkIn.hasError('matDatepickerFilter') && isUpdateForm && hasCheckInValueChanged())) {
+                        <mat-error>Data de Check-In Inválida</mat-error>
+                    }
+                </div>
+                <div class="booking-dialog__field w-1/2">
+                    <mat-form-field class="w-full">
+                        <mat-label>Data de Check-Out:</mat-label>
+                        <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkout" formControlName="checkOut" [min]="checkOutMinDate" (dateChange)="onCheckOutChange($event)">
+                        <mat-datepicker-toggle matIconSuffix [for]="checkout"></mat-datepicker-toggle>
+                        <mat-datepicker #checkout></mat-datepicker>
+                    </mat-form-field>
+                    @if ((checkOut.hasError('matDatepickerFilter') && isCreateForm) 
+                            || 
+                        (checkOut.hasError('matDatepickerFilter') && isUpdateForm && hasCheckOutValueChanged())) {
+                        <mat-error>Data de Check-Out Inválida</mat-error>
+                    }
+                </div>
+            </div>
+            <div class="flex gap-8">
+                <div class="booking-dialog__field w-1/2">
+                    <mat-form-field class="w-full">
+                        <mat-label>Hóspede</mat-label>
+                        <input type="text" matInput [formControl]="user" [matAutocomplete]="auto" (input)="formatUserCpf($event)" maxlength="14">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            @for (option of filteredUsersList | async; track option) {
+                                <mat-option [value]="option">{{ option.cpf }}</mat-option>
+                            }
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    @if (user.invalid && (user.touched || user.dirty)) {
+                        <mat-error *ngIf="user.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+                <div class="booking-dialog__field w-1/2">
+                    <mat-form-field class="w-full">
+                        <mat-label>Quantidade de Hóspedes</mat-label>
+                        <mat-select formControlName="guestsQuantity">
+                            @for (value of capacityOptions; track value) {
+                                <mat-option [value]="value">{{value}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                    @if (guestsQuantity.invalid && (guestsQuantity.touched || guestsQuantity.dirty)) {
+                        <mat-error *ngIf="guestsQuantity.hasError('required')">Campo Requerido</mat-error>
+                    }
+                </div>
+            </div>
+            @if (isCreateForm) {
+                <div class="flex gap-8">
+                    <div class="booking-dialog__field w-1/2">
+                        <mat-form-field class="w-full">
+                            <mat-label>Forma de Pagamento</mat-label>
+                            <mat-select formControlName="paymentType">
+                                @for (type of paymentKeys; track type) {
+                                    <mat-option [value]="type">{{ type | paymentType }}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+                        @if (paymentType.invalid && (paymentType.touched || paymentType.dirty)) {
+                            <mat-error *ngIf="paymentType.hasError('required')">Campo Requerido</mat-error>
+                        }
+                    </div>
+                    @if (paymentType.value === 2) {
+                        <div class="booking-dialog__field w-1/2">
+                            <mat-form-field class="w-full">
+                                <mat-label>Quantidade de Parcelas:</mat-label>
+                                <mat-select formControlName="installmentQuantity">
+                                    @for (value of installments.keys(); track value) {
+                                        <mat-option [value]="value">{{value}}x de {{ installments.get(value) | currency: 'BRL' }}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    }
+                </div>
+            }
+            @if (isUpdateForm) {
+                <div class="py-6 flex flex-col gap-4">
+                    <mat-label class="user-dialog__subtitle">Reserva Concluída</mat-label>
+                    <mat-slide-toggle formControlName="isFinished"></mat-slide-toggle>
+                </div>
+            }
+            <span class="text-2xl font-thin">Dados do Quarto e da Reserva</span>
+            <div class="w-full grid grid-cols-3">
+                <div class="booking-dialog__view-item">
+                    <span class="booking-dialog__subtitle">Número e Andar do Quarto:</span>
+                    <p class="booking-dialog__text">{{ roomData.number + ' - ' + roomData.floor + '°' }}</p>
+                </div>
+                <div class="booking-dialog__view-item">
+                    <span class="booking-dialog__subtitle">Tipo do Quarto:</span>
+                    <p class="booking-dialog__text">{{ roomData.type | roomType }}</p>
+                </div>
+                <div class="booking-dialog__view-item">
+                    <span class="booking-dialog__subtitle">Diária do Quarto:</span>
+                    <p class="booking-dialog__text">{{ roomData.pricePerNight | currency: 'BRL' }}</p>
+                </div>
+                <div class="booking-dialog__view-item">
+                    <span class="booking-dialog__subtitle">Capacidade do Quarto:</span>
+                    <p class="booking-dialog__text">{{ roomData.capacity }}</p>
+                </div>
+                <div class="booking-dialog__view-item">
+                    <span class="booking-dialog__subtitle">Avaliação do Quarto:</span>
+                    <p class="booking-dialog__text">{{ roomData.averageRating }}</p>
+                </div>
+                <div class="booking-dialog__view-item">
+                    <span class="booking-dialog__subtitle">Nome do Hotel:</span>
+                    <p class="booking-dialog__text">{{ roomData.hotel.name }}</p>
+                </div>
+                <div class="booking-dialog__view-item">
+                    <span class="booking-dialog__subtitle">Qtde. de noites:</span>
+                    <p class="booking-dialog__text">{{ nights }}</p>
+                </div>
+                <div class="booking-dialog__view-item">
+                    <span class="booking-dialog__subtitle">Preço Total</span>
+                    <p class="booking-dialog__text">{{ totalPrice | currency: 'BRL' }}</p>
+                </div>
+            </div>
+            <div class="w-full flex gap-6">
+                <button class="booking-dialog__button" (click)="onCloseDialog()">{{ buttonAction }}</button>
+            </div>
+        </form>
+    }
+    @if (isView) {
+        <div class="grid grid-cols-3">
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Check-In:</span>
+                <p class="booking-dialog__text">{{ bookingData.checkIn | date: 'dd/MM/yyyy' }}</p>
+            </div>
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Check-Out:</span>
+                <p class="booking-dialog__text">{{ bookingData.checkOut | date: 'dd/MM/yyyy' }}</p>
+            </div>
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Preço Total:</span>
+                <p class="booking-dialog__text">{{ bookingData.totalPrice | currency: 'BRL' }}</p>
+            </div>
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Pagamento:</span>
+                <p class="booking-dialog__text">{{ bookingData.payment.paymentType | paymentType }}</p>
+            </div>
+            @if (bookingData.payment.paymentType === 2) {
+                <div class="booking-dialog__view-item">
+                    <span class="booking-dialog__subtitle">Parcelas:</span>
+                    <p class="booking-dialog__text">{{ bookingData.payment.installmentQuantity + 'x de '}}{{ bookingData.totalPrice / bookingData.payment.installmentQuantity | currency: 'BRL' }}</p>
+                </div>
+            }
+        </div>
+        <div class="grid grid-cols-3">
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Hóspede:</span>
+                <p class="booking-dialog__text">{{ bookingData.user.fullName }}</p>
+            </div>
+            <div class="booking-dialog__view-item col-span-2">
+                <span class="booking-dialog__subtitle">E-mail:</span>
+                <p class="booking-dialog__text">{{ bookingData.user.email }}</p>
+            </div>
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">CPF:</span>
+                <p class="booking-dialog__text">{{ bookingData.user.cpf }}</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-3">
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Número e Andar do Quarto:</span>
+                <p class="booking-dialog__text">{{ roomData.number + ' - ' + roomData.floor + '°' }}</p>
+            </div>
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Tipo do Quarto:</span>
+                <p class="booking-dialog__text">{{ roomData.type | roomType }}</p>
+            </div>
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Diária do Quarto:</span>
+                <p class="booking-dialog__text">{{ roomData.pricePerNight | currency: 'BRL' }}</p>
+            </div>
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Capacidade do Quarto:</span>
+                <p class="booking-dialog__text">{{ roomData.capacity }}</p>
+            </div>
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Avaliação do Quarto:</span>
+                <p class="booking-dialog__text">{{ roomData.averageRating }}</p>
+            </div>
+            <div class="booking-dialog__view-item">
+                <span class="booking-dialog__subtitle">Nome do Hotel:</span>
+                <p class="booking-dialog__text">{{ roomData.hotel.name }}</p>
+            </div>
+        </div>
+    }
+</div>

@@ -2,19 +2,19 @@
     <div class="container mx-auto flex flex-col items-center justify-center h-full">
         <img src="../../../assets/img/logo-com-cor.svg" alt="Logo do Hotel colorido" class="admin-login__logo" />
         <form class="admin-login__form" [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
-            <input class="auth-form__input admin-login__input" type="text" placeholder="E-mail" formControlName="email">
-            <div class="auth-form__error" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <input class="auth-form__input auth-form__input--dark-brown admin-login__input" type="text" placeholder="E-mail" formControlName="email">
+            <div class="auth-form__error auth-form__error--dark-brown" *ngIf="email.invalid && (email.dirty || email.touched)">
                 <div *ngIf="email.hasError('required')">Campo obrigatório</div>
             </div>
-            <input class="auth-form__input admin-login__input" type="password" placeholder="Senha" formControlName="password">
-            <div class="auth-form__error" *ngIf="password.invalid && (password.dirty || password.touched)">
+            <input class="auth-form__input auth-form__input--dark-brown admin-login__input" type="password" placeholder="Senha" formControlName="password">
+            <div class="auth-form__error auth-form__error--dark-brown" *ngIf="password.invalid && (password.dirty || password.touched)">
                 <div *ngIf="password.hasError('required')">Campo obrigatório</div>
             </div>
-            <p class="auth-form__error" *ngIf="adminLoginForm.hasError('invalidCredentials')">Credenciais Inválidas</p>
-            <p class="auth-form__error" *ngIf="adminLoginForm.hasError('accountNotActivated')">Conta do Usuário ainda não foi ativada</p>
-            <p class="auth-form__error" *ngIf="adminLoginForm.hasError('userIsNotAdmin')">O usuário não tem permissão para fazer esta ação</p>
-            <p class="auth-form__error" *ngIf="adminLoginForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde</p>
-            <button type="submit" class="auth-form__button">Entrar</button>
+            <p class="auth-form__error auth-form__error--dark-brown" *ngIf="adminLoginForm.hasError('invalidCredentials')">Credenciais Inválidas</p>
+            <p class="auth-form__error auth-form__error--dark-brown" *ngIf="adminLoginForm.hasError('accountNotActivated')">Conta do Usuário ainda não foi ativada</p>
+            <p class="auth-form__error auth-form__error--dark-brown" *ngIf="adminLoginForm.hasError('userIsNotAdmin')">O usuário não tem permissão para fazer esta ação</p>
+            <p class="auth-form__error auth-form__error--dark-brown" *ngIf="adminLoginForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde</p>
+            <button type="submit" class="auth-form__button auth-form__button--light-brown">Entrar</button>
         </form>
     </div>
 </div>

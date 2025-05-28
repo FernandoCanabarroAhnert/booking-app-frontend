@@ -1,0 +1,23 @@
+@use '../../../styles/variables' as variables;
+
+.delete-confirmation-dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+
+    &__button {
+        padding: .75rem 1.2rem;
+        cursor: pointer;
+        border-radius: .5rem;
+        font-size: 1.0625rem;
+        &--light-color {
+            color: #000;
+            background-color: variables.$light-color;
+        }
+        &--dark-color {
+            color: #fff;
+            background-color: variables.$dark-brown-color;
+        }
+    }
+}

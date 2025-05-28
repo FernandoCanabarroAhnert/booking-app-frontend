@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IRoomFilterResponse } from '../../interfaces/room/room-filter-response.interface';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -8,6 +8,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { RoomTypePipe } from '../../pipes/room-type.pipe';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { formatDateToISODate } from '../../utils/date-utils';
 
 @Component({
   selector: 'app-room-filter',
@@ -18,9 +21,11 @@ import { RoomTypePipe } from '../../pipes/room-type.pipe';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatTooltipModule,
     MatSelectModule,
-    RoomTypePipe
+    RoomTypePipe,
+    CommonModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   templateUrl: './room-filter.component.html',
   styleUrl: './room-filter.component.scss',
@@ -32,6 +37,8 @@ export class RoomFilterComponent {
 
   @Output()
   onFilterSubmitEmitter = new EventEmitter<IRoomFilterResponse>();
+  @Input({ required: true })
+  showCityFilter: boolean = true;
 
   roomFilterForm = new FormGroup({
     city: new FormControl<string | null>(''),
@@ -66,15 +73,12 @@ export class RoomFilterComponent {
   onSubmit() {
     this.onFilterSubmitEmitter.emit({
       city: this.city.value,
-      checkIn: this.formatDateToISODate(this.checkIn.value as Date),
-      checkOut: this.formatDateToISODate(this.checkOut.value as Date),
+      checkIn: formatDateToISODate(this.checkIn.value as Date),
+      checkOut: formatDateToISODate(this.checkOut.value as Date),
       capacity: this.capacity.value,
       types: this.types.value
     })
   }
 
-  private formatDateToISODate(date: Date): string {
-    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
-  }
 
 }

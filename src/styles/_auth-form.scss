@@ -44,11 +44,20 @@
         &:focus {
             box-shadow: 4px 15px 10px -15px #ffffff;   
         }
+        &--dark-brown {
+            border-color: variables.$light-brown-color;
+            &:focus {
+                box-shadow: 4px 15px 10px -15px variables.$light-brown-color;   
+            }
+        }
     }
 
     &__error {
         color: #ff5151;
         font-size: 1rem;
+        &--dark-brown {
+            color: variables.$dark-brown-color;
+        }
     }
 
     &__button {
@@ -61,6 +70,10 @@
         color: variables.$dark-brown-color;
         &:active {
             bottom: -1px;
+        }
+        &--light-brown {
+            background-color: variables.$light-brown-color;
+            color: #fff;
         }
     }
 

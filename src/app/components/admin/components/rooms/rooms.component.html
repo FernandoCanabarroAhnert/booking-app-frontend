@@ -37,7 +37,7 @@
                 <td mat-cell *matCellDef="let element" class="content-center">
                     <button class="rooms__action-button rooms__action-button--view" (click)="onViewButtonClick(element.id)"><mat-icon class="rooms__icon">visibility</mat-icon></button>
                     <button class="rooms__action-button rooms__action-button--edit mx-3" (click)="onEditButtonClick(element.id)"><mat-icon class="rooms__icon">edit</mat-icon></button>
-                    <button class="rooms__action-button rooms__action-button--delete"><mat-icon class="rooms__icon">delete</mat-icon></button>
+                    <button class="rooms__action-button rooms__action-button--delete" (click)="onDeleteButtonClick(element.id)"><mat-icon class="rooms__icon">delete</mat-icon></button>
                 </td>
             </ng-container>
 
@@ -46,7 +46,8 @@
         </table>
          <div *ngIf="isAdmin" class="rooms__exports">
             <button class="rooms__button rooms__button--light" (click)="onPdfExportButtonClick()">Exportar para PDF<mat-icon>upload_file</mat-icon></button>
-            <button class="rooms__button rooms__button--dark" (click)="onExcelExportButtonClick()">Exportar para Excel<mat-icon>table_view</mat-icon></button>
+            <button class="rooms__button rooms__button--dark" (click)="onPdfExportGroupByHotelButtonClick()">Exportar para PDF por Hotel<mat-icon>upload_file</mat-icon></button>
+            <button class="rooms__button rooms__button--light" (click)="onExcelExportButtonClick()">Exportar para Excel<mat-icon>table_view</mat-icon></button>
         </div>
         <app-pagination [currentPage]="response.number + 1"
             [totalPages]="response.totalPages"

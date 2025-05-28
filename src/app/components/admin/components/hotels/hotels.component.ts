@@ -16,6 +16,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { getHotelFullAddress } from '../../../../utils/hotel-utils';
 import { IHotelDetailResponse } from '../../../../interfaces/hotel/hotel-detail-response.interface';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DeleteConfirmationDialogComponent } from '../../../delete-confirmation-dialog/delete-confirmation-dialog.component';
 
 @Component({
   selector: 'app-hotels',
@@ -125,6 +126,38 @@ export class HotelsComponent implements OnInit {
         });
       }
     });
+  }
+
+  onDeleteButtonClick(hotelId: number) {
+    const dialogRef = this._matDialog.open(DeleteConfirmationDialogComponent, {
+      width: '500px',
+      data: {
+        resource: 'Hotel'
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+      this._hotelService.deleteHotel(hotelId).subscribe({
+        next: () => {
+          this.findAllHotels();
+          this._snackBarServce.showSnackBar('Hotel excluído com sucesso!', 'Fechar');
+        },
+        error: (error: HttpErrorResponse) => {
+          const BAD_REQUEST_ERROR = error.status === 400;
+          const NOT_FOUND_ERROR = error.status === 404;
+          const INTERNAL_SERVER_ERROR = error.status === 500;
+          if (BAD_REQUEST_ERROR) {
+            this._snackBarServce.showSnackBar('Hotel não pode ser excluído pois há quartos ou funcionários ainda cadastrados', 'Fechar');
+          }
+          if (NOT_FOUND_ERROR) {
+            this._snackBarServce.showSnackBar('Hotel não encontrado', 'Fechar');
+          }
+          if (INTERNAL_SERVER_ERROR) {
+            this._snackBarServce.showSnackBar('Um erro inesperado ocorreu. Tente novamente mais tarde.', 'Fechar');
+          }
+        }
+      })
+    })
   }
 
   private openDialog(option: 'view' | 'create' | 'update', hotel?: IHotelDetailResponse, callback?: (result: any) => void, ) {

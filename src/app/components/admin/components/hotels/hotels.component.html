@@ -39,7 +39,7 @@
                 <td mat-cell *matCellDef="let element" class="content-center">
                     <button class="hotels__action-button hotels__action-button--view" (click)="onViewButtonClick(element.id)"><mat-icon class="hotels__icon">visibility</mat-icon></button>
                     <button class="hotels__action-button hotels__action-button--edit mx-3" (click)="onEditButtonClick(element.id)"><mat-icon class="hotels__icon">edit</mat-icon></button>
-                    <button class="hotels__action-button hotels__action-button--delete"><mat-icon class="hotels__icon">delete</mat-icon></button>
+                    <button class="hotels__action-button hotels__action-button--delete" (click)="onDeleteButtonClick(element.id)"><mat-icon class="hotels__icon">delete</mat-icon></button>
                 </td>
             </ng-container>
 

@@ -1,18 +1,40 @@
 @use '../../../../../styles/variables' as variables;
 
 .aside-menu {
-    height: 100%;
+    min-height: 100%;
     background-color: variables.$green-color;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 7rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 2.5rem 1.5rem;
     gap: 2.5rem;
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 100%;
+        opacity: 0.1;
+        z-index: 100;
+        background-image: url('../../../../../assets/img/admin-login-bg.png');
+        background-size: cover;
+        opacity: .3;
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 7rem;
+    }
 
     &__profile {
+        z-index: 1000;
+        width: 100%;
+        padding: 1.5rem;
+        color: #fff;
         display: flex;
-        gap: 1.5rem;
         align-items: center;
     }
 
@@ -24,6 +46,7 @@
 
     &__container {
         width: 100%;
+        z-index: 1000;
     }
 
     &__list {
@@ -31,6 +54,7 @@
     }
 
     &__link {
+        z-index: 1000;
         width: 100%;
         padding: 1.5rem;
         color: #fff;
@@ -58,11 +82,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        &--user {
+            width: 3.5rem;
+            height: 3.5rem;
+            font-size: 3.5rem;
+        }
     }
 
     &__text {
         font-size: 1.325rem;
         font-weight: 200;
+        &--bold {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
     }
 
 }

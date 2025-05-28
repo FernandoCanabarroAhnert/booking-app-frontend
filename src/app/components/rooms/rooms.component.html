@@ -2,7 +2,7 @@
     <app-header></app-header>
     <div class="container mx-auto flex flex-col items-center gap-12 min-h-[100dvh] py-6">
         <div class="w-full flex justify-center">
-            <app-room-filter (onFilterSubmitEmitter)="onRoomFilterSubmit($event)"></app-room-filter>
+            <app-room-filter [showCityFilter]="true" (onFilterSubmitEmitter)="onRoomFilterSubmit($event)"></app-room-filter>
         </div>
         <div class="w-full flex items-center justify-start gap-8">
             <span class="text-7xl font-thin">Quartos</span>

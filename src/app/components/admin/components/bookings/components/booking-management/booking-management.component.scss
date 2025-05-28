@@ -1,0 +1,62 @@
+@use '../../../../../../../styles/variables' as variables;
+
+.booking-management {
+    padding: 2rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    
+    &__button {
+        position: relative;
+        border-radius: .5rem;
+        padding: .75rem 1.5rem;
+        font-size: 1.375rem;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        &:active {
+            bottom: -1px;
+        }
+        &--dark {
+            background-color: variables.$dark-brown-color;
+        }
+        &--light {
+            background-color: variables.$light-brown-color;
+        }
+        &--search {
+            border-radius: 0;
+            border-top-right-radius: .5rem;
+            border-bottom-right-radius: .5rem;
+        }   
+    }
+
+    &__action-button {
+        border-radius: .5rem;
+        padding: .375rem;
+        &--view {
+            background-color: #28a745;
+            color: white;
+        }
+        &--edit {
+            background-color: #007bff;
+            color: white;
+        }
+        &--delete {
+            background-color: #dc3545;
+            color: white;
+        }
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__exports {
+        width: 100%;
+        display: flex;
+        gap: 1.5rem;
+        margin: 1.5rem 0;
+    }
+}

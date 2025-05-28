@@ -1,0 +1,11 @@
+@use '../../../../../styles/variables' as variables;
+
+.bookings {
+    padding: 2rem 3rem;
+
+     &__title-decoration {
+        width: 15%;
+        border: 2px solid variables.$light-color;
+    }
+
+}

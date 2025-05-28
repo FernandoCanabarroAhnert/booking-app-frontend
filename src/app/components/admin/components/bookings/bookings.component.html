@@ -1,1 +1,14 @@
-<p>bookings works!</p>
+<div class="bookings">
+    <div class="flex flex-col gap-4 mb-6">
+        <span class="text-5xl font-thin">Gestão de Reservas</span>
+        <div class="bookings__title-decoration"></div>
+    </div>
+    <mat-tab-group>
+        <mat-tab label="Cadastrar Reserva">
+            <app-create-booking [usersList]="usersList"></app-create-booking>
+        </mat-tab>
+        <mat-tab label="Gerenciar Reservas">
+            <app-booking-management [usersList]="usersList" [hotelsList]="hotelsList"></app-booking-management>
+        </mat-tab>
+    </mat-tab-group>
+</div>

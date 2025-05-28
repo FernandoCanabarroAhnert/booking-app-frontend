@@ -48,6 +48,11 @@ export class HotelService {
     return this._http.delete<void>(`${this._baseUrl}/${imageId}/images`, { headers });
   }
 
+  deleteHotel(id: number): Observable<void> {
+    const headers = new HttpHeaders().set('authorization', `Bearer ${localStorage.getItem('access-token')}`);  
+    return this._http.delete<void>(`${this._baseUrl}/${id}`, { headers });
+  }
+
   exportToPdf() {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
     const options = {

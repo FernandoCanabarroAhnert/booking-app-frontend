@@ -6,7 +6,7 @@
         <h3 class="room-card__name">Quarto № {{ room.number }}, {{ room.type | roomType }}</h3>
         <p class="room-features">• {{ room.capacity }} hóspede(s) • {{ room.hotelName }}</p>
         <div class="room-card__price">{{ room.pricePerNight | currency: 'BRL' }}/noite</div>
-        <div class="room-card__rating">
+        <div class="room-card__rating" *ngIf="showRating">
             <app-stars-rating [rating]="room.averageRating" [color]="'green'"></app-stars-rating>
             <span>{{ room.averageRating }} ({{ room.ratingsQuantity }} avaliações)</span>
         </div>
