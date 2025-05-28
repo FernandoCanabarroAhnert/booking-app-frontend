@@ -23,7 +23,9 @@
                         </mat-expansion-panel-header>
                         @if (isAuthenticated) {
                             <ul class="header__links">
-                                <li class="header__link">Meus dados</li>
+                                <li class="header__link" routerLink="/user">Meus dados</li>
+                                <li class="header__link" routerLink="/user/credit-cards">Cartões</li>
+                                <li class="header__link" routerLink="/user/bookings">Reservas</li>
                                 <li class="header__link" (click)="logout()">Sair</li>
                             </ul>
                         }

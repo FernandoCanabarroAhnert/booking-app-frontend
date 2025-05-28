@@ -1,0 +1,57 @@
+@use '../../../styles/variables' as variables;
+
+.user-area {
+
+    &__main {
+        background-image: url('../../../assets/img/room-background.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    &__nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__link {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        transition: all .3s ease-in-out;
+        border-top-left-radius: 1.75rem;
+        border-top-right-radius: 1.75rem;
+        &:hover, &--active  {
+            background-color: variables.$light-brown-color;
+            color: #fff;
+            .user-area__icon {
+                color: #fff;
+            }
+        }
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: variables.$dark-brown-color;
+        font-size: 2rem;
+        width: 2rem;
+        height: 2rem;
+        transition: all .3s ease-in-out;
+    }
+
+    &__text {
+        font-size: 1.1rem;
+        font-weight: 400;
+    }
+
+    &__content {
+        border: 2px solid variables.$light-brown-color;
+        border-radius: .5rem;
+        padding: 1rem;
+    }
+
+}

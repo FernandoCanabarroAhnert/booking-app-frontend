@@ -34,5 +34,9 @@ export const routes: Routes = [
         path: 'rooms/:roomId',
         title: 'Detalhes do Quarto',
         loadComponent: () => import('./components/room-details/room-details.component').then(m => m.RoomDetailsComponent)
+    },
+    {
+        path: 'user',
+        loadChildren: () => import('./components/user-area/user-area.routes').then(m => m.userAreaRoutes)
     }
 ];
