@@ -1,0 +1,82 @@
+@use '../../../../../styles/variables' as variables;
+
+.user-infos{
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    &__header{
+        display: flex;
+        gap: 1.5rem;
+        justify-content: flex-start;    
+        border-radius: .75rem;
+        background-color: variables.$green-color;
+        padding: 1.5rem;
+        align-items: center;
+    }
+    &__profile{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+    &__fullname{
+        font-size: 2rem;
+        font-weight: 100;
+        color: #fff;
+    }
+    &__email,&__created-at{
+        font-size: 1.15rem;
+        font-weight: 100;
+        color: #fff;
+    }
+    &__icon{
+        width: 4rem;
+        height: 4rem;
+        font-size: 4rem;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__item{
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+        padding: 1rem;
+        border-radius: .5rem;
+        position: relative;
+        transition: all .3s ease-in-out;
+        cursor: pointer;
+        &:hover{
+            top: -2px;
+            box-shadow: 0 25px 50px rgba(45, 42, 30, 0.15);
+        }
+    }
+    &__subtitle{
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: variables.$green-color;
+    }
+    &__text{
+        font-size: 1rem;
+        font-weight: 100;
+        color: variables.$dark-brown-color;
+    }
+    &__button{
+        padding: .625rem 1rem;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 400;
+        border-radius: .625rem;
+        cursor: pointer;
+        position: relative;
+        &:active{
+            bottom: -1px;
+        }
+        &--light-brown{
+            background-color: variables.$light-brown-color;
+        }
+        &--dark-brown{
+            background-color: variables.$dark-brown-color;
+        }
+    }
+}
