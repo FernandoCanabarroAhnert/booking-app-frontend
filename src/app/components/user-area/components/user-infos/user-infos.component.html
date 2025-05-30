@@ -1,10 +1,10 @@
-<div class="user-infos">
-    <span class="text-5xl font-thin">Meus Dados</span>
+<div class="user-infos sm:rounded-[1rem] p-6 xl:p-10 2xl:p-20 gap-3 lg:gap-6">
+    <span class="text-3xl xl:text-5xl font-thin">Meus Dados</span>
     <div class="border-2 border-gray-300 w-[15%] my-4"></div>
     <mat-tab-group>
         <mat-tab label="Dados pessoais">
             @if (updateInfosForm) {
-                <form [formGroup]="updateInfosForm" class="grid grid-cols-2 gap-6 p-6 pb-0" (ngSubmit)="onUpdateInfosFormSubmit()">
+                <form [formGroup]="updateInfosForm" class="md:grid md:grid-cols-2 gap-4 md:gap-6 p-6 pb-0" (ngSubmit)="onUpdateInfosFormSubmit()">
                     <div class="user-infos__item">
                         <mat-form-field>
                             <mat-label>Nome Completo</mat-label>
@@ -45,7 +45,7 @@
             }
         </mat-tab>
         <mat-tab label="Alterar senha">
-            <div class="w-2/4">
+            <div class="lg:w-2/4">
                 <form [formGroup]="updatePasswordForm" class="gap-6 p-6 pb-0" (ngSubmit)="onUpdatePasswordFormSubmit()">
                     <div class="user-infos__item">
                         <mat-form-field>

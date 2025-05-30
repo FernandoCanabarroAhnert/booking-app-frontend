@@ -42,7 +42,7 @@
                 </mat-form-field>
                 @if (expirationDate.invalid && (expirationDate.touched || expirationDate.dirty)) {
                     <mat-error *ngIf="expirationDate.hasError('required')">Campo Requerido</mat-error>
-                    <mat-error *ngIf="expirationDate.hasError('mask')">Formato inválido</mat-error>
+                    <mat-error *ngIf="expirationDate.hasError('mask') || expirationDate.hasError('invalidFormat')">Formato inválido</mat-error>
                 }
             </div>
         </div>

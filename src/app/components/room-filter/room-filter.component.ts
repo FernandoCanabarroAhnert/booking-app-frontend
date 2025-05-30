@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, Input, Output } from '@angular/core';
 import { IRoomFilterResponse } from '../../interfaces/room/room-filter-response.interface';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -11,6 +11,7 @@ import { RoomTypePipe } from '../../pipes/room-type.pipe';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { formatDateToISODate } from '../../utils/date-utils';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-room-filter',
@@ -39,6 +40,9 @@ export class RoomFilterComponent {
   onFilterSubmitEmitter = new EventEmitter<IRoomFilterResponse>();
   @Input({ required: true })
   showCityFilter: boolean = true;
+
+  private readonly _breakpointObserver = inject(BreakpointObserver);
+  private readonly _elementRef = inject(ElementRef);
 
   roomFilterForm = new FormGroup({
     city: new FormControl<string | null>(''),

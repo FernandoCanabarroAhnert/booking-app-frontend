@@ -9,6 +9,7 @@ import { provideEnvironmentNgxMask } from 'ngx-mask';
 import localept from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { loadingInterceptor } from './interceptors/loading.interceptor';
+import { authInterceptor } from './interceptors/auth.interceptor';
 
 registerLocaleData(localept, 'pt-BR');
 
@@ -16,7 +17,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(
-      withInterceptors([loadingInterceptor])
+      withInterceptors([loadingInterceptor, authInterceptor])
     ), 
     provideEnvironmentNgxMask(),
     provideAnimationsAsync(),

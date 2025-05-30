@@ -17,9 +17,8 @@
     }
 
     &__link {
+        height: 100%;
         cursor: pointer;
-        display: flex;
-        align-items: center;
         transition: all .3s ease-in-out;
         border-top-left-radius: 1.75rem;
         border-top-right-radius: 1.75rem;
@@ -44,13 +43,11 @@
     }
 
     &__text {
-        font-size: 1.1rem;
         font-weight: 400;
     }
 
     &__content {
         border: 2px solid variables.$light-brown-color;
-        border-radius: 1rem;
     }
 
 }

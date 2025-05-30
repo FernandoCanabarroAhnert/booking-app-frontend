@@ -214,7 +214,7 @@ export class BookingManagementComponent implements OnInit {
   private buildDialogData(option: 'view' | 'update', booking: IBookingDetailResponse, room: IRoomDetailResponse) {
     switch (option) {
       case 'view':
-        return { booking, room, isCreateForm: false, isUpdateForm: false, isView: true };
+        return { booking, room, isCreateForm: false, isUpdateForm: false, isView: true, isGuestView: false };
       case 'update':
         return { booking, room, isCreateForm: false, isUpdateForm: true, isView: false, usersList: this.usersList };
     }

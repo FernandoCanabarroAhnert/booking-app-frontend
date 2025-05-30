@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreditCardList } from '../types/credit-card-list.type';
@@ -14,21 +14,15 @@ export class CreditCardService {
   private readonly baseUrl = 'http://localhost:8080/api/v1/credit-cards';
 
   getMyCreditCards( page: number, size: number): Observable<IPageResponse<CreditCardList>> {
-    const accessToken = localStorage.getItem('access-token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
-    return this._http.get<IPageResponse<CreditCardList>>(`${this.baseUrl}/my-credit-cards`, { headers, params: { page: page - 1, size } });
+    return this._http.get<IPageResponse<CreditCardList>>(`${this.baseUrl}/my-credit-cards`, { params: { page: page - 1, size } });
   }
 
   addCreditCard(request: ICreditCardRequest): Observable<void> {
-    const accessToken = localStorage.getItem('access-token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
-    return this._http.post<void>(`${this.baseUrl}`, request, { headers });
+    return this._http.post<void>(`${this.baseUrl}`, request);
   }
 
   deleteCreditCard(creditCardId: number): Observable<void> {
-    const accessToken = localStorage.getItem('access-token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${accessToken}`);
-    return this._http.delete<void>(`${this.baseUrl}/${creditCardId}`, { headers });
+    return this._http.delete<void>(`${this.baseUrl}/${creditCardId}`);
   }
 
 }

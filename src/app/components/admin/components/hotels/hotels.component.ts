@@ -113,6 +113,9 @@ export class HotelsComponent implements OnInit {
         this.openDialog('update', hotel, (result) => {
           this._hotelService.updateHotel(hotelId, result.data).subscribe({
             next: () => {
+              if (result.imagesIdsForDelete && result.imagesIdsForDelete.length > 0) {
+                this._hotelService.deleteImages(result.imagesIdsForDelete).subscribe({});
+              } 
               this._snackBarServce.showSnackBar('Hotel atualizado com sucesso!', 'Fechar');
               this.findAllHotels();
             },
@@ -120,9 +123,6 @@ export class HotelsComponent implements OnInit {
               console.error(error);
             }
           });
-          result.imagesIdsForDelete.forEach((imageId: number) => {
-            this._hotelService.deleteImage(imageId).subscribe({});
-          })
         });
       }
     });

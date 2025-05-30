@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICreateBooking } from '../interfaces/booking/create-booking.interface';
@@ -20,60 +20,49 @@ export class BookingService {
   findAllBookings(page: number = 1, size: number = 10, sort: string = 'id,asc', checkIn: string = '', checkOut: string = '',
       hotelId: number | string = '', minPrice: number | string = '', maxPrice: number | string = '', 
       paymentType: string[] = ['']): Observable<IPageResponse<BookingList>> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get<IPageResponse<BookingList>>(this._baseUrl, { headers, params: {
+    return this._http.get<IPageResponse<BookingList>>(this._baseUrl, { params: {
       page: page - 1, size, sort, checkIn, checkOut, hotelId, minPrice, maxPrice, paymentType
     }})
   }
 
   findById(id: number): Observable<IBookingDetailResponse> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get<IBookingDetailResponse>(`${this._baseUrl}/${id}`, { headers });
+    return this._http.get<IBookingDetailResponse>(`${this._baseUrl}/${id}`, {});
   }
 
   createSelfBooking(bookingRequest: ICreateBooking): Observable<void> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.post<void>(`${this._baseUrl}/self`, bookingRequest, { headers });
+    return this._http.post<void>(`${this._baseUrl}/self`, bookingRequest, {});
   }
 
   adminCreateBooking(request: IAdminCreateBookingRequest): Observable<void> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.post<void>(this._baseUrl, request, { headers });
+    return this._http.post<void>(this._baseUrl, request, {});
   }
 
   adminUpdateBooking(id: number, request: IAdminUpdateBookingRequest): Observable<void> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.put<void>(`${this._baseUrl}/${id}`, request, { headers });
+    return this._http.put<void>(`${this._baseUrl}/${id}`, request, {});
   }
 
   deleteBooking(id: number): Observable<void> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.delete<void>(`${this._baseUrl}/${id}`, { headers });
+    return this._http.delete<void>(`${this._baseUrl}/${id}`, {});
   }
 
   findConnectedUserBookings(page: number = 1, size: number = 10): Observable<IPageResponse<IBookingDetailResponse[]>> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get<IPageResponse<IBookingDetailResponse[]>>(`${this._baseUrl}/my-bookings`, { headers, params: { page: page - 1, size } });
+    return this._http.get<IPageResponse<IBookingDetailResponse[]>>(`${this._baseUrl}/my-bookings`, { params: { page: page - 1, size } });
   } 
 
   exportToPdf(checkIn: string = '', checkOut: string = '', minAmount: number | string = '', maxAmount: number | string = '',
     dinheiro: string = '', cartao: string = '', pix: string = '', boleto: string = '', hotelId: number | string = ''
   ): Observable<Blob> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get(`${this._baseUrl}/pdf`, { headers, responseType: 'blob', params: {
+    return this._http.get(`${this._baseUrl}/pdf`, { responseType: 'blob', params: {
       minCheckInDate: checkIn, maxCheckOutDate: checkOut, minAmount, maxAmount, dinheiro, cartao, pix, boleto, hotelId
     }});
   }
 
   exportToExcel(): Observable<Blob> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get(`${this._baseUrl}/excel`, { headers, responseType: 'blob' });
+    return this._http.get(`${this._baseUrl}/excel`, { responseType: 'blob' });
   }
  
   printBoleto(amount: number) {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
     const options = {
-      headers,
       responseType: 'blob' as const,
       params: { amount: amount.toString() }
     };

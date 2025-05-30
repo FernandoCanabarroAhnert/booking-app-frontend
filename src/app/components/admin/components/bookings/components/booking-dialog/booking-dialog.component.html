@@ -1,4 +1,4 @@
-<div class="booking-dialog">
+<div class="booking-dialog p-4 gap-3 lg:p-10 lg:gap-6">
     <span class="text-3xl font-thin">{{ dialogTitle }}</span>
     @if (isCreateForm || isUpdateForm) {
         <form [formGroup]="bookingForm" class="flex flex-col">
@@ -96,37 +96,37 @@
             }
             <span class="text-2xl font-thin">Dados do Quarto e da Reserva</span>
             <div class="w-full grid grid-cols-3">
-                <div class="booking-dialog__view-item">
-                    <span class="booking-dialog__subtitle">Número e Andar do Quarto:</span>
-                    <p class="booking-dialog__text">{{ roomData.number + ' - ' + roomData.floor + '°' }}</p>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Número e Andar do Quarto:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.number + ' - ' + roomData.floor + '°' }}</p>
                 </div>
-                <div class="booking-dialog__view-item">
-                    <span class="booking-dialog__subtitle">Tipo do Quarto:</span>
-                    <p class="booking-dialog__text">{{ roomData.type | roomType }}</p>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Tipo do Quarto:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.type | roomType }}</p>
                 </div>
-                <div class="booking-dialog__view-item">
-                    <span class="booking-dialog__subtitle">Diária do Quarto:</span>
-                    <p class="booking-dialog__text">{{ roomData.pricePerNight | currency: 'BRL' }}</p>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Diária do Quarto:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.pricePerNight | currency: 'BRL' }}</p>
                 </div>
-                <div class="booking-dialog__view-item">
-                    <span class="booking-dialog__subtitle">Capacidade do Quarto:</span>
-                    <p class="booking-dialog__text">{{ roomData.capacity }}</p>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Capacidade do Quarto:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.capacity }}</p>
                 </div>
-                <div class="booking-dialog__view-item">
-                    <span class="booking-dialog__subtitle">Avaliação do Quarto:</span>
-                    <p class="booking-dialog__text">{{ roomData.averageRating }}</p>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Avaliação do Quarto:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.averageRating }}</p>
                 </div>
-                <div class="booking-dialog__view-item">
-                    <span class="booking-dialog__subtitle">Nome do Hotel:</span>
-                    <p class="booking-dialog__text">{{ roomData.hotel.name }}</p>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Nome do Hotel:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.hotel.name }}</p>
                 </div>
-                <div class="booking-dialog__view-item">
-                    <span class="booking-dialog__subtitle">Qtde. de noites:</span>
-                    <p class="booking-dialog__text">{{ nights }}</p>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Qtde. de noites:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ nights }}</p>
                 </div>
-                <div class="booking-dialog__view-item">
-                    <span class="booking-dialog__subtitle">Preço Total</span>
-                    <p class="booking-dialog__text">{{ totalPrice | currency: 'BRL' }}</p>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Preço Total</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ totalPrice | currency: 'BRL' }}</p>
                 </div>
             </div>
             <div class="w-full flex gap-6">
@@ -135,68 +135,70 @@
         </form>
     }
     @if (isView) {
-        <div class="grid grid-cols-3">
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Check-In:</span>
-                <p class="booking-dialog__text">{{ bookingData.checkIn | date: 'dd/MM/yyyy' }}</p>
+        <div class="grid grid-cols-2">
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Check-In:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ bookingData.checkIn | date: 'dd/MM/yyyy' }}</p>
             </div>
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Check-Out:</span>
-                <p class="booking-dialog__text">{{ bookingData.checkOut | date: 'dd/MM/yyyy' }}</p>
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Check-Out:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ bookingData.checkOut | date: 'dd/MM/yyyy' }}</p>
             </div>
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Preço Total:</span>
-                <p class="booking-dialog__text">{{ bookingData.totalPrice | currency: 'BRL' }}</p>
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Preço Total:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ bookingData.totalPrice | currency: 'BRL' }}</p>
             </div>
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Pagamento:</span>
-                <p class="booking-dialog__text">{{ bookingData.payment.paymentType | paymentType }}</p>
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Pagamento:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ bookingData.payment.paymentType | paymentType }}</p>
             </div>
             @if (bookingData.payment.paymentType === 2) {
-                <div class="booking-dialog__view-item">
-                    <span class="booking-dialog__subtitle">Parcelas:</span>
-                    <p class="booking-dialog__text">{{ bookingData.payment.installmentQuantity + 'x de '}}{{ bookingData.totalPrice / bookingData.payment.installmentQuantity | currency: 'BRL' }}</p>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Parcelas:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ bookingData.payment.installmentQuantity + 'x de '}}{{ bookingData.totalPrice / bookingData.payment.installmentQuantity | currency: 'BRL' }}</p>
                 </div>
             }
         </div>
-        <div class="grid grid-cols-3">
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Hóspede:</span>
-                <p class="booking-dialog__text">{{ bookingData.user.fullName }}</p>
+        @if (!isGuestView) {
+            <div class="grid grid-cols-3">
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Hóspede:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ bookingData.user.fullName }}</p>
+                </div>
+                <div class="booking-dialog__view-item p-2 md:p-4 col-span-2">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">E-mail:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ bookingData.user.email }}</p>
+                </div>
+                <div class="booking-dialog__view-item p-2 md:p-4">
+                    <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">CPF:</span>
+                    <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ bookingData.user.cpf }}</p>
+                </div>
             </div>
-            <div class="booking-dialog__view-item col-span-2">
-                <span class="booking-dialog__subtitle">E-mail:</span>
-                <p class="booking-dialog__text">{{ bookingData.user.email }}</p>
+        }
+        <div class="grid grid-cols-2 md:grid-cols-3">
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Número e Andar do Quarto:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.number + ' - ' + roomData.floor + '°' }}</p>
             </div>
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">CPF:</span>
-                <p class="booking-dialog__text">{{ bookingData.user.cpf }}</p>
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Tipo do Quarto:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.type | roomType }}</p>
             </div>
-        </div>
-        <div class="grid grid-cols-3">
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Número e Andar do Quarto:</span>
-                <p class="booking-dialog__text">{{ roomData.number + ' - ' + roomData.floor + '°' }}</p>
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Diária do Quarto:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.pricePerNight | currency: 'BRL' }}</p>
             </div>
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Tipo do Quarto:</span>
-                <p class="booking-dialog__text">{{ roomData.type | roomType }}</p>
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Capacidade do Quarto:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.capacity }}</p>
             </div>
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Diária do Quarto:</span>
-                <p class="booking-dialog__text">{{ roomData.pricePerNight | currency: 'BRL' }}</p>
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Avaliação do Quarto:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.averageRating }}</p>
             </div>
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Capacidade do Quarto:</span>
-                <p class="booking-dialog__text">{{ roomData.capacity }}</p>
-            </div>
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Avaliação do Quarto:</span>
-                <p class="booking-dialog__text">{{ roomData.averageRating }}</p>
-            </div>
-            <div class="booking-dialog__view-item">
-                <span class="booking-dialog__subtitle">Nome do Hotel:</span>
-                <p class="booking-dialog__text">{{ roomData.hotel.name }}</p>
+            <div class="booking-dialog__view-item p-2 md:p-4">
+                <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Nome do Hotel:</span>
+                <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ roomData.hotel.name }}</p>
             </div>
         </div>
     }

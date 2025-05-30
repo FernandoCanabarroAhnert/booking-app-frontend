@@ -55,6 +55,7 @@ export class BookingDialogComponent {
   pricePerNight!: number;
   capacity!: number;
   capacityOptions!: number[];
+  isGuestView: boolean = false;
 
   usersList: IUserSearchResponse[] = [];
   filteredUsersList!: Observable<IUserSearchResponse[]>;
@@ -269,6 +270,7 @@ export class BookingDialogComponent {
       this.isView = true;
       this.bookingData = this._data.booking;
       this.roomData = this._data.room;
+      this.isGuestView = this._data.isGuestView;
     }
   }
 

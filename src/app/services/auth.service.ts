@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { IRegistrationRequest } from '../interfaces/register/register-request.interface';
@@ -8,6 +8,7 @@ import { jwtDecode } from 'jwt-decode';
 import { IUserResponse } from '../interfaces/user/user-response.interface';
 import { IUserSelfUpdatePasswordRequest } from '../interfaces/user/user-self-update-password.interface';
 import { IUserSelfUpdateInfosRequest } from '../interfaces/user/user-self-update-infos.interface';
+import { APPLY_AUTH_TOKEN } from '../interceptors/auth.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class AuthService {
   }
 
   register(request: IRegistrationRequest): Observable<void> {
-    return this._http.post<void>(`${this._baseUrl}/register`, request);
+    return this._http.post<void>(`${this._baseUrl}/register`, request, { context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
   }
 
   guestLogin(request: ILoginRequest): Observable<ILoginResponse> {
@@ -49,7 +50,7 @@ export class AuthService {
   }
 
   private login(path: string, request: ILoginRequest): Observable<ILoginResponse> {
-    return this._http.post<ILoginResponse>(`${this._baseUrl}/${path}`, request)
+    return this._http.post<ILoginResponse>(`${this._baseUrl}/${path}`, request, { context: new HttpContext().set(APPLY_AUTH_TOKEN, false) })
       .pipe(
         map(response => {
           localStorage.setItem('access-token', response.token);
@@ -63,37 +64,31 @@ export class AuthService {
   }
 
   activateAccount(code: string): Observable<void> {
-    return this._http.put<void>(`${this._baseUrl}/activate-account`, { code });
+    return this._http.put<void>(`${this._baseUrl}/activate-account`, { code }, { context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
   }
 
   validateJWTToken(): Observable<void> {
-    const token = localStorage.getItem('access-token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this._http.get<void>(`${this._baseUrl}/token/validate`, { headers });
+    return this._http.get<void>(`${this._baseUrl}/token/validate`);
   }
 
   getMe(): Observable<IUserResponse> {
-    const token = localStorage.getItem('access-token');
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this._http.get<IUserResponse>(`${this._baseUrl}/me`, { headers });
+    return this._http.get<IUserResponse>(`${this._baseUrl}/me`);
   }
 
   userSelfUpdateInfos(request: IUserSelfUpdateInfosRequest): Observable<void> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.put<void>(`${this._baseUrl}/profile`, request, { headers });
+    return this._http.put<void>(`${this._baseUrl}/profile`, request);
   }
 
   userSelfUpdatePassword(request: IUserSelfUpdatePasswordRequest): Observable<void> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.put<void>(`${this._baseUrl}/profile/password`, request, { headers });
+    return this._http.put<void>(`${this._baseUrl}/profile/password`, request);
   }
 
   verifyIfEmailIsAlreadyInUse(email: string): Observable<{ alreadyExists: boolean }> {
-    return this._http.get<{ alreadyExists: boolean }>(`${this._baseUrl}/verify-email`, { params: { email } });
+    return this._http.get<{ alreadyExists: boolean }>(`${this._baseUrl}/verify-email`, { params: { email }, context: new HttpContext().set(APPLY_AUTH_TOKEN, false) },);
   }
 
   verifyIfCPFIsAlreadyInUse(cpf: string): Observable<{ alreadyExists: boolean }> {
-    return this._http.get<{ alreadyExists: boolean }>(`${this._baseUrl}/verify-cpf`, { params: { cpf } });
+    return this._http.get<{ alreadyExists: boolean }>(`${this._baseUrl}/verify-cpf`, { params: { cpf }, context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
   }
 
 }

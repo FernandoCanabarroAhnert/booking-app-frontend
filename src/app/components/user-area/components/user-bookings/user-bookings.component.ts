@@ -45,7 +45,8 @@ export class UserBookingsComponent implements OnInit {
           data: {
             isView: true,
             booking,
-            room
+            room,
+            isGuestView: true
           },
           width: '800px'
         });

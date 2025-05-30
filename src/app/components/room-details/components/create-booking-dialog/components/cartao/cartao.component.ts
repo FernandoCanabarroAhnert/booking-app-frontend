@@ -117,8 +117,12 @@ export class CartaoComponent implements OnInit, OnChanges {
         this._snackBarService.showSnackBar('Cartão adicionado com sucesso!', 'Fechar');
       },
       error: (error: HttpErrorResponse) => {
+        const BAD_REQUEST = error.status === 400;
         const UNPROCESSABLE_ENTITY = error.status === 422;
         const SERVER_ERROR = error.status === 500; 
+        if (BAD_REQUEST) {
+          this.expirationDate.setErrors({ invalidFormat: true });
+        }
         if (UNPROCESSABLE_ENTITY) {
           this.addCreditCardForm.setErrors({ invalidData: true });
         }

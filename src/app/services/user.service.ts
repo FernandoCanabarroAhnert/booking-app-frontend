@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { IPageResponse } from '../interfaces/page/page-response.interface';
 import { UserList } from '../types/user-list.type';
@@ -17,38 +17,31 @@ export class UserService {
   private readonly _baseUrl = 'http://localhost:8080/api/v1/users';
 
   findAllByCpf(cpf: string): Observable<IUserSearchResponse[]> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get<IUserSearchResponse[]>(`${this._baseUrl}/search`, { params: { cpf }, headers });
+    return this._http.get<IUserSearchResponse[]>(`${this._baseUrl}/search`, { params: { cpf } });
   }
 
   findAllUsers(page: number = 1, size: number = 10, fullName: string = ''): Observable<IPageResponse<UserList>> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get<IPageResponse<UserList>>(this._baseUrl, { headers, params: { page: page - 1, size, fullName } });
+    return this._http.get<IPageResponse<UserList>>(this._baseUrl, { params: { page: page - 1, size, fullName } });
   }
 
   findById(id: number): Observable<IUserResponse> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get<IUserResponse>(`${this._baseUrl}/${id}`, { headers });
+    return this._http.get<IUserResponse>(`${this._baseUrl}/${id}`);
   }
 
   createUser(request: ICreateUserRequest): Observable<void> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.post<void>(this._baseUrl, request, { headers });  
+    return this._http.post<void>(this._baseUrl, request);  
   }
 
   updateUser(id: number, request: IUpdateUserRequest): Observable<void> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.put<void>(`${this._baseUrl}/${id}`, request, { headers });
+    return this._http.put<void>(`${this._baseUrl}/${id}`, request);
   }
 
   exportToPdf(): Observable<Blob> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get(`${this._baseUrl}/pdf`, { headers, responseType: 'blob' });
+    return this._http.get(`${this._baseUrl}/pdf`, { responseType: 'blob' });
   }
 
   exportToExcel(): Observable<Blob> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
-    return this._http.get(`${this._baseUrl}/excel`, { headers, responseType: 'blob' });
+    return this._http.get(`${this._baseUrl}/excel`, { responseType: 'blob' });
   }
 
 }

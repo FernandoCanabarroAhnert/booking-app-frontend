@@ -122,6 +122,7 @@ export class HotelDialogComponent implements OnInit {
       this.requiredImageError = true;
     }
     if (this.isUpdateForm) {
+      console.log(this.hotelData.images[index].id);
       this.imagesIdsForDelete.push(this.hotelData.images[index].id);
     }
   }

@@ -3,18 +3,13 @@
 .room-filter {
     display: flex;
 
-    &__form {
-        display: flex;
-        align-items: center;
-    }
-
     &__input {
         border-width: 1px;
         border-style: solid;
         border-color: variables.$green-color;
         &--first {
-            border-top-left-radius: 1.625rem;
-            border-bottom-left-radius: 1.625rem;
+            border-top-left-radius: 1.25rem;
+            border-top-right-radius: 1.25rem;
         }
     }
 
@@ -28,10 +23,10 @@
         border-width: 3px 3px 3px 2px;
         border-style: solid;
         border-color: variables.$green-color;
-        border-top-right-radius: 1.625rem;
-        border-bottom-right-radius: 1.625rem;
         padding: 0 .325rem;
-        transition: all .4s ease-in-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     &__icon {
@@ -51,6 +46,19 @@
 }
 
 :host ::ng-deep #first .mdc-text-field--filled:not(.mdc-text-field--disabled) {
-    border-top-left-radius: 1.625rem !important;
-    border-bottom-left-radius: 1.625rem !important;
+    border-top-left-radius: 1.25rem !important;
+    border-top-right-radius: 1.25rem !important;
+}
+
+@media (min-width: 1024px) {
+    :host ::ng-deep #first .mdc-text-field--filled:not(.mdc-text-field--disabled) {
+        border-top-right-radius: 0 !important;
+        border-top-left-radius: 1.625rem !important;
+        border-bottom-left-radius: 1.625rem !important;
+    }
+    .room-filter__input--first {
+        border-top-right-radius: 0 !important;
+        border-top-left-radius: 1.625rem !important;
+        border-bottom-left-radius: 1.625rem !important;
+    }
 }

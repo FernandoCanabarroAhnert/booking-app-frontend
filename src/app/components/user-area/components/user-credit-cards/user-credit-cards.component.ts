@@ -44,6 +44,7 @@ export class UserCreditCardsComponent implements OnInit {
       width: '700px'
     });
     dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
       this.findCreditCards(1);
       this._snackBarService.showSnackBar('Cartão adicionado com sucesso!', 'Fechar');
     })

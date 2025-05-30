@@ -2,7 +2,7 @@
     <div class="room-details__main">
         <app-header></app-header>
         <div class="container mx-auto pt-8 sm:pt-0 pb-12">
-            <div class="room-details__breadcrumb text-lg xl:text-4xl font-thin text-center px-4 flex items-center">Hotel {{ room.hotel.name }} <mat-icon>arrow_right_alt</mat-icon> Quarto № {{ room.number }}, {{ room.type | roomType }}</div>
+            <div class="room-details__breadcrumb text-lg xl:text-4xl font-thin text-center px-4 flex items-center mb-[1rem] md:mb-[1.5rem] lg:mb-[1.825rem] xl:mb-[2.25rem]">Hotel {{ room.hotel.name }} <mat-icon>arrow_right_alt</mat-icon> Quarto № {{ room.number }}, {{ room.type | roomType }}</div>
             <div class="grid lg:grid-cols-2">
                 <div class="room-details__images">
                     <img *ngIf="room?.images?.length" [src]="room.images[0].base64Image" alt="Imagem Principal" class="room-details__image room-details__image--main">

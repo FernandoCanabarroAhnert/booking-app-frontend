@@ -1,14 +1,16 @@
-<div class="user-bookings">
-        @if (bookings$ | async; as response) {
-        <div class="grid grid-cols-3 gap-9">
-            @for (booking of response.content; track booking) {
-                <app-booking-card (click)="onBookingInfosClick(booking.id)" [booking]="booking"></app-booking-card>
-            }
-        </div>
-        <app-pagination [currentPage]="response.number + 1"
-            [totalPages]="response.totalPages"
-            [numberOfElements]="response.numberOfElements"
-            [totalElements]="response.totalElements"
-            (onPageChangeEmitter)="findBookings($event)"></app-pagination>
+<div class="user-bookings p-6 md:p-8 xl:p-12 sm:rounded-[1rem] gap-3 lg:gap-6">
+    <span class="text-3xl xl:text-5xl font-thin">Minhas Reservas</span>
+    <div class="border-2 border-gray-300 w-[15%] my-2 md:my-4"></div>
+    @if (bookings$ | async; as response) {
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-9">
+        @for (booking of response.content; track booking) {
+            <app-booking-card (click)="onBookingInfosClick(booking.id)" [booking]="booking"></app-booking-card>
         }
+    </div>
+    <app-pagination [currentPage]="response.number + 1"
+        [totalPages]="response.totalPages"
+        [numberOfElements]="response.numberOfElements"
+        [totalElements]="response.totalElements"
+        (onPageChangeEmitter)="findBookings($event)"></app-pagination>
+    }
 </div>

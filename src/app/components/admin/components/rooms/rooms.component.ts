@@ -117,6 +117,9 @@ export class RoomsComponent {
         this.openDialog('update', room, (result) => {
           this._roomService.updateRoom(roomId, result.data).subscribe({
             next: () => {
+              if (result.imagesIdsForDelete && result.imagesIdsForDelete.length > 0) {
+                this._roomService.deleteImages(result.imagesIdsForDelete).subscribe({});
+              }
               this._snackBarServce.showSnackBar('Quarto atualizado com sucesso!', 'Fechar');
               this.findAllRooms();
             },
@@ -124,9 +127,6 @@ export class RoomsComponent {
               console.error(error);
             }
           });
-          result.imagesIdsForDelete.forEach((imageId: number) => {
-            this._hotelService.deleteImage(imageId).subscribe({});
-          })
         });
       }
     });

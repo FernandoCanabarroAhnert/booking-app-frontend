@@ -53,7 +53,7 @@ export class RoomsComponent implements OnInit {
   onPageChange(page: number) {
     if (this.filter) {
       this.rooms$ = this._roomService.findAllRoomsWithFilter(page, 12, this.filter.checkIn, this.filter.checkOut, 
-        this.filter.city, this.filter.capacity, this.filter.types);
+        this.filter.city, this.filter.capacity, this.filter.types, '', this.sort);
     }
     else this.rooms$ = this._roomService.findAllRooms(page, 12);
   }
@@ -64,7 +64,7 @@ export class RoomsComponent implements OnInit {
     this.sort = `pricePerNight,${this.priceSortDirection}`;
     if (this.filter) {
       this.rooms$ = this._roomService.findAllRoomsWithFilter(1, 12, this.filter.checkIn, this.filter.checkOut, 
-        this.filter.city, this.filter.capacity, this.filter.types, this.sort);
+        this.filter.city, this.filter.capacity, this.filter.types, '', this.sort);
     }
     else {
       this.rooms$ = this._roomService.findAllRooms(1, 12, this.sort);
