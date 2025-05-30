@@ -1,0 +1,27 @@
+@use '../../../styles/variables' as variables;
+
+.credit-card-form {
+    padding: 2rem;
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__label {
+        font-size: 1.325rem;
+        font-weight: 100;
+    }
+
+    &__submit {
+        background-color: variables.$green-color;
+        color: #fff;
+        font-size: 1.25rem;
+        padding: 0.825rem 1.75rem;
+        border-radius: .5rem;
+        position: relative;
+        &:active {
+            bottom: -1px;
+        }
+    }
+}

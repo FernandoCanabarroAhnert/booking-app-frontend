@@ -10,7 +10,7 @@
         }
         <mat-form-field class="room-filter__input">
             <mat-label>Selecione as datas</mat-label>
-            <mat-date-range-input [formGroup]="roomFilterForm" [rangePicker]="picker" disabled>
+            <mat-date-range-input [formGroup]="roomFilterForm" [rangePicker]="picker">
                 <input matStartDate formControlName="checkIn" placeholder="Check In">
                 <input matEndDate formControlName="checkOut" placeholder="Check Out">
             </mat-date-range-input>

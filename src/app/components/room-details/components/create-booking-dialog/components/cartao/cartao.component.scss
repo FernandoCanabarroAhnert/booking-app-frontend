@@ -36,3 +36,19 @@
     }
 
 }
+
+:host ::ng-deep .mat-mdc-radio-button.mat-accent {
+    --mdc-radio-selected-icon-color: #fff;
+    --mdc-radio-selected-focus-icon-color: #fff;
+    --mdc-radio-selected-hover-icon-color: #fff;
+    --mdc-radio-selected-pressed-icon-color: #fff;
+    --mat-radio-checked-ripple-color: #fff;
+}
+
+:host ::ng-deep .radio.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-selected-icon-color: #2d2109;
+    --mdc-radio-selected-focus-icon-color: #2d2109;
+    --mdc-radio-selected-hover-icon-color: #2d2109;
+    --mdc-radio-selected-pressed-icon-color: #2d2109;
+    --mat-radio-checked-ripple-color: #2d2109;
+}

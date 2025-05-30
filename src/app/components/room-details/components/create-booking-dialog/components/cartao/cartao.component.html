@@ -5,6 +5,7 @@
             class="w-full md:w-3/4"
             *ngFor="let creditCard of response.content" 
             [creditCard]="creditCard"
+            [isManagementMode]="false"
             (click)="selectedCreditCardEmit(creditCard.id)"></app-credit-card>
         <app-pagination
             [currentPage]="response.number + 1"
@@ -74,8 +75,8 @@
                             <div class="flex flex-col gap-4 my-6">
                                 <mat-label class="cartao__label">Bandeira</mat-label>
                                 <mat-radio-group aria-label="Select an option" formControlName="brand">
-                                    <mat-radio-button [value]="1">Visa</mat-radio-button>
-                                    <mat-radio-button [value]="2">MasterCard</mat-radio-button>
+                                    <mat-radio-button class="radio" [value]="1">Visa</mat-radio-button>
+                                    <mat-radio-button class="radio" [value]="2">MasterCard</mat-radio-button>
                                 </mat-radio-group>
                                 @if (brand.invalid && (brand.touched || brand.dirty)) {
                                     <mat-error *ngIf="brand.hasError('required')">Campo Requerido</mat-error>

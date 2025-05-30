@@ -1,26 +1,26 @@
 <div class="credit-card grid grid-cols-6">
-    <div class="col-span-1 credit-card__radio">
+    <div *ngIf="!isManagementMode" class="col-span-1 credit-card__radio">
         <mat-radio-button [value]="creditCard.id"></mat-radio-button>
     </div>
-    <div class="col-span-5 credit-card__infos">
-        <div class="credit-card__row">
-            <div class="credit-card__info">
-                <b class="credit-card__subtitle">Nome do Titular:</b> 
-                <p class="credit-card__text">{{ creditCard.holderName }}</p>
-            </div>
-            <div class="credit-card__info">
-                <b class="credit-card__subtitle">Bandeira:</b>
-                <p class="credit-card__text">{{ creditCard.brand | creditCardBrand }}</p>
+    <div class="credit-card__infos" [ngClass]="{ 'col-span-5': !isManagementMode, 'col-span-6': isManagementMode }">
+        <div class="credit-card__header">
+            <span class="credit-card__brand">{{ creditCard.brand | creditCardBrand | uppercase }}</span>
+            <div *ngIf="isManagementMode" 
+                class="credit-card__delete" 
+                (click)="onDeleteClick(creditCard.id)"
+                matTooltip="Deletar">
+                <mat-icon class="credit-card__icon">close</mat-icon>
             </div>
         </div>
+        <span class="credit-card__number">{{ creditCard.lastFourDigits }}</span>
         <div class="credit-card__row">
             <div class="credit-card__info">
-                <b class="credit-card__subtitle">Número do cartão:</b>
-                <p class="credit-card__text">{{ creditCard.lastFourDigits }}</p>
+                <span class="credit-card__subtitle">Titular:</span> 
+                <span class="credit-card__text">{{ creditCard.holderName }}</span>
             </div>
             <div class="credit-card__info">
-                <b class="credit-card__subtitle">Validade:</b>
-                <p class="credit-card__text">{{ creditCard.expirationDate }}</p>
+                <span class="credit-card__subtitle">Validade:</span>
+                <span class="credit-card__text">{{ creditCard.expirationDate }}</span>
             </div>
         </div>
     </div>

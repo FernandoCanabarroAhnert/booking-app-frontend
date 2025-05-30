@@ -1,41 +1,95 @@
 <div class="user-infos">
-    <div class="user-infos__header">
-        <mat-icon class="user-infos__icon">account_circle</mat-icon>
-        <div class="user-infos__profile">
-            <span class="user-infos__fullname">Guti</span>
-            <span class="user-infos__email">{{' Guti@gmail.com' }}</span>
-            <div class="user-infos__created-at">28/09/2025</div>
-        </div>
-    </div>
-    <div class="border-2 border-gray-300 w-full my-4"></div>
-    <div class="grid grid-cols-2 gap-4">
-        <div class="user-infos__item">
-            <span class="user-infos__subtitle">Nome</span>
-            <span class="user-infos__text">Guti</span>
-        </div>
-         <div class="user-infos__item">
-            <span class="user-infos__subtitle">Nome</span>
-            <span class="user-infos__text">Guti</span>
-        </div>
-         <div class="user-infos__item">
-            <span class="user-infos__subtitle">Nome</span>
-            <span class="user-infos__text">Guti</span>
-        </div>
-         <div class="user-infos__item">
-            <span class="user-infos__subtitle">Nome</span>
-            <span class="user-infos__text">Guti</span>
-        </div>
-         <div class="user-infos__item">
-            <span class="user-infos__subtitle">Nome</span>
-            <span class="user-infos__text">Guti</span>
-         </div>
-          <div class="user-infos__item">
-            <span class="user-infos__subtitle">Nome</span>
-            <span class="user-infos__text">Guti</span>
-        </div>
-    </div>
-    <div class="w-full py-3 flex gap-4">
-        <button class="user-infos__button user-infos__button--light-brown">Editar Dados</button>
-        <button class="user-infos__button user-infos__button--dark-brown">Alterar Senha</button>
-    </div>
+    <span class="text-5xl font-thin">Meus Dados</span>
+    <div class="border-2 border-gray-300 w-[15%] my-4"></div>
+    <mat-tab-group>
+        <mat-tab label="Dados pessoais">
+            @if (updateInfosForm) {
+                <form [formGroup]="updateInfosForm" class="grid grid-cols-2 gap-6 p-6 pb-0" (ngSubmit)="onUpdateInfosFormSubmit()">
+                    <div class="user-infos__item">
+                        <mat-form-field>
+                            <mat-label>Nome Completo</mat-label>
+                            <input matInput type="text" placeholder="Ex.: Fulano da Silva" formControlName="fullName">
+                        </mat-form-field>
+                        @if (fullName.invalid && (fullName.touched || fullName.dirty)) {
+                            <mat-error *ngIf="fullName.hasError('required')">Campo Requerido</mat-error>
+                        }
+                    </div>
+                    <div class="user-infos__item">
+                        <mat-form-field>
+                            <mat-label>E-mail</mat-label>
+                            <input matInput type="text" placeholder="Ex.: fulano@gmail.com" formControlName="email">
+                        </mat-form-field>
+                        @if (email.invalid && (email.touched || email.dirty)) {
+                            <mat-error *ngIf="email.hasError('required')">Campo Requerido</mat-error>
+                            <mat-error *ngIf="email.hasError('emailIsAlreadyInUse')">Este e-mail já está em uso</mat-error>
+                        }
+                    </div>
+                    <div class="user-infos__item">
+                        <mat-form-field>
+                            <mat-label>Telefone</mat-label>
+                            <input matInput type="text" placeholder="Ex.: (11) 99999-9999" mask="(00) 00000-0000" formControlName="phone">
+                        </mat-form-field>
+                        @if (phone.invalid && (phone.touched || phone.dirty)) {
+                            <mat-error *ngIf="phone.hasError('required')">Campo Requerido</mat-error>
+                            <mat-error *ngIf="phone.hasError('mask')">Formato Inválido</mat-error>
+                        }
+                    </div>
+                    <div class="my-3">
+                        <mat-error *ngIf="updateInfosForm.hasError('invalidData')">Dados inválidos. Por favor revise-os.</mat-error>
+                        <mat-error *ngIf="updateInfosForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde.</mat-error>
+                    </div>
+                    <div class="col-span-2">
+                        <button class="user-infos__button user-infos__button--light-brown">Editar Dados</button>
+                    </div>
+                </form>
+            }
+        </mat-tab>
+        <mat-tab label="Alterar senha">
+            <div class="w-2/4">
+                <form [formGroup]="updatePasswordForm" class="gap-6 p-6 pb-0" (ngSubmit)="onUpdatePasswordFormSubmit()">
+                    <div class="user-infos__item">
+                        <mat-form-field>
+                            <mat-label>Senha Atual</mat-label>
+                            <input matInput type="password"  formControlName="currentPassword">
+                        </mat-form-field>
+                        @if (currentPassword.invalid && (currentPassword.touched || currentPassword.dirty)) {
+                            <mat-error *ngIf="currentPassword.hasError('required')">Campo Requerido</mat-error>
+                            <mat-error *ngIf="currentPassword.hasError('invalidCurrentPassword')">Senha atual incorreta</mat-error>
+                        }
+                    </div>
+                    <div class="user-infos__item">
+                        <mat-form-field>
+                            <mat-label>Nova Senha</mat-label>
+                            <input matInput type="password" formControlName="password">
+                        </mat-form-field>
+                        @if (password.invalid && (password.touched || password.dirty)) {
+                            <mat-error *ngIf="password.hasError('required')">Campo obrigatório</mat-error>
+                            <mat-error *ngIf="password.hasError('minlength')">Senha deve ter no mínimo 8 caracteres</mat-error>
+                            <mat-error *ngIf="password.hasError('noUpperCaseLetter')">Senha deve ter no mínimo 1 letra maiúscula</mat-error>
+                            <mat-error *ngIf="password.hasError('noLowerCaseLetter')">Senha deve ter no mínimo 1 letra minúscula</mat-error>
+                            <mat-error *ngIf="password.hasError('noNumber')">Senha deve ter no mínimo 1 número</mat-error>
+                            <mat-error *ngIf="password.hasError('noSpecialChar')">Senha deve ter no mínimo 1 caractere especial</mat-error>
+                        }
+                    </div>
+                    <div class="user-infos__item mb-3">
+                        <mat-form-field>
+                            <mat-label>Confirmar Senha</mat-label>
+                            <input matInput type="password"  formControlName="passwordConfirmation">
+                        </mat-form-field>
+                        @if (passwordConfirmation.invalid && (passwordConfirmation.touched || passwordConfirmation.dirty)) {
+                            <mat-error *ngIf="passwordConfirmation.hasError('required')">Campo Requerido</mat-error>
+                            <mat-error *ngIf="passwordConfirmation.hasError('passwordMismatch')">As senhas devem ser iguais</mat-error>
+                        }
+                    </div>
+                    <div class="my-3">
+                        <mat-error *ngIf="updatePasswordForm.hasError('invalidData')">Dados inválidos. Por favor revise-os.</mat-error>
+                        <mat-error *ngIf="updatePasswordForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde.</mat-error>
+                    </div>
+                    <div class="col-span-2">
+                        <button class="user-infos__button user-infos__button--dark-brown">Alterar Senha</button>
+                    </div>
+                </form>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
 </div>

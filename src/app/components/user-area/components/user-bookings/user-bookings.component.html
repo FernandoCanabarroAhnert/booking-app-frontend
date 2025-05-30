@@ -1,12 +1,14 @@
 <div class="user-bookings">
-    <div class="grid grid-cols-3 gap-6">
-    <app-booking-card></app-booking-card>
-     <app-booking-card></app-booking-card>
-      <app-booking-card></app-booking-card>
-       <app-booking-card></app-booking-card>
-        <app-booking-card></app-booking-card>
-         <app-booking-card></app-booking-card>
-          <app-booking-card></app-booking-card>
-           <app-booking-card></app-booking-card>
-</div>
+        @if (bookings$ | async; as response) {
+        <div class="grid grid-cols-3 gap-9">
+            @for (booking of response.content; track booking) {
+                <app-booking-card (click)="onBookingInfosClick(booking.id)" [booking]="booking"></app-booking-card>
+            }
+        </div>
+        <app-pagination [currentPage]="response.number + 1"
+            [totalPages]="response.totalPages"
+            [numberOfElements]="response.numberOfElements"
+            [totalElements]="response.totalElements"
+            (onPageChangeEmitter)="findBookings($event)"></app-pagination>
+        }
 </div>

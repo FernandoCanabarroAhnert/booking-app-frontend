@@ -6,6 +6,8 @@ import { ILoginRequest } from '../interfaces/login/login-request.interface';
 import { ILoginResponse } from '../interfaces/login/login-response.interface';
 import { jwtDecode } from 'jwt-decode';
 import { IUserResponse } from '../interfaces/user/user-response.interface';
+import { IUserSelfUpdatePasswordRequest } from '../interfaces/user/user-self-update-password.interface';
+import { IUserSelfUpdateInfosRequest } from '../interfaces/user/user-self-update-infos.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +76,16 @@ export class AuthService {
     const token = localStorage.getItem('access-token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this._http.get<IUserResponse>(`${this._baseUrl}/me`, { headers });
+  }
+
+  userSelfUpdateInfos(request: IUserSelfUpdateInfosRequest): Observable<void> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
+    return this._http.put<void>(`${this._baseUrl}/profile`, request, { headers });
+  }
+
+  userSelfUpdatePassword(request: IUserSelfUpdatePasswordRequest): Observable<void> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
+    return this._http.put<void>(`${this._baseUrl}/profile/password`, request, { headers });
   }
 
   verifyIfEmailIsAlreadyInUse(email: string): Observable<{ alreadyExists: boolean }> {

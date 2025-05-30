@@ -1,0 +1,33 @@
+@use '../../../../../styles/variables' as variables;
+
+.user-credit-cards {
+    background-color: #fff;
+    padding: 5rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    &__button {
+        padding: .625rem 1rem;
+        color: #fff;
+        font-size: 1.1rem;
+        font-weight: 400;
+        border-radius: .625rem;
+        cursor: pointer;
+        position: relative;
+        transition: all .3s ease-in-out;
+        &:active {
+            bottom: -1px;
+        }
+        &:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+        &--light-brown {
+            background-color: variables.$light-brown-color;
+        }
+        &--dark-brown {
+            background-color: variables.$dark-brown-color;
+        }
+    }
+}

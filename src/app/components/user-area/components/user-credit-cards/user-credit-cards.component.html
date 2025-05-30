@@ -1,1 +1,25 @@
-<p>user-credit-cards works!</p>
+<div class="user-credit-cards">
+    <div class="user-credit-cards__header flex justify-between items-center">
+        <span class="text-5xl font-thin">Meus Cartões</span>
+        <button class="user-credit-cards__button user-credit-cards__button--light-brown" (click)="openAddDialog()">+ Adicionar</button>
+    </div>
+    <div class="border-2 border-gray-300 w-[15%] my-4"></div>
+        @if (creditCards$ | async; as response) {
+            <div class="grid grid-cols-3 gap-6">
+                @for (creditCard of response.content; track creditCard) {
+                    <app-credit-card 
+                        class="w-full"
+                        [creditCard]="creditCard"
+                        [isManagementMode]="true"
+                        (onDeleteCreditCardEmitter)="onDeleteClick($event)"></app-credit-card>
+                }
+            </div>
+            <app-pagination
+                [currentPage]="response.number + 1"
+                [totalPages]="response.totalPages"
+                [numberOfElements]="response.numberOfElements"
+                [totalElements]="response.totalElements"
+                (onPageChangeEmitter)="findCreditCards($event)"
+            ></app-pagination>
+        }        
+</div>

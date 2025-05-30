@@ -1,34 +1,29 @@
 @use '../../../../../styles/variables' as variables;
 
-.user-infos{
+.user-infos {
     background-color: #fff;
-    padding: 2.5rem;
+    padding: 5rem;
     border-radius: 1rem;
-    &__header{
-        display: flex;
-        gap: 1.5rem;
-        justify-content: flex-start;    
-        border-radius: .75rem;
-        background-color: variables.$green-color;
-        padding: 1.5rem;
-        align-items: center;
-    }
-    &__profile{
+
+    &__profile {
         display: flex;
         flex-direction: column;
         gap: .5rem;
     }
-    &__fullname{
+
+    &__fullname {
         font-size: 2rem;
         font-weight: 100;
         color: #fff;
     }
-    &__email,&__created-at{
+    
+    &__email,&__created-at {
         font-size: 1.15rem;
         font-weight: 100;
         color: #fff;
     }
-    &__icon{
+
+    &__icon {
         width: 4rem;
         height: 4rem;
         font-size: 4rem;
@@ -37,31 +32,25 @@
         justify-content: center;
         align-items: center;
     }
-    &__item{
+
+    &__item {
         display: flex;
         flex-direction: column;
-        gap: .75rem;
-        padding: 1rem;
-        border-radius: .5rem;
-        position: relative;
-        transition: all .3s ease-in-out;
-        cursor: pointer;
-        &:hover{
-            top: -2px;
-            box-shadow: 0 25px 50px rgba(45, 42, 30, 0.15);
-        }
     }
-    &__subtitle{
+
+    &__subtitle {
         font-size: 1.2rem;
         font-weight: 400;
         color: variables.$green-color;
     }
-    &__text{
+
+    &__text {
         font-size: 1rem;
         font-weight: 100;
         color: variables.$dark-brown-color;
     }
-    &__button{
+
+    &__button {
         padding: .625rem 1rem;
         color: #fff;
         font-size: 1.1rem;
@@ -69,14 +58,35 @@
         border-radius: .625rem;
         cursor: pointer;
         position: relative;
-        &:active{
+        transition: all .3s ease-in-out;
+        &:active {
             bottom: -1px;
         }
-        &--light-brown{
+        &:hover {
+            transform: translateY(-2px) scale(1.05);
+        }
+        &--light-brown {
             background-color: variables.$light-brown-color;
         }
-        &--dark-brown{
+        &--dark-brown {
             background-color: variables.$dark-brown-color;
         }
     }
+
+}
+
+:host ::ng-deep .mat-mdc-tab-group, .mat-mdc-tab-nav-bar {
+    --mdc-tab-indicator-active-indicator-color: #a89172 !important;
+    --mat-tab-header-disabled-ripple-color: rgba(0, 0, 0, 0.38) !important;
+    --mat-tab-header-pagination-icon-color: black !important;
+    --mat-tab-header-inactive-label-text-color: rgba(0, 0, 0, 0.6);
+    --mat-tab-header-active-label-text-color: #a89172 !important;
+    --mat-tab-header-active-ripple-color: #a89172 !important;
+    --mat-tab-header-inactive-ripple-color: #a89172 !important;
+    --mat-tab-header-inactive-focus-label-text-color: rgba(0, 0, 0, 0.6) !important;
+    --mat-tab-header-inactive-hover-label-text-color: rgba(0, 0, 0, 0.6) !important;
+    --mat-tab-header-active-focus-label-text-color: #a89172 !important;
+    --mat-tab-header-active-hover-label-text-color: #a89172 !important;
+    --mat-tab-header-active-focus-indicator-color: #a89172 !important;
+    --mat-tab-header-active-hover-indicator-color: #a89172 !important;
 }

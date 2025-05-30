@@ -1,0 +1,63 @@
+<div class="credit-card-form">
+    <span class="text-4xl font-thin">Adicionar Cartão</span>
+    <div class="w-[15%] border-2 border-gray-300 my-3"></div>
+    <form [formGroup]="addCreditCardForm" (ngSubmit)="onSubmit()" class="p-6">
+        <div class="w-full flex flex-col md:flex-row md:justify-evenly">
+            <div class="credit-card-form__field">
+                <mat-form-field>
+                    <mat-label>Nome do Titular</mat-label>
+                    <input matInput type="text" placeholder="Ex.: Fulano da Silva" formControlName="holderName">
+                </mat-form-field>
+                @if (holderName.invalid && (holderName.touched || holderName.dirty)) {
+                    <mat-error *ngIf="holderName.hasError('required')">Campo Requerido</mat-error>
+                }
+            </div>
+            <div class="credit-card-form__field">
+                <mat-form-field>
+                    <mat-label>Número do Cartão</mat-label>
+                    <input matInput type="text" placeholder="Ex.: 1234 1234 1234 1234" mask="0000 0000 0000 0000" formControlName="cardNumber">
+                </mat-form-field>
+                @if (cardNumber.invalid && (cardNumber.touched || cardNumber.dirty)) {
+                    <mat-error *ngIf="cardNumber.hasError('required')">Campo Requerido</mat-error>
+                    <mat-error *ngIf="cardNumber.hasError('mask')">Formato inválido</mat-error>
+                }
+            </div>
+        </div>
+        <div class="w-full flex flex-col md:flex-row md:justify-evenly">
+            <div class="credit-card-form__field">
+                <mat-form-field>
+                    <mat-label>CVV</mat-label>
+                    <input matInput type="text" placeholder="Ex.: 123" mask="000" formControlName="cvv">
+                </mat-form-field>
+                @if (cvv.invalid && (cvv.touched || cvv.dirty)) {
+                    <mat-error *ngIf="cvv.hasError('required')">Campo Requerido</mat-error>
+                    <mat-error *ngIf="cvv.hasError('mask')">Formato inválido</mat-error>
+                }
+            </div>
+            <div class="credit-card-form__field">
+                <mat-form-field>
+                    <mat-label>Data de Expiração</mat-label>
+                    <input matInput type="text" placeholder="Ex.: 10/2026" mask="00/0000" formControlName="expirationDate">
+                    <mat-hint>MM/AAAA</mat-hint>
+                </mat-form-field>
+                @if (expirationDate.invalid && (expirationDate.touched || expirationDate.dirty)) {
+                    <mat-error *ngIf="expirationDate.hasError('required')">Campo Requerido</mat-error>
+                    <mat-error *ngIf="expirationDate.hasError('mask')">Formato inválido</mat-error>
+                }
+            </div>
+        </div>
+        <div class="flex flex-col gap-4 my-6">
+            <mat-label class="credit-card-form__label">Bandeira</mat-label>
+            <mat-radio-group aria-label="Select an option" formControlName="brand">
+                <mat-radio-button [value]="1">Visa</mat-radio-button>
+                <mat-radio-button [value]="2">MasterCard</mat-radio-button>
+            </mat-radio-group>
+            @if (brand.invalid && (brand.touched || brand.dirty)) {
+                <mat-error *ngIf="brand.hasError('required')">Campo Requerido</mat-error>
+            }
+        </div>
+        <mat-error *ngIf="addCreditCardForm.hasError('invalidData')">Dados Inválidos. Por favor, revise-os</mat-error>
+        <mat-error *ngIf="addCreditCardForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde</mat-error>
+        <button class="credit-card-form__submit" type="submit">Adicionar</button>
+    </form>
+</div>

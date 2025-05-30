@@ -1,34 +1,36 @@
 <div class="booking-card">
-    <img src="../../../assets/img/room-background.png" class="booking-card__image" alt="">
-    <div class="booking-card__content">
-        <div class="booking-card__header">
-            <div class="booking-card__room-infos">
-                <span class="booking-card__room-name">Chalé Rústico Montanha</span>
-                <span class="booking-card__hotel-name">Pousada Serra Verde</span>
+    @if (booking) {
+        <img [src]="booking.room.cardDisplayImage.base64Image" class="booking-card__image h-[260px] w-full" alt="">
+        <div class="booking-card__content">
+            <div class="booking-card__header">
+                <div class="booking-card__room-infos">
+                    <span class="booking-card__room-name">Quarto № {{ booking.room.number }}, {{ booking.room.type | roomType }}</span>
+                    <span class="booking-card__hotel-name">{{ booking.room.hotelName }}</span>
+                </div>
+                <button class="booking-card__button">CONFIRMADA</button>
             </div>
-            <button class="booking-card__button">{{'Confirmada' | uppercase}}</button>
+            <div class="booking-card__body">
+                <div class="booking-card__date">
+                    <span class="booking-card__subtitle">CHECK-IN</span>
+                    <span class="booking-card__text">{{ booking.checkIn | date: 'dd/MM/yyyy' }}</span>
+                </div>
+                <span class="booking-card__button">{{ nights }} noite(s)</span>
+                <div class="booking-card__date">
+                    <span class="booking-card__subtitle">CHECK-OUT</span>
+                    <span class="booking-card__text">{{ booking.checkOut | date: 'dd/MM/yyyy' }}</span>
+                </div>
+            </div>
+            <div class="booking-card__footer">
+                <div class="booking-card__payment-info">
+                    <span class="booking-card__price">
+                    {{ booking.totalPrice| currency:'BRL' }}      
+                    </span>
+                    <span class="booking-card__payment-type">
+                        {{ booking.payment.paymentType| paymentType }}
+                    </span>
+                </div>
+                <button class="booking-card__button booking-card__button--details">Ver Detalhes</button>
+            </div>
         </div>
-        <div class="booking-card__body">
-            <div class="booking-card__date">
-                <span class="booking-card__subtitle">CHECK-IN</span>
-                <span class="booking-card__text">28/05/2025</span>
-            </div>
-            <span class="booking-card__button">3 noites</span>
-            <div class="booking-card__date">
-                <span class="booking-card__subtitle">CHECK-OUT</span>
-                <span class="booking-card__text">28/05/2025</span>
-            </div>
-        </div>
-        <div class="booking-card__footer">
-            <div class="booking-card__payment-info">
-                <span class="booking-card__price">
-                  {{200 | currency:'BRL'}}      
-                </span>
-                <span class="booking-card__payment-type">
-                    {{1 | paymentType}}
-                </span>
-            </div>
-            <button class="booking-card__button booking-card__button--details">Ver Detalhes</button>
-        </div>
-    </div>
+    }
 </div>

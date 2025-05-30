@@ -51,6 +51,11 @@ export class BookingService {
     return this._http.delete<void>(`${this._baseUrl}/${id}`, { headers });
   }
 
+  findConnectedUserBookings(page: number = 1, size: number = 10): Observable<IPageResponse<IBookingDetailResponse[]>> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('access-token')}`);
+    return this._http.get<IPageResponse<IBookingDetailResponse[]>>(`${this._baseUrl}/my-bookings`, { headers, params: { page: page - 1, size } });
+  } 
+
   exportToPdf(checkIn: string = '', checkOut: string = '', minAmount: number | string = '', maxAmount: number | string = '',
     dinheiro: string = '', cartao: string = '', pix: string = '', boleto: string = '', hotelId: number | string = ''
   ): Observable<Blob> {

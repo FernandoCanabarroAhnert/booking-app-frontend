@@ -1,7 +1,7 @@
 <div class="pagination">
-    <p class="pagination__infos">
+    <span class="pagination__infos">
         Listando {{ numberOfElements }} de {{ totalElements }} itens | Página {{ currentPage }} de {{ totalPages }}
-    </p>
+    </span>
     <div class="pagination__nav">
         <div *ngIf="currentPage > 1" class="pagination__item pagination__item--first" (click)="onPageChange(1)"> <- </div>
         <div *ngIf="currentPage > 1" class="pagination__item" (click)="onPageChange(currentPage - 1)"> < </div>

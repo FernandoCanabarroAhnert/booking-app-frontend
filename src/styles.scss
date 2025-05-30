@@ -3,9 +3,10 @@
 @use './styles/variables';
 @use './styles/auth-form';
 @use './styles/tailwind';
+@use './styles/sf-pro-display.scss';
 
 html, body { height: 100%; }
-body { margin: 0; }
+body { margin: 0; font-family: 'SF Pro Display'; }
 
 ::ng-deep .cdk-overlay-pane.mat-mdc-dialog-panel, .cdk-overlay-pane mat-mdc-dialog-panel {
     overflow: auto !important;
