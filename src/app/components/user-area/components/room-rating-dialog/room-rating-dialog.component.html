@@ -1,0 +1,53 @@
+<div class="room-rating-dialog">
+    <span class="text-3xl font-thin">{{ isCreate ? 'Adicionar Avaliação' : 'Atualizar Avaliação' }}</span>
+    <div class="border-2 border-gray-300 w-[15%] my-3"></div>
+    <form class="room-rating-dialog__form" [formGroup]="roomRatingForm" (ngSubmit)="onSubmit()">
+        <fieldset class="star-rating">
+            <input type="radio" formControlName="rating" id="star5" [value]="5">
+            <label for="star5" class="full" matTooltip="5 Estrelas"></label>
+
+            <input type="radio" formControlName="rating" id="star4half" [value]="4.5">
+            <label for="star4half" class="half" matTooltip="4.5 Estrelas"></label>
+
+            <input type="radio" formControlName="rating" id="star4" [value]="4">
+            <label for="star4" class="full" matTooltip="4 Estrelas"></label>
+
+            <input type="radio" formControlName="rating" id="star3half" [value]="3.5">
+            <label for="star3half" class="half" matTooltip="3.5 Estrelas"></label>
+
+            <input type="radio" formControlName="rating" id="star3" [value]="3">
+            <label for="star3" class="full" matTooltip="3 Estrelas"></label>
+
+            <input type="radio" formControlName="rating" id="star2half" [value]="2.5">
+            <label for="star2half" class="half" matTooltip="2.5 Estrelas"></label>
+
+            <input type="radio" formControlName="rating" id="star2" [value]="2">
+            <label for="star2" class="full" matTooltip="2 Estrelas"></label>
+
+            <input type="radio" formControlName="rating" id="star1half" [value]="1.5">
+            <label for="star1half" class="half" matTooltip="1.5 Estrelas"></label>
+
+            <input type="radio" formControlName="rating" id="star1" [value]="1">
+            <label for="star1" class="full" matTooltip="1 Estrela"></label>
+
+            <input type="radio" formControlName="rating" id="star0half" [value]="0.5">
+            <label for="star0half" class="half" matTooltip="0.5 Estrela"></label>
+        </fieldset>
+        <div class="mt-[6rem]"></div>
+        @if (rating.invalid && (rating.dirty || rating.touched)) {
+            <mat-error class="text-center" *ngIf="rating.hasError('required')">Campo Requerido</mat-error>
+        }
+        <div class="room-rating-dialog__item mt-[1rem]">
+            <mat-form-field>
+                <mat-label>Descrição da Avaliação</mat-label>
+                <input matInput type="text" placeholder="Ex.: Quarto muito confortável e atendimento excelente..." formControlName="description">
+            </mat-form-field>
+            @if (description.invalid && (description.dirty || description.touched)) {
+                <mat-error *ngIf="description.hasError('required')">Campo Requerido</mat-error>
+            }
+        </div>
+        <div class="w-full flex">
+            <button class="room-rating-dialog__button">{{ isCreate ? 'Adicionar' : 'Atualizar' }}</button>
+        </div>
+    </form>
+</div>

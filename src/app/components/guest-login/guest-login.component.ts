@@ -48,7 +48,7 @@ export class GuestLoginComponent implements OnInit {
     }
     this._authService.guestLogin(this.loginForm.value).subscribe({
       next: () => {
-        this._router.navigate(['/rooms/1']);
+        this._router.navigate(['/']);
       },
       error: (error: HttpErrorResponse) => {
         const AUTHORIZATION_ERROR = error.status === 401;

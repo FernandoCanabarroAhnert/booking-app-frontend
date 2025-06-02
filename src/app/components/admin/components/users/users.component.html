@@ -1,8 +1,8 @@
-<div class="users">
+<div class="default-management-layout users">
     <div class="users__header">
-        <div class="flex flex-col gap-4">
-            <span class="text-5xl font-thin">Gestão de Usuários</span>
-            <div class="users__title-decoration"></div>
+        <div class="default-management-layout__heading">
+            <span class="default-management-layout__title">Gestão de Usuários</span>
+            <div class="default-management-layout__title-decoration"></div>
         </div>
         <div class="flex justify-between items-center w-full">
             <form class="users__search" [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">

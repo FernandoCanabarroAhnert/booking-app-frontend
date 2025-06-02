@@ -10,6 +10,9 @@ import { IPageResponse } from '../../../../interfaces/page/page-response.interfa
 import { MatDialog } from '@angular/material/dialog';
 import { BookingDialogComponent } from '../../../admin/components/bookings/components/booking-dialog/booking-dialog.component';
 import { RoomService } from '../../../../services/room.service';
+import { RoomRatingDialogComponent } from '../room-rating-dialog/room-rating-dialog.component';
+import { SnackBarService } from '../../../../services/snack-bar.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-bookings',
@@ -28,7 +31,8 @@ export class UserBookingsComponent implements OnInit {
 
   private readonly _bookingService = inject(BookingService);
   private readonly _matDialog = inject(MatDialog);
-  private readonly _roomService = inject(RoomService)
+  private readonly _roomService = inject(RoomService);
+  private readonly _snackBarService = inject(SnackBarService);
 
   ngOnInit(): void {
     this.findBookings(1);
@@ -52,6 +56,38 @@ export class UserBookingsComponent implements OnInit {
         });
       });
     });
+  }
+
+  onRoomRatingClick(roomId: number) {
+    const dialogRef = this._matDialog.open(RoomRatingDialogComponent, {
+      width: '600px',
+      data: {
+        isCreate: true,
+        isUpdate: false
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+      this._roomService.addRating(roomId, result).subscribe({
+        next: () => {
+          this._snackBarService.showSnackBar('Avaliação adicionada com sucesso!', 'Fechar');
+        },
+        error: (error: HttpErrorResponse) => {
+          const FORBIDDEN_ERROR = error.status === 403;
+          const NOT_FOUND_ERROR = error.status === 404;
+          const INTERNAL_SERVER_ERROR = error.status === 500;
+          if (FORBIDDEN_ERROR) {
+            this._snackBarService.showSnackBar('Você só pode avaliar um quarto a mesma quantidade de vezes que você se hospedou nele', 'Fechar');
+          }
+          if (NOT_FOUND_ERROR) {
+            this._snackBarService.showSnackBar('Quarto não encontrado', 'Fechar');
+          }
+          if (INTERNAL_SERVER_ERROR) {
+            this._snackBarService.showSnackBar('Ocorreu um erro inesperado. Tente novamente mais tarde', 'Fechar');
+          }
+        }
+      });
+    })
   }
 
 }

@@ -39,11 +39,6 @@ export const adminRoutes: Routes = [
                 path: 'users',
                 title: 'Gerenciamento',
                 loadComponent: () => import('./components/users/users.component').then(m => m.UsersComponent)
-            },
-            {
-                path: 'reports',
-                title: 'Gerenciamento',
-                loadComponent: () => import('./components/reports/reports.component').then(m => m.ReportsComponent)
             }
         ]
     }

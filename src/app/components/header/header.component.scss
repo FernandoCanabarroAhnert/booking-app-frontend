@@ -5,6 +5,10 @@
     flex-direction: column;
     background-color: transparent;
 
+    &__logo, &__title {
+        cursor: pointer;
+    }
+
     &__icons {
         display: flex;
         gap: 1rem;
@@ -57,8 +61,22 @@
         color: variables.$dark-brown-color;
         cursor: pointer;
         transition: all .3s ease-in-out;
+        position: relative;
         &:hover {
             color: variables.$light-brown-color;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: variables.$light-brown-color;
+            transition: width 0.3s ease;
+        }
+        &:hover::after {
+            width: 100%;
         }
     }
 

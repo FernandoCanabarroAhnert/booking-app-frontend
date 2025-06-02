@@ -1,8 +1,8 @@
-<div class="hotels">
+<div class="default-management-layout hotels">
     <div class="hotels__header">
-        <div class="flex flex-col gap-4">
-            <span class="text-5xl font-thin">Gestão de Hotéis</span>
-            <div class="hotels__title-decoration"></div>
+        <div class="default-management-layout__heading">
+            <span class="default-management-layout__title">Gestão de Hotéis</span>
+            <div class="default-management-layout__title-decoration"></div>
         </div>
         <div class="flex justify-between items-center w-full">
             <form class="hotels__search" [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
@@ -23,7 +23,7 @@
                 <td mat-cell *matCellDef="let element" class="content-center"> {{ element.name }} </td>
             </ng-container>
             <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef class="content-center">Descrição</th>
+                <th mat-header-cell *matHeaderCellDef class="content-center w-[580px]">Descrição</th>
                 <td mat-cell *matCellDef="let element" class="content-center"> {{ element.description }} </td>
             </ng-container>
             <ng-container matColumnDef="roomQuantity">
@@ -35,7 +35,7 @@
                 <td mat-cell *matCellDef="let element" class="content-center"> {{ hotelFullAddress(element) }} </td>
             </ng-container>
             <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef class="content-center">Ações</th>
+                <th mat-header-cell *matHeaderCellDef class="content-center w-[12.5%]">Ações</th>
                 <td mat-cell *matCellDef="let element" class="content-center">
                     <button class="hotels__action-button hotels__action-button--view" (click)="onViewButtonClick(element.id)"><mat-icon class="hotels__icon">visibility</mat-icon></button>
                     <button class="hotels__action-button hotels__action-button--edit mx-3" (click)="onEditButtonClick(element.id)"><mat-icon class="hotels__icon">edit</mat-icon></button>

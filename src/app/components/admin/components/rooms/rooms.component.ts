@@ -54,7 +54,7 @@ export class RoomsComponent {
     this.obtainUserAuthority();
     if (this.isOnlyOperator) this.obtainOperatorWorkingHotelId();
     this.findAllRooms();
-    this.populateHotelsList();
+    if (this.isAdmin) this.populateHotelsList();
   }
 
   onPageChange(page: number) {

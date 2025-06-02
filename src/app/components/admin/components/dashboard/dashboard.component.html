@@ -1,1 +1,42 @@
-<p>dashboard works!</p>
+<div class="default-management-layout dashboard">
+    <div class="default-management-layout__heading">
+        <span class="default-management-layout__title">Dashboard</span>
+        <span class="default-management-layout__title-decoration"></span>
+    </div>
+    @if (bookingDashboardSummary) {
+        <div class="w-full grid grid-cols-2 gap-8">
+            <div class="dashboard__item">
+                <span class="dashboard__subtitle">📊 Taxa de Ocupação Geral</span>
+                <span class="dashboard__text">{{ bookingDashboardSummary.occupationPercentage }}%</span>
+            </div>
+            <div class="dashboard__item">
+                <span class="dashboard__subtitle">💰 Receita Total</span>
+                <span class="dashboard__text">{{ bookingDashboardSummary.totalAmount | currency: 'BRL' }}</span>
+            </div>
+            <div class="dashboard__item">
+                <span class="dashboard__subtitle">🕓 Estadia Média</span>
+                <span class="dashboard__text">{{ bookingDashboardSummary.averageStayDays }} dias</span>
+            </div>
+            <div class="dashboard__item">
+                <span class="dashboard__subtitle">⭐ Avaliação Geral</span>
+                <span class="dashboard__text">{{ bookingDashboardSummary.averageRating }}</span>
+            </div>
+        </div>
+        <div id="chart">
+        <apx-chart
+            [series]="chartOptions.series!"
+            [chart]="chartOptions.chart!"
+            [colors]="chartOptions.colors!"
+            [xaxis]="chartOptions.xaxis!"
+            [stroke]="chartOptions.stroke!"
+            [tooltip]="chartOptions.tooltip!"
+            [dataLabels]="chartOptions.dataLabels!"
+            [legend]="chartOptions.legend!"
+            [markers]="chartOptions.markers!"
+            [grid]="chartOptions.grid!"
+            [yaxis]="chartOptions.yaxis!"
+            [title]="chartOptions.title!"
+        ></apx-chart>
+        </div>
+    }
+</div>

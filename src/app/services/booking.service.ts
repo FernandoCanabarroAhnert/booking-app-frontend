@@ -7,6 +7,7 @@ import { IAdminCreateBookingRequest } from '../interfaces/booking/admin-create-b
 import { BookingList } from '../types/booking-list.type';
 import { IPageResponse } from '../interfaces/page/page-response.interface';
 import { IAdminUpdateBookingRequest } from '../interfaces/booking/admin-update-booking-request.interface';
+import { IBookingDashboardSummary } from '../interfaces/booking/booking-dashboard-summary.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,11 @@ export class BookingService {
 
   findConnectedUserBookings(page: number = 1, size: number = 10): Observable<IPageResponse<IBookingDetailResponse[]>> {
     return this._http.get<IPageResponse<IBookingDetailResponse[]>>(`${this._baseUrl}/my-bookings`, { params: { page: page - 1, size } });
-  } 
+  }
+  
+  getDashboardSummary(hotelId: number | string = ''): Observable<IBookingDashboardSummary> {
+    return this._http.get<IBookingDashboardSummary>(`${this._baseUrl}/stats`, { params: { hotelId } });
+  }
 
   exportToPdf(checkIn: string = '', checkOut: string = '', minAmount: number | string = '', maxAmount: number | string = '',
     dinheiro: string = '', cartao: string = '', pix: string = '', boleto: string = '', hotelId: number | string = ''

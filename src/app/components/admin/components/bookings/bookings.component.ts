@@ -7,6 +7,7 @@ import { IUserSearchResponse } from '../../../../interfaces/user/user-search-res
 import { BookingManagementComponent } from './components/booking-management/booking-management.component';
 import { IHotelSearchResponse } from '../../../../interfaces/hotel/hotel-search-response.interface';
 import { HotelService } from '../../../../services/hotel.service';
+import { AuthService } from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-bookings',
@@ -30,7 +31,9 @@ export class BookingsComponent implements OnInit {
 
   ngOnInit(): void {
     this._userService.findAllByCpf('').subscribe(response => this.usersList = response);
-    this._hotelService.findAllByName('').subscribe(response => this.hotelsList = response);
+    if (AuthService.isAdmin()) {
+      this._hotelService.findAllByName('').subscribe(response => this.hotelsList = response);
+    }
   }
 
 }

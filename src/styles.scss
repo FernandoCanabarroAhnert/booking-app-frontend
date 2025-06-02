@@ -4,9 +4,11 @@
 @use './styles/auth-form';
 @use './styles/tailwind';
 @use './styles/sf-pro-display.scss';
+@use './styles/default-card';
+@use './styles/default-management-layout';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: 'SF Pro Display'; }
+body { margin: 0; }
 
 ::ng-deep .cdk-overlay-pane.mat-mdc-dialog-panel, .cdk-overlay-pane mat-mdc-dialog-panel {
     overflow: auto !important;

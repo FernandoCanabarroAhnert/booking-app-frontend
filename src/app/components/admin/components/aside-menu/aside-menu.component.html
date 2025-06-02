@@ -28,10 +28,6 @@
                 <mat-icon class="aside-menu__icon">groups</mat-icon>
                 <span class="aside-menu__text">Gestão de Usuários</span>
             </li>
-            <li *ngIf="isAdmin" class="aside-menu__link" routerLink="/admin/reports" routerLinkActive="aside-menu__link--active">
-                <mat-icon class="aside-menu__icon">description</mat-icon>
-                <span class="aside-menu__text">Relatórios e Análises</span>
-            </li>
         </ul>
     </aside>
     <div class="aside-menu__link aside-menu__link--logout" (click)="logout()">

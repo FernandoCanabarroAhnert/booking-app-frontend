@@ -1,16 +1,7 @@
 .room-card {
-    cursor: pointer;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    border-radius: 24px;
-    border: 1px solid rgba(146, 146, 146, 0.5);
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s ease-in-out;
     position: relative;
-    &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 25px 50px rgba(45, 42, 30, 0.15);
-    }
 
     &__image-container {
         height: 240px;

@@ -1,11 +1,11 @@
-<div class="rooms">
+<div class="default-management-layout rooms">
     <div class="rooms__header">
-        <div class="flex flex-col gap-4">
-                <span class="text-5xl font-thin">Gestão de Quartos</span>
-                <div class="rooms__title-decoration"></div>
+        <div class="default-management-layout__heading">
+            <span class="default-management-layout__title">Gestão de Quartos</span>
         </div>
         <button class="rooms__button rooms__button--dark" (click)="onCreateButtonClick()">Adicionar</button>
     </div>
+    <div class="default-management-layout__title-decoration"></div>
     @if (rooms$ | async; as response) {
         <table mat-table [dataSource]="response.content" class="mat-elevation-z8 my-4">
             <ng-container matColumnDef="id">

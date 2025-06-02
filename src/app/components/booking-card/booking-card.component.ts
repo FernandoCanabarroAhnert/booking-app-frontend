@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IBookingDetailResponse } from '../../interfaces/booking/booking-detail-response.interface';
 import { CommonModule } from '@angular/common';
 import { PaymentTypePipe } from '../../pipes/payment-type.pipe';
@@ -19,6 +19,10 @@ export class BookingCardComponent {
 
   @Input({required: true})
   booking!: IBookingDetailResponse;
+  @Output()
+  onBookingInfosClickEmitter = new EventEmitter<number>();
+  @Output()
+  onRoomRatingClickEmitter = new EventEmitter<number>();  
 
   get nights(): number {
     if (!this.booking.checkIn || !this.booking.checkOut) {
@@ -28,6 +32,14 @@ export class BookingCardComponent {
     const checkOutDate = new Date(this.booking.checkOut);
     const timeDifference = checkOutDate.getTime() - checkInDate.getTime();
     return Math.ceil(timeDifference / (1000 * 3600 * 24));
+  }
+
+  onBookingInfosClick(bookingId: number) {
+    this.onBookingInfosClickEmitter.emit(bookingId);
+  }
+
+  onRoomRatingClick(roomId: number) {
+    this.onRoomRatingClickEmitter.emit(roomId);
   }
 
 }

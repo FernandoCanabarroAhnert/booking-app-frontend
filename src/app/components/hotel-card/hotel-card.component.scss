@@ -1,0 +1,81 @@
+@use '../../../styles/variables' as variables;
+
+.hotel-card {
+
+    &__image-container {
+        position: relative;
+    }
+
+    &__image {
+        height: 100%;
+        width: 100%;
+    }
+    
+    &__rating {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        border-radius: 1rem;
+        padding: .5rem;
+        background-color: #fff;
+        font-size: 1rem;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.2rem;
+    }
+
+    &__name {
+        font-size: 1.425rem;
+        font-weight: 500;
+        color: variables.$green-color;
+    }
+
+    &__address {
+        font-size: .9rem;
+        font-size: 200;
+        height: 2.5rem;
+    }
+
+    &__description {
+        font-size: 1rem;
+        color: variables.$dark-brown-color;
+        font-size: 200;
+        height: 60px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+
+    &__separator {
+        width: 100%;
+        border: 1px solid #ddd;
+    }
+
+    &__infos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__rooms, &__address, &__phone {
+        color: #747474;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    &__icon {
+        font-size: 1.1rem;
+        &--room {
+            font-size: 1.325rem;
+        }
+    }
+
+}

@@ -1,9 +1,12 @@
 import { Routes } from "@angular/router";
+import { authGuard } from "../../guards/auth.guard";
 
 export const userAreaRoutes: Routes = [
     {
         path: '',
         title: 'Área do Usuário',
+        canActivate: [authGuard()],
+        canActivateChild: [authGuard()],
         loadComponent: () => import('./user-area.component').then(m => m.UserAreaComponent),
         children: [
             {

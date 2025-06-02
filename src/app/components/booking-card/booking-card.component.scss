@@ -1,22 +1,7 @@
 @use '../../../styles/variables' as variables;
 
 .booking-card {
-    background-color: #FFF;
-    border-radius: 1.5rem;
     position: relative;
-    border: 1px solid #DDD;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-
-    &:hover  {
-        box-shadow: 0 10px 30px rgba(45, 42, 30, 0.08);
-        transform: translateY(-6px);
-    }
-
-    &__image {
-        border-top-left-radius: 1.5rem;
-        border-top-right-radius: 1.5rem;
-    }
 
     &__content {
         padding: 1rem;
@@ -54,14 +39,12 @@
         padding: .5rem .75rem;
         color: #FFF;
         cursor: pointer;
-        &--details {
-            position: relative;
-            transition: all 0.3s ease-in-out;
-            font-size: 1.1rem;
-            font-weight: 500;
-            &:hover  {
-                transform: translateY(-1px) scale(1.05);  
-            }
+        position: relative;
+        transition: all 0.3s ease-in-out;
+        font-size: 1.1rem;
+        font-weight: 500;
+        &:hover  {
+            transform: translateY(-1px) scale(1.05);  
         }
     }
 

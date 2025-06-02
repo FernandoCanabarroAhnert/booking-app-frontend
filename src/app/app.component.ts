@@ -4,8 +4,6 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { LoadingService } from './services/loading.service';
 import { delay } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { RoomsComponent } from './components/rooms/rooms.component';
-import { MainComponent } from './components/main/main.component';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +12,6 @@ import { MainComponent } from './components/main/main.component';
     RouterOutlet, 
     LoadingComponent,
     CommonModule,
-    RoomsComponent,
-    MainComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -1,8 +1,94 @@
 <div class="main">
-    <app-header></app-header>
-    <div class="main__content">
-        <span class="main__title">Sobre nós</span>
-        <span class="main__subtitle">Raizes</span>
-        <span class="main__text">O Ybante nasceu da conexão com as raízes. Nosso nome carrega a força e a fluidez da cultura indígena, celebrando a harmonia com a natureza, a sabedoria ancestral e o respeito à terra. Mais do que um hotel, somos um refúgio onde o conforto moderno encontra a essência do Brasil original. Cada espaço, cada detalhe, ecoa o espírito de acolhimento, liberdade e pertencimento. No Ybante, você é convidado a viver com intensidade, leveza e verdade.</span>
+    <section class="main__content min-h-[100dvh]">
+        <app-header></app-header>
+            <div class="container mx-auto flex items-center gap-10">
+                <div class="main__about-us w-[45%]">
+                    <span class="main__subtitle">SOBRE NÓS</span>
+                    <span class="main__title max-w-[500px]">Conectando você às suas <span class="main__title--highlight">raízes</span></span>
+                    <span class="main__text">
+                        O Ybante nasceu da conexão com as raízes. Nosso nome carrega a força e a fluidez da cultura indígena, 
+                        celebrando a harmonia com a natureza, a sabedoria ancestral e o respeito à terra. Mais do que um hotel, somos um refúgio 
+                        onde o conforto moderno encontra a essência do Brasil original. 
+                    </span>
+                    <span class="main__text">
+                        Cada espaço, cada detalhe, ecoa o espírito de 
+                        acolhimento, liberdade e pertencimento. No Ybante, você é convidado a viver com intensidade, leveza e verdade.
+                    </span>
+                    <div class="grid grid-cols-2 p-10 pt-6 gap-6">
+                        <div class="main__principle">
+                            <span class="main__icon">🌿</span>
+                            <span class="main__tag">Sustentabilidade</span>
+                        </div>
+                        <div class="main__principle">
+                            <span class="main__icon">🏞️</span>
+                            <span class="main__tag">Natureza Preservada</span>
+                        </div>
+                        <div class="main__principle">
+                            <span class="main__icon">🎭</span>
+                            <span class="main__tag">Cultura Autêntica</span>
+                        </div>
+                        <div class="main__principle">
+                            <span class="main__icon">✨</span>
+                            <span class="main__tag">Experiências Únicas</span>
+                        </div>
+                    </div>
+                </div>
+                <img src="../../../assets/img/main-image.jpg" class="main__image w-[55%]">
+            </div>
+    </section>
+    <section class="main__rooms">
+        <div class="container mx-auto min-h-[80dvh] flex flex-col py-16">
+            <div class="flex flex-col items-center">
+                <span class="main__subtitle">NOSSOS QUARTOS</span>
+                <span class="main__title">Conforto que inspira</span>
+                <span class="main__text w-[60%] text-center">
+                    Cada quarto é uma experiência única, projetada para conectar você com a essência do lugar, 
+                    oferecendo todo o conforto moderno em harmonia com elementos naturais e culturais autênticos.
+                </span>
+            </div>
+            <div class="main__swiper">
+                <swiper-container id="rooms-swiper-container" loop="true"
+                    space-between="30" grab-cursor="true" slides-per-view="3">
+                    @if (rooms$ | async; as rooms) {
+                        @for (room of rooms; track room) {
+                            <swiper-slide class="main__slide" [routerLink]="['/rooms', room.id]" (mouseover)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                                <img class="main__slide-image w-[360px] h-[245px]" [src]="room.cardDisplayImage.base64Image">
+                                <mat-icon class="main__arrow" #tooltip="matTooltip" matTooltip="Visualizar Quarto">north_east</mat-icon>
+                            </swiper-slide>
+                        }
+                    }
+                </swiper-container>
+            </div>
+            <div class="w-full flex justify-center mt-16">
+                <button class="main__button" routerLink="/rooms">VER QUARTOS</button>
+            </div>
         </div>
+    </section>
+    <section class="main__hotels">
+        <div class="container mx-auto min-h-[80dvh] flex flex-col py-16">
+            <div class="w-full flex flex-col items-center">
+                <span class="main__subtitle">NOSSOS DESTINOS</span>
+                <span class="main__title">Experiências Autênticas</span>
+                <span class="main__text w-[60%] text-center">
+                    Descubra locais únicos que celebram a diversidade cultural e natural do Brasil, cada um oferecendo uma experiência autêntica e inesquecível.
+                </span>
+            </div>
+            <div class="main__swiper">
+                <swiper-container id="hotels-swiper-container" loop="true"
+                space-between="30" grab-cursor="true" slides-per-view="3">
+                    @if (hotels$ | async; as hotels) {
+                        @for (hotel of hotels; track hotel) {
+                            <swiper-slide class="main__slide" [routerLink]="['/hotels', hotel.id]" (mouseover)="tooltip.show()" (mouseleave)="tooltip.hide()">
+                                <img class="main__slide-image w-[360px] h-[245px]" [src]="hotel.cardDisplayImage.base64Image">
+                                <mat-icon class="main__arrow" #tooltip="matTooltip" matTooltip="Visualizar Hotel">north_east</mat-icon>
+                            </swiper-slide>
+                        }
+                    }
+                </swiper-container>
+            </div>
+            <div class="w-full flex justify-center mt-16">
+                <button class="main__button" routerLink="/hotels">VER HOTÉIS</button>
+            </div>
+        </div>
+    </section>
 </div>

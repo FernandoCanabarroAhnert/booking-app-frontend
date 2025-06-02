@@ -6,6 +6,7 @@ import { IPageResponse } from '../interfaces/page/page-response.interface';
 import { RoomRatingList } from '../types/room-rating-list.type';
 import { RoomList } from '../types/room-list.type';
 import { APPLY_AUTH_TOKEN } from '../interceptors/auth.interceptor';
+import { IRoomRatingRequest } from '../interfaces/room/room-rating-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -36,11 +37,6 @@ export class RoomService {
     return this._http.get<IRoomDetailResponse>(`${this.baseUrl}/${id}`, { context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
   }
 
-  findAllRatingsByRoomId(id: number, page: number, size: number): Observable<IPageResponse<RoomRatingList>> {
-    return this._http.get<IPageResponse<RoomRatingList>>(`${this.baseUrl}/${id}/ratings`, { params: { page: page - 1, size }, 
-      context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
-  }
-
   createRoom(room: FormData): Observable<void> {
     return this._http.post<void>(this.baseUrl, room);
   }
@@ -55,6 +51,23 @@ export class RoomService {
 
   deleteImages(imagesIds: number[]): Observable<void> {
     return this._http.delete<void>(`${this.baseUrl}/images`, { params: { imagesIds } });
+  }
+
+  findAllRatingsByRoomId(id: number, page: number, size: number): Observable<IPageResponse<RoomRatingList>> {
+    return this._http.get<IPageResponse<RoomRatingList>>(`${this.baseUrl}/${id}/ratings`, { params: { page: page - 1, size }, 
+      context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
+  }
+
+  addRating(roomId: number, request: IRoomRatingRequest): Observable<void> {
+    return this._http.post<void>(`${this.baseUrl}/${roomId}/ratings`, request);
+  }
+
+  updateRating(ratingId: number, request: IRoomRatingRequest): Observable<void> {
+    return this._http.put<void>(`${this.baseUrl}/ratings/${ratingId}`, request);
+  }
+
+  deleteRating(ratingId: number): Observable<void> {
+    return this._http.delete<void>(`${this.baseUrl}/ratings/${ratingId}`);
   }
 
   exportToPdf() {

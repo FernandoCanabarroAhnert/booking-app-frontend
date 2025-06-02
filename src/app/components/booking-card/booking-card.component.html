@@ -1,13 +1,13 @@
-<div class="booking-card">
+<div class="default-card booking-card">
     @if (booking) {
-        <img [src]="booking.room.cardDisplayImage.base64Image" class="booking-card__image h-[260px] w-full" alt="">
+        <img [src]="booking.room.cardDisplayImage.base64Image" class="default-card__image booking-card__image h-[260px] w-full" alt="">
         <div class="booking-card__content">
             <div class="booking-card__header">
                 <div class="booking-card__room-infos">
                     <span class="booking-card__room-name">Quarto № {{ booking.room.number }}, {{ booking.room.type | roomType }}</span>
                     <span class="booking-card__hotel-name">{{ booking.room.hotelName }}</span>
                 </div>
-                <button class="booking-card__button">CONFIRMADA</button>
+                <button (click)="onBookingInfosClick(booking.id)" class="booking-card__button">Ver Detalhes</button>
             </div>
             <div class="booking-card__body">
                 <div class="booking-card__date">
@@ -29,7 +29,7 @@
                         {{ booking.payment.paymentType| paymentType }}
                     </span>
                 </div>
-                <button class="booking-card__button booking-card__button--details">Ver Detalhes</button>
+                <button (click)="onRoomRatingClick(booking.room.id)" class="booking-card__button">Avaliar Quarto</button>
             </div>
         </div>
     }

@@ -1,0 +1,25 @@
+<div class="default-card hotel-card">
+    <div class="hotel-card__image-container h-[242px]">
+        <span class="hotel-card__rating">⭐ {{ hotel.averageRating }}</span>
+        <img class="default-card__image hotel-card__image" [src]="hotel.cardDisplayImage.base64Image">
+    </div>
+    <div class="hotel-card__body">
+        <span class="hotel-card__name">{{ hotel.name }}</span>
+        <span class="hotel-card__address">
+            <span class="hotel-card__icon">📍</span>
+            {{ getHotelFullAddress(hotel) }}
+        </span>
+        <span class="hotel-card__description">{{ hotel.description }}</span>
+        <div class="hotel-card__separator"></div>
+        <div class="hotel-card__infos">
+            <span class="hotel-card__rooms">
+                <span class="hotel-card__icon hotel-card__icon-room">🛏️</span>
+                <span class="pt-[0.5rem]">{{ hotel.roomQuantity }} quartos</span>
+            </span>
+            <span class="hotel-card__phone">
+                <span class="hotel-card__icon">📞</span>
+                {{ hotel.phone }}
+            </span>
+        </div>
+    </div>
+</div>

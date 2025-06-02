@@ -4,7 +4,9 @@
     @if (bookings$ | async; as response) {
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-9">
         @for (booking of response.content; track booking) {
-            <app-booking-card (click)="onBookingInfosClick(booking.id)" [booking]="booking"></app-booking-card>
+            <app-booking-card [booking]="booking"
+                (onBookingInfosClickEmitter)="onBookingInfosClick($event)"
+                (onRoomRatingClickEmitter)="onRoomRatingClick($event)"></app-booking-card>
         }
     </div>
     <app-pagination [currentPage]="response.number + 1"

@@ -3,7 +3,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   isAuthenticated: boolean = false;
 
   private readonly _authService = inject(AuthService);
+  private readonly _router = inject(Router);
 
   ngOnInit(): void {
     this.listenToAuthState();
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this._authService.logout();
+    this._router.navigate(['/login']);
   }
 
 }

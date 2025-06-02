@@ -1,0 +1,15 @@
+.default-card {
+    cursor: pointer;
+    background: #fff;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(146, 146, 146, 0.5);
+    transition: all 0.4s ease-in-out;
+    &:hover  {
+        box-shadow: 0 10px 30px rgba(45, 42, 30, 0.08);
+        transform: translateY(-7px);
+    }
+    &__image {
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+    }
+}

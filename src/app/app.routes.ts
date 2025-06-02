@@ -2,6 +2,16 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'home'
+    },
+    {
+        path: 'home',
+        title: 'Página Inicial',
+        loadComponent: () => import('./components/main/main.component').then(m => m.MainComponent)
+    },
+    {
         path: 'register',
         title: 'Cadastro',
         loadComponent: () => import('./components/register/register.component').then(m => m.RegisterComponent)
@@ -29,6 +39,11 @@ export const routes: Routes = [
         path: 'rooms',
         title: 'Quartos',
         loadComponent: () => import('./components/rooms/rooms.component').then(m => m.RoomsComponent)
+    },
+    {
+        path: 'hotels',
+        title: 'Hotéis',
+        loadComponent: () => import('./components/hotels/hotels.component').then(m => m.HotelsComponent)
     },
     {
         path: 'rooms/:roomId',
