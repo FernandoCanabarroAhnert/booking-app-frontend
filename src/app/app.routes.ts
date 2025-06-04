@@ -60,6 +60,16 @@ export const routes: Routes = [
         loadChildren: () => import('./components/user-area/user-area.routes').then(m => m.userAreaRoutes)
     },
     {
+        path: 'forgot-password',
+        title: 'Esqueci minha senha',
+        loadComponent: () => import('./components/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+    },
+    {
+        path: 'reset-password',
+        title: 'Redefinir senha',
+        loadComponent: () => import('./components/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
+    },
+    {
         path: 'forbidden',
         title: 'Acesso Negado - 403',
         loadComponent: () => import('./components/route-error-page/route-error-page.component').then(m => m.RouteErrorPageComponent),
