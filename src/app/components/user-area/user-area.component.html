@@ -3,20 +3,24 @@
         <app-header></app-header>
         <div class="container mx-auto mt-12">
             <div class="user-area__nav">
-                <div class="user-area__link py-4 px-[2rem] md:px-[2.75rem] lg:px-[3.425rem] xl:px-[4rem] md:gap-2 lg:gap-4 md:flex md:flex-col md:items-center lg:flex-row" [routerLink]="['infos']" routerLinkActive="user-area__link--active">
+                <div class="user-area__link py-4 px-[2rem] md:px-[2.325rem] lg:px-[3.425rem] xl:px-[4rem] md:gap-2 lg:gap-4 md:flex md:flex-col md:items-center md:text-center lg:flex-row" [routerLink]="['infos']" routerLinkActive="user-area__link--active">
                     <mat-icon class="user-area__icon">contact_mail</mat-icon>
                     <span class="user-area__text hidden md:flex text-[1.1rem]">Meus Dados</span>
                 </div>
-                <div class="user-area__link py-4 px-[2rem] md:px-[2.75rem] lg:px-[3.425rem] xl:px-[4rem] md:gap-2 lg:gap-4 md:flex md:flex-col md:items-center lg:flex-row" [routerLink]="['credit-cards']" routerLinkActive="user-area__link--active">
+                <div class="user-area__link py-4 px-[2rem] md:px-[2.325rem] lg:px-[3.425rem] xl:px-[4rem] md:gap-2 lg:gap-4 md:flex md:flex-col md:items-center md:text-center lg:flex-row" [routerLink]="['credit-cards']" routerLinkActive="user-area__link--active">
                     <mat-icon class="user-area__icon">credit_card</mat-icon>
                     <span class="user-area__text hidden md:flex text-[1.1rem]">Meus Cartões</span>
                 </div>
-                <div class="user-area__link py-4 px-[2rem] md:px-[2.75rem] lg:px-[3.425rem] xl:px-[4rem] md:gap-2 lg:gap-4 md:flex md:flex-col md:items-center lg:flex-row" [routerLink]="['bookings']" routerLinkActive="user-area__link--active">
+                <div class="user-area__link py-4 px-[2rem] md:px-[2.325rem] lg:px-[3.425rem] xl:px-[4rem] md:gap-2 lg:gap-4 md:flex md:flex-col md:items-center md:text-center lg:flex-row" [routerLink]="['bookings']" routerLinkActive="user-area__link--active">
                     <mat-icon class="user-area__icon">calendar_month</mat-icon>
                     <span class="user-area__text hidden md:flex text-[1.1rem]">Minhas Reservas</span>
                 </div>
+                <div class="user-area__link py-4 px-[2rem] md:px-[2.325rem] lg:px-[3.425rem] xl:px-[4rem] md:gap-2 lg:gap-4 md:flex md:flex-col md:items-center md:text-center lg:flex-row" [routerLink]="['my-ratings']" routerLinkActive="user-area__link--active">
+                    <mat-icon class="user-area__icon">star</mat-icon>
+                    <span class="user-area__text hidden md:flex text-[1.1rem]">Minhas Avaliações</span>
+                </div>
             </div>
-            <div class="user-area__content sm:rounded-[1rem]">
+            <div class="user-area__content sm:rounded-[1rem] md:rounded-none xl:rounded-[1rem]">
                 <router-outlet></router-outlet>
             </div>
         </div>

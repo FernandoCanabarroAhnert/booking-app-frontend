@@ -1,0 +1,21 @@
+@use '../../../styles/variables' as variables;
+
+.route-error-page {
+    &__error {
+        font-weight: 500;
+        color: variables.$dark-brown-color;
+    }
+    &__message {
+        font-weight: 300;
+        color: variables.$green-color;
+    }
+    &__link {
+        color: variables.$light-brown-color;
+        text-decoration: none;
+        font-weight: 300;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

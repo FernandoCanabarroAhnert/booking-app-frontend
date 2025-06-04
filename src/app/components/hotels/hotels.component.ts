@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { Observable } from 'rxjs';
 import { IPageResponse } from '../../interfaces/page/page-response.interface';
-import { IHotelResponse } from '../../interfaces/hotel/hotel-response.interface';
 import { HotelList } from '../../types/hotel-list.type';
 import { HotelCardComponent } from '../hotel-card/hotel-card.component';
 import { RouterLink } from '@angular/router';

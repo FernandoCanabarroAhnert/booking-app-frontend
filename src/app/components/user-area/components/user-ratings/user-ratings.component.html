@@ -1,0 +1,22 @@
+<div class="user-ratings sm:rounded-[1rem] md:rounded-none xl:rounded-[1rem] p-6 xl:p-10 2xl:p-20 gap-3 lg:gap-6">
+    <span class="text-3xl xl:text-5xl font-thin">Minhas Avaliações</span>
+    <div class="border-2 border-gray-300 w-[15%] my-2 md:my-4"></div>
+        @if (roomRatings$ | async; as response) {
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                @for (roomRating of response.content; track roomRating) {
+                    <app-room-rating 
+                        [rating]="roomRating" 
+                        [isManagementMode]="true"
+                        (onUpdateClickEmitter)="onUpdateClick($event)"
+                        (onDeleteClickEmitter)="onDeleteClick($event)"></app-room-rating>
+                }
+            </div>
+            <app-pagination
+                [currentPage]="response.number + 1"
+                [totalPages]="response.totalPages"
+                [numberOfElements]="response.numberOfElements"
+                [totalElements]="response.totalElements"
+                (onPageChangeEmitter)="findMyRatings($event)"
+            ></app-pagination>
+        }        
+</div>

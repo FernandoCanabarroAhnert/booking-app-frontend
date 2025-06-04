@@ -3,6 +3,7 @@
 .footer {
     border-top: 1px solid variables.$light-color;
     padding: 2rem;
+    background-color: #fff;
 
     &__brand {
         font-size: 1.1rem;
@@ -17,8 +18,23 @@
         font-size: 1rem;
         transition: color .3s ease-in-out;
         cursor: pointer;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: variables.$light-brown-color;
+            transition: width 0.3s ease;
+        }
         &:hover {
             color: variables.$light-brown-color;
+        }
+        &:hover::after {
+            width: 100%;
+            border-color: variables.$light-brown-color;
         }
     }
 

@@ -28,6 +28,11 @@ export const userAreaRoutes: Routes = [
                 path: 'credit-cards',
                 title: 'Meus Cartões de Crédito',
                 loadComponent: () => import('./components/user-credit-cards/user-credit-cards.component').then(m => m.UserCreditCardsComponent)
+            },
+            {
+                path: 'my-ratings',
+                title: 'Minhas Avaliações',
+                loadComponent: () => import('./components/user-ratings/user-ratings.component').then(m => m.UserRatingsComponent)
             }
         ]
     }

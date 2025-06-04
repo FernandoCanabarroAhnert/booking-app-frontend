@@ -2,15 +2,18 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-admin-login',
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink,
+    MatTooltipModule
   ],
   templateUrl: './admin-login.component.html',
   styleUrl: './admin-login.component.scss'

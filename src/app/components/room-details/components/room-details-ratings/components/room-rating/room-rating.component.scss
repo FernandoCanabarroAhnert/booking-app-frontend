@@ -15,17 +15,62 @@
         color: #fff;
     }
 
+    &__created-at {
+        font-size: .95rem;
+        color: #ebebeb;
+    }
+
+    &__delete {
+        cursor: pointer;
+        padding: .625rem;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: all .3s ease-in-out;
+        display: flex;
+        align-items: center;
+        &:hover {
+            background-color: rgb(212, 29, 29);
+            transform: scale(1.05);
+        }
+    }
+
+    &__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+    }
+
     &__body {
         padding: 1.25rem;
         font-size: 1.2rem;
     }
 
-    &__rating {
+    &__footer {
         width: 100%;
         display: flex;
-        justify-content: flex-end;
+    }
+
+    &__update {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: variables.$green-color;
+        padding: .5rem;
+        border-radius: .625rem;
+        cursor: pointer;
+        transition: all .3s ease-in-out;
+        &:hover {
+            transform: scale(1.03) translateY(-1px);
+        }
+    }
+
+    &__rating {
+        margin-left: auto;
+        display: flex;
         align-items: center;
         gap: 1rem;
+        width: 68px;
     }
 
     &__star {

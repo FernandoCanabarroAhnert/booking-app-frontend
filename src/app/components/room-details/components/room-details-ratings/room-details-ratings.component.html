@@ -3,7 +3,7 @@
         <span class="text-4xl font-thin ml-4 md:ml-0">Avaliações e Comentários</span>
         @if (ratingsResponse | async; as response) {
             <div class="room-details-ratings__ratings grid p-6 md:p-0 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <app-room-rating *ngFor="let rating of response.content" [rating]="rating"></app-room-rating>
+                <app-room-rating *ngFor="let rating of response.content" [rating]="rating" [isManagementMode]="false"></app-room-rating>
             </div>
             <div class="room-details-ratings__pagination w-full flex justify-center">
                 <app-pagination [currentPage]="response.number + 1"

@@ -22,15 +22,19 @@
                             </div>
                         </mat-expansion-panel-header>
                         @if (isAuthenticated) {
-                            <ul class="header__links">
+                            <ul class="header__links text-center">
                                 <li class="header__link" routerLink="/user">Meus dados</li>
                                 <li class="header__link" routerLink="/user/credit-cards">Cartões</li>
                                 <li class="header__link" routerLink="/user/bookings">Reservas</li>
+                                <li class="header__link" routerLink="/user/my-ratings">Avaliações</li>
+                                @if (hasManagementPermission) {
+                                    <li class="header__link" routerLink="/admin">Administração</li>
+                                }
                                 <li class="header__link" (click)="logout()">Sair</li>
                             </ul>
                         }
                         @if (!isAuthenticated) {
-                            <ul class="header__links">
+                            <ul class="header__links text-center">
                                 <li class="header__link" routerLink="/login">Login</li>
                                 <li class="header__link" routerLink="/login/admin">Login Admin</li>
                             </ul>
@@ -43,11 +47,9 @@
     <div class="header__bottom">
         <div class="header__nav flex flex-col gap-3 items-center sm:flex-row sm:justify-center lg:top-[-3.5rem]">
             <div class="flex flex-row gap-2 md:gap-3">
-                <span class="header__option text-[.8rem] md:text-[1.05rem]">Qualquer hotel</span>
-                <span class="header__option text-[.8rem] md:text-[1.05rem] hidden sm:flex">|</span>
-                <span class="header__option text-[.8rem] md:text-[1.05rem]">Qualquer lugar</span>
-                <span class="header__option text-[.8rem] md:text-[1.05rem] hidden sm:flex">|</span>
-                <span class="header__option text-[.8rem] md:text-[1.05rem]">Qualquer semana</span>
+                <span class="header__option text-[1.05rem]" routerLink="/hotels">HOTÉIS</span>
+                <span class="header__option text-[1.05rem]">|</span>
+                <span class="header__option text-[1.05rem]" routerLink="/rooms">QUARTOS</span>
         </div>
     </div>
 </div>

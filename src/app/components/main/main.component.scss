@@ -1,9 +1,12 @@
 @use '../../../styles/variables' as variables;
 
 .main {
-    background-image: url("../../../assets/img/HotelTonight_PoolsideViewsl-2\ 1.png");
-    background-repeat: no-repeat;
-    background-size: contain;
+    
+    &__content {
+        background-image: url("../../../assets/img/HotelTonight_PoolsideViewsl-2\ 1.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
     &__about-us {
         display: flex;
@@ -22,7 +25,6 @@
     }
 
     &__title {
-        font-size: 3.5rem;
         font-weight: 700;
         color: variables.$dark-brown-color;
         margin-bottom: 1.325rem;
@@ -43,11 +45,11 @@
     }
 
     &__principle {
-        width: 255px;
         height: 85px;
         position: relative;
         z-index: 1000;
         border-radius: 1rem;
+        border: 1px solid #ddd;
         border-left-width: 6px;
         border-left-color: variables.$light-brown-color;
         background-color: #fff;
@@ -112,10 +114,10 @@
         }
     }
 
-    &__slide-image, &__slide {
+    &__slide-image {
         cursor: pointer;
         border-radius: 1.5rem;
-        border: 1px solid transparent;
+        border: 2px solid transparent;
         transition: all .3s ease-in-out;
         &:hover {
             border-color: variables.$light-brown-color;

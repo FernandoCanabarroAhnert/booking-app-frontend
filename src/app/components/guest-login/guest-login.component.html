@@ -16,6 +16,9 @@
                 <div class="auth-form__error" *ngIf="password.invalid && (password.dirty || password.touched)">
                     <div *ngIf="password.hasError('required')">Campo obrigatório</div>
                 </div>
+                <div class="w-full flex justify-end">
+                    <a class="auth-form__link" routerLink="/forgot-password">Esqueci minha senha</a>
+                </div>
                 <div class="auth-form__error">
                     <div *ngIf="loginForm.hasError('invalidCredentials')">Credencias inválidas</div>
                     <div *ngIf="loginForm.hasError('accountNotActivated')">Conta do Usuário ainda não foi ativada</div>

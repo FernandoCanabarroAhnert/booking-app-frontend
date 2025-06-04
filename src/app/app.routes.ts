@@ -46,6 +46,11 @@ export const routes: Routes = [
         loadComponent: () => import('./components/hotels/hotels.component').then(m => m.HotelsComponent)
     },
     {
+        path: 'hotels/:hotelId',
+        title: 'Detalhes do Hotel',
+        loadComponent: () => import('./components/hotel-details/hotel-details.component').then(m => m.HotelDetailsComponent)
+    },
+    {
         path: 'rooms/:roomId',
         title: 'Detalhes do Quarto',
         loadComponent: () => import('./components/room-details/room-details.component').then(m => m.RoomDetailsComponent)
@@ -53,5 +58,17 @@ export const routes: Routes = [
     {
         path: 'user',
         loadChildren: () => import('./components/user-area/user-area.routes').then(m => m.userAreaRoutes)
+    },
+    {
+        path: 'forbidden',
+        title: 'Acesso Negado - 403',
+        loadComponent: () => import('./components/route-error-page/route-error-page.component').then(m => m.RouteErrorPageComponent),
+        data: { error: 'Acesso negado' }
+    },
+    {
+        path: '**',
+        title: 'Página Não Encontrada - 404',
+        loadComponent: () => import('./components/route-error-page/route-error-page.component').then(m => m.RouteErrorPageComponent),
+        data: { error: 'Página não encontrada' }
     }
 ];

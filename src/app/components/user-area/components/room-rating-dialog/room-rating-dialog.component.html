@@ -33,20 +33,19 @@
             <input type="radio" formControlName="rating" id="star0half" [value]="0.5">
             <label for="star0half" class="half" matTooltip="0.5 Estrela"></label>
         </fieldset>
-        <div class="mt-[6rem]"></div>
         @if (rating.invalid && (rating.dirty || rating.touched)) {
             <mat-error class="text-center" *ngIf="rating.hasError('required')">Campo Requerido</mat-error>
         }
         <div class="room-rating-dialog__item mt-[1rem]">
             <mat-form-field>
                 <mat-label>Descrição da Avaliação</mat-label>
-                <input matInput type="text" placeholder="Ex.: Quarto muito confortável e atendimento excelente..." formControlName="description">
+                <textarea matInput type="text" placeholder="Ex.: Quarto muito confortável e atendimento excelente..." formControlName="description"></textarea>
             </mat-form-field>
             @if (description.invalid && (description.dirty || description.touched)) {
                 <mat-error *ngIf="description.hasError('required')">Campo Requerido</mat-error>
             }
         </div>
-        <div class="w-full flex">
+        <div class="w-full flex mt-3">
             <button class="room-rating-dialog__button">{{ isCreate ? 'Adicionar' : 'Atualizar' }}</button>
         </div>
     </form>

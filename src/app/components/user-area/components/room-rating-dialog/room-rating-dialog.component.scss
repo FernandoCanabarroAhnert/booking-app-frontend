@@ -6,15 +6,15 @@
     &__form {
         display: flex;
         flex-direction: column;
-        gap: .625rem;
         width: 100%;
+        gap: 1.5rem;
     }
 
     &__item {
         display: flex;
         flex-direction: column;
-        gap: .5rem;
         width: 100%;
+        gap: .5rem;
     }
 
     &__button {
@@ -37,10 +37,7 @@
 form {
     position: relative;
     .star-rating {
-        position: absolute;
-        top: 10%;
-        left: 50%;
-        transform: translate(-50%,-50%);
+        margin: 0 auto;
         input {
             display: none;
         }
@@ -67,4 +64,8 @@ form {
     .star-rating:not(:checked)>label:hover~label {
         color: variables.$green-color;
     }
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
 }

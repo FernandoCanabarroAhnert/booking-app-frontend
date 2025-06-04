@@ -9,6 +9,7 @@ import { IUserResponse } from '../interfaces/user/user-response.interface';
 import { IUserSelfUpdatePasswordRequest } from '../interfaces/user/user-self-update-password.interface';
 import { IUserSelfUpdateInfosRequest } from '../interfaces/user/user-self-update-infos.interface';
 import { APPLY_AUTH_TOKEN } from '../interceptors/auth.interceptor';
+import { INewPasswordRequest } from '../interfaces/user/new-password-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,13 @@ export class AuthService {
     return this.obtainRolesFromToken().includes('ROLE_OPERATOR') && !this.obtainRolesFromToken().includes('ROLE_ADMIN');
   }
 
-  private static obtainRolesFromToken(): string[] {
+  static hasManagementPermission(): boolean {
+    return this.obtainRolesFromToken().includes('ROLE_ADMIN') || this.obtainRolesFromToken().includes('ROLE_OPERATOR');
+  }
+
+  static obtainRolesFromToken(): string[] {
     const token = localStorage.getItem('access-token');
+    if (!token) return [];
     const decodedToken: any = jwtDecode(token as string);
     return decodedToken.authorities as string[];
   }
@@ -81,6 +87,14 @@ export class AuthService {
 
   userSelfUpdatePassword(request: IUserSelfUpdatePasswordRequest): Observable<void> {
     return this._http.put<void>(`${this._baseUrl}/profile/password`, request);
+  }
+
+  forgotPassword(email: string): Observable<void> {
+    return this._http.post<void>(`${this._baseUrl}/forgot-password`, { email }, { context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
+  }
+
+  resetPassword(request: INewPasswordRequest): Observable<void> {
+    return this._http.put<void>(`${this._baseUrl}/reset-password`, request, { context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
   }
 
   verifyIfEmailIsAlreadyInUse(email: string): Observable<{ alreadyExists: boolean }> {

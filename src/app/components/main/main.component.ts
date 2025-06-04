@@ -43,12 +43,13 @@ export class MainComponent implements OnInit {
   configureSwiper(element: string) {
     const swiperEl = this._elementRef.nativeElement.querySelector(element);
     Object.assign(swiperEl, {
-      slidesPerView: 2,
-      spaceBetween: 10,
       pagination: {
         clickable: true,
       },
       breakpoints: {
+        400: {
+          slidesPerView: 1,
+        },
         640: {
           slidesPerView: 2,
           spaceBetween: 20,

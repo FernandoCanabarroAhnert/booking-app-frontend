@@ -1,11 +1,11 @@
 <div class="main">
     <section class="main__content min-h-[100dvh]">
         <app-header></app-header>
-            <div class="container mx-auto flex items-center gap-10">
-                <div class="main__about-us w-[45%]">
-                    <span class="main__subtitle">SOBRE NÓS</span>
-                    <span class="main__title max-w-[500px]">Conectando você às suas <span class="main__title--highlight">raízes</span></span>
-                    <span class="main__text">
+            <div class="container mx-auto flex flex-col xl:flex-row items-center gap-10 py-6">
+                <div class="main__about-us xl:w-[45%]">
+                    <span class="main__subtitle ml-4 sm:ml-0">SOBRE NÓS</span>
+                    <span class="main__title text-center xl:text-start xl:max-w-[500px] text-[2rem] lg:text-[3.5rem] ml-4 sm:ml-0">Conectando você às suas <span class="main__title main__title--highlight">raízes</span></span>
+                    <span class="main__text px-4 sm:px-0">
                         O Ybante nasceu da conexão com as raízes. Nosso nome carrega a força e a fluidez da cultura indígena, 
                         celebrando a harmonia com a natureza, a sabedoria ancestral e o respeito à terra. Mais do que um hotel, somos um refúgio 
                         onde o conforto moderno encontra a essência do Brasil original. 
@@ -14,7 +14,7 @@
                         Cada espaço, cada detalhe, ecoa o espírito de 
                         acolhimento, liberdade e pertencimento. No Ybante, você é convidado a viver com intensidade, leveza e verdade.
                     </span>
-                    <div class="grid grid-cols-2 p-10 pt-6 gap-6">
+                    <div class="grid sm:grid-cols-2 xl:p-10 p-4 gap-3 xl:gap-6">
                         <div class="main__principle">
                             <span class="main__icon">🌿</span>
                             <span class="main__tag">Sustentabilidade</span>
@@ -33,20 +33,20 @@
                         </div>
                     </div>
                 </div>
-                <img src="../../../assets/img/main-image.jpg" class="main__image w-[55%]">
+                <img src="../../../assets/img/main-image.jpg" class="main__image xl:w-[55%]">
             </div>
     </section>
     <section class="main__rooms">
         <div class="container mx-auto min-h-[80dvh] flex flex-col py-16">
             <div class="flex flex-col items-center">
                 <span class="main__subtitle">NOSSOS QUARTOS</span>
-                <span class="main__title">Conforto que inspira</span>
-                <span class="main__text w-[60%] text-center">
+                <span class="main__title text-[2.5rem] text-center">Conforto que inspira</span>
+                <span class="main__text w-[60%] text-center px-4 sm:px-0">
                     Cada quarto é uma experiência única, projetada para conectar você com a essência do lugar, 
                     oferecendo todo o conforto moderno em harmonia com elementos naturais e culturais autênticos.
                 </span>
             </div>
-            <div class="main__swiper">
+            <div class="main__swiper ml-[1.5rem] sm:ml-0">
                 <swiper-container id="rooms-swiper-container" loop="true"
                     space-between="30" grab-cursor="true" slides-per-view="3">
                     @if (rooms$ | async; as rooms) {
@@ -68,12 +68,12 @@
         <div class="container mx-auto min-h-[80dvh] flex flex-col py-16">
             <div class="w-full flex flex-col items-center">
                 <span class="main__subtitle">NOSSOS DESTINOS</span>
-                <span class="main__title">Experiências Autênticas</span>
-                <span class="main__text w-[60%] text-center">
+                <span class="main__title text-[2.5rem] text-center">Experiências Autênticas</span>
+                <span class="main__text w-[60%] text-center px-4 sm:px-0">
                     Descubra locais únicos que celebram a diversidade cultural e natural do Brasil, cada um oferecendo uma experiência autêntica e inesquecível.
                 </span>
             </div>
-            <div class="main__swiper">
+            <div class="main__swiper ml-[1.5rem] sm:ml-0">
                 <swiper-container id="hotels-swiper-container" loop="true"
                 space-between="30" grab-cursor="true" slides-per-view="3">
                     @if (hotels$ | async; as hotels) {

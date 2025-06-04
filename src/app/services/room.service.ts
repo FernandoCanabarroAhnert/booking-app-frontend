@@ -7,6 +7,7 @@ import { RoomRatingList } from '../types/room-rating-list.type';
 import { RoomList } from '../types/room-list.type';
 import { APPLY_AUTH_TOKEN } from '../interceptors/auth.interceptor';
 import { IRoomRatingRequest } from '../interfaces/room/room-rating-request.interface';
+import { IRoomRatingResponse } from '../interfaces/room/room-rating-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,14 @@ export class RoomService {
   findAllRatingsByRoomId(id: number, page: number, size: number): Observable<IPageResponse<RoomRatingList>> {
     return this._http.get<IPageResponse<RoomRatingList>>(`${this.baseUrl}/${id}/ratings`, { params: { page: page - 1, size }, 
       context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
+  }
+
+  findMyRatings(page: number = 0, size: number = 9): Observable<IPageResponse<RoomRatingList>> {
+    return this._http.get<IPageResponse<RoomRatingList>>(`${this.baseUrl}/my-ratings`, { params: { page: page - 1, size } });
+  }
+
+  findRatingById(ratingId: number): Observable<IRoomRatingResponse> {
+    return this._http.get<IRoomRatingResponse>(`${this.baseUrl}/ratings/${ratingId}`);
   }
 
   addRating(roomId: number, request: IRoomRatingRequest): Observable<void> {

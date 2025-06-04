@@ -20,6 +20,7 @@ import { Router, RouterLink } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   isAuthenticated: boolean = false;
+  hasManagementPermission: boolean = false;
 
   private readonly _authService = inject(AuthService);
   private readonly _router = inject(Router);
@@ -30,6 +31,9 @@ export class HeaderComponent implements OnInit {
 
   listenToAuthState(): void {
     this.isAuthenticated = AuthService.isAuthenticated();
+    if (this.isAuthenticated) {
+      this.hasManagementPermission = AuthService.hasManagementPermission();
+    }
   }
 
   logout(): void {

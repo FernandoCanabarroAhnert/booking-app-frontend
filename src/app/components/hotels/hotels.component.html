@@ -1,11 +1,11 @@
 <div class="hotels">
     <app-header></app-header>
-    <div class="container mx-auto flex flex-col items-center gap-12 min-h-[100dvh] py-6">
+    <div class="container mx-auto flex flex-col items-center min-h-[100dvh] py-6">
         <div class="w-full flex justify-start">
-            <span class="text-7xl font-thin">Hotéis</span>
+            <span class="text-5xl lg:text-7xl font-thin ml-4 sm:ml-0">Hotéis</span>
         </div>
         @if (hotels$ | async; as hotels) {
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 p-4 lg:p-0">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6 p-4 py-8 lg:px-0">
                 @for (hotel of hotels.content; track hotel) {
                     <app-hotel-card [hotel]="hotel" [routerLink]="[hotel.id]"></app-hotel-card>
                 }

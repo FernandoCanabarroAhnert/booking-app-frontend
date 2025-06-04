@@ -26,8 +26,8 @@ export class HotelService {
        context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
   }
 
-  findAllRoomsByHotelId(id: number, page: number, size: number): Observable<IPageResponse<RoomList>> {
-    return this._http.get<IPageResponse<RoomList>>(`${this._baseUrl}/${id}/rooms`, { params: { page: page - 1, size }, 
+  findAllRoomsByHotelId(id: number, page: number, size: number, sort: string = 'id,asc'): Observable<IPageResponse<RoomList>> {
+    return this._http.get<IPageResponse<RoomList>>(`${this._baseUrl}/${id}/rooms`, { params: { page: page - 1, size, sort }, 
       context: new HttpContext().set(APPLY_AUTH_TOKEN, false) });
   }
 

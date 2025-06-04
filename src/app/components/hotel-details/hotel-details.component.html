@@ -1,114 +1,115 @@
 <div class="hotel-details">
     <app-header></app-header>
-    <div class="container mx-auto">
-        <div class="grid grid-cols-4">
-            <div class="hotel-details__main">
-                <span class="hotel-details__name">hotel ybanté</span>
-                <span class="hotel-details__address">📍Rua dos Andradas, 1234 - Centro Histórico, Porto Alegre, Brasil</span>
-                <img src=" https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="">
-                
-                <div class="grid grid-cols-3">
-                    <img src=" https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="">
-                    <img src=" https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="">
-                    <img src=" https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="">
-                </div>
+    @if (hotel) {
+        <div class="container mx-auto flex flex-col gap-6 py-10 px-4 sm:px-0">
+            <div class="flex flex-col gap-4 xl:gap-8">
+                <span class="hotel-details__name text-3xl lg:text-5xl">{{ hotel.name }}</span>
+                <span class="hotel-details__address">📍 {{ hotelFullAddress() }}</span>
             </div>
-
-            <div class="hotel-details__infos">
-                
-                <div class="hotel-details__item">
-                    
-                    <span class="hotel-detail__icon">🏨</span>
-                    
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__subtitle">45</span>
-                        <span class="hotel-details__text">Quartos e Suítes</span>
+            <div class="flex flex-col gap-8 lg:flex-row lg:gap-[2rem] xl:gap-[5rem]">
+                <div class="hotel-details__main xl:w-[64%]">
+                    <img class="hotel-details__image" [src]="hotel.images[0].base64Image">
+                    <div class="grid grid-cols-3 gap-3">
+                        <div *ngFor="let image of hotel.images; let i = index">
+                            <img *ngIf="i !== 0"
+                                class="hotel-details__image" 
+                                [src]="image.base64Image">
+                        </div>
                     </div>
                 </div>
-
-                <div class="hotel-details__item">
-                    <span class="hotel-detail__icon">🏨</span>
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__subtitle">45</span>
-                        <span class="hotel-details__text">Quartos e Suítes</span>
+                <div class="xl:w-[36%] flex justify-center items-center">
+                    <div class="hotel-details__infos">
+                        <div class="hotel-details__item">
+                            <span class="hotel-details__icon">🏨</span>
+                            <div class="flex flex-col gap-2">
+                                <span class="hotel-details__subtitle">{{ hotel.roomQuantity }}</span>
+                                <span class="hotel-details__text">Quartos e Suítes</span>
+                            </div>
+                        </div>
+                        <div class="hotel-details__item">
+                        <span class="hotel-details__icon">⭐</span>
+                        <div class="flex flex-col gap-2">
+                            <span class="hotel-details__subtitle">{{ hotel.averageRating }}</span>
+                            <span class="hotel-details__text">Avaliação dos Hóspedes</span>
+                        </div>
                     </div>
-                </div>
-                <div class="hotel-details__item">
-                    <span class="hotel-detail__icon">🏨</span>
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__subtitle">45</span>
-                        <span class="hotel-details__text">Quartos e Suítes</span>
+                    <div class="hotel-details__item">
+                        <span class="hotel-details__icon">🏨</span>
+                        <div class="flex flex-col gap-2">
+                            <span class="hotel-details__subtitle">45</span>
+                            <span class="hotel-details__text">Quartos e Suítes</span>
+                        </div>
                     </div>
-                </div>
-                <div class="hotel-details__item">
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__text">📞 (51) 3021-8500</span>
-                        <span class="hotel-details__text">✉️ reservas%ybante.com.br</span>
-                        <span class="hotel-details__text">🌐 www.ybante.com.br</span>
-                        <span class="hotel-details__text">🕒 Check-in: 15h | Check-out: 12h</span>1
+                        <div class="hotel-details__item hotel-details__item--contact">
+                            <div class="flex flex-col gap-2">
+                                <span class="hotel-details__text">📞 {{ hotel.phone }}</span>
+                                <span class="hotel-details__text">✉️ {{ 'reservas@ybante.com.br' }}</span>
+                                <span class="hotel-details__text">🌐 www.ybante.com.br</span>
+                                <span class="hotel-details__text">🕒 Check-in: 15h | Check-out: 12h</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="hotel-details__about">
-            <span class="text-2xl font-thin">Sobre Este Hotel</span>
-            <span class="hotel-details__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum magni pariatur deleniti, ad facilis dolor quae reiciendis explicabo sunt expedita esse neque aspernatur repellat illo cupiditate iste dolorum iure error!
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam corporis saepe minima est numquam placeat quaerat vel accusamus recusandae necessitatibus praesentium atque eveniet, ut, nesciunt repellendus vitae dicta sunt animi.
-            </span>
-            <span class="text-2xl font-thin">Comodidades do Hotel</span>
-            <div class="grid grid-cols-4 gap-6">
-                <div class="hotel-details__item">
-                    <span class="hotel-detail__icon">🏨</span>
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__subtitle">45</span>
-                        <span class="hotel-details__text">Quartos e Suítes</span>
+            <div class="container mx-auto flex flex-col gap-8 py-10 px-4 sm:px-0">
+                <span class="hotel-details__topic">Sobre Este Hotel</span>
+                <span class="hotel-details__description">{{ hotel.description }}</span>
+                <span class="hotel-details__topic">Comodidades do Hotel</span>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div class="hotel-details__item">
+                        <span class="hotel-details__icon">🏊</span>
+                        <div class="flex flex-col gap-2">
+                            <span class="hotel-details__subtitle">Piscina Infinity</span>
+                            <span class="hotel-details__text">Com vista panorâmica da cidade</span>
+                        </div>
+                    </div>
+                    <div class="hotel-details__item">
+                        <span class="hotel-details__icon">🧘</span>
+                        <div class="flex flex-col gap-2">
+                            <span class="hotel-details__subtitle">Spa Completo</span>
+                            <span class="hotel-details__text">Massagens e tratamentos relaxantes</span>
+                        </div>
+                    </div>
+                    <div class="hotel-details__item">
+                        <span class="hotel-details__icon">🍽️</span>
+                        <div class="flex flex-col gap-2">
+                            <span class="hotel-details__subtitle">Restaurante Gourmet</span>
+                            <span class="hotel-details__text">Culinária regional e internacional</span>
+                        </div>
+                    </div>
+                    <div class="hotel-details__item">
+                        <span class="hotel-details__icon">💪</span>
+                        <div class="flex flex-col gap-2">
+                            <span class="hotel-details__subtitle">Equipamentos modernos e personal trainer</span>
+                            <span class="hotel-details__text">Quartos e Suítes</span>
+                        </div>
+                    </div>
+                    <div class="hotel-details__item">
+                        <span class="hotel-details__icon">🚗</span>
+                        <div class="flex flex-col gap-2">
+                            <span class="hotel-details__subtitle">Estacionamento Valet</span>
+                            <span class="hotel-details__text">Serviço completo incluso</span>
+                        </div>
+                    </div>
+                    <div class="hotel-details__item">
+                        <span class="hotel-details__icon">📶</span>
+                        <div class="flex flex-col gap-2">
+                            <span class="hotel-details__subtitle">Wi-fi premium</span>
+                            <span class="hotel-details__text">Internet de alta velocidade gratuita</span>
+                        </div>
                     </div>
                 </div>
-                <div class="hotel-details__item">
-                    <span class="hotel-detail__icon">🏨</span>
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__subtitle">45</span>
+                <div class="hotel-details__rooms flex flex-col gap-4 p-6 md:p-8 sm:flex-row sm:justify-between sm:items-center">
+                    <div class="flex flex-col gap-4">
+                        <span class="hotel-details__subtitle">{{ hotel.roomQuantity }}</span>
                         <span class="hotel-details__text">Quartos e Suítes</span>
                     </div>
-                </div>
-                <div class="hotel-details__item">
-                    <span class="hotel-detail__icon">🏨</span>
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__subtitle">45</span>
-                        <span class="hotel-details__text">Quartos e Suítes</span>
-                    </div>
-                </div>
-                <div class="hotel-details__item">
-                    <span class="hotel-detail__icon">🏨</span>
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__subtitle">45</span>
-                        <span class="hotel-details__text">Quartos e Suítes</span>
-                    </div>
-                </div>
-                <div class="hotel-details__item">
-                    <span class="hotel-detail__icon">🏨</span>
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__subtitle">45</span>
-                        <span class="hotel-details__text">Quartos e Suítes</span>
-                    </div>
-                </div>
-                <div class="hotel-details__item">
-                    <span class="hotel-detail__icon">🏨</span>
-                    <div class="flex flex-col gap-3">
-                        <span class="hotel-details__subtitle">45</span>
-                        <span class="hotel-details__text">Quartos e Suítes</span>
-                    </div>
+                    <button class="hotel-details__button" routerLink="/rooms" [queryParams]="{ hotelId: hotel.id }">Ver todos os quartos</button>
                 </div>
             </div>
         </div>
-        <div class="hotel-details__rooms">
-            <div class="flex flex-col gap-4">
-                <span class="hotel-details__subtitle">45</span>
-                <span class="hotel-details__text">Quartos e Suítes</span>
-            </div>
-            <button class="hotel-details__button">Ver todos os quartos</button>
-        </div>
-    </div>
-
+    }
     <app-footer></app-footer>
 </div>
