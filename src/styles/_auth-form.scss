@@ -8,8 +8,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 4rem;
         gap: 2rem;
+        position: relative;
     }
 
     &__logo {
@@ -96,6 +96,7 @@
         font-size: 2rem;
         width: 2rem;
         height: 2rem;
+        z-index: 10000;
         cursor: pointer;
         transition: transform .3s ease-in-out;
         &:hover {
@@ -107,6 +108,10 @@
         &--register {
             right: 2rem;
         }  
+        &--white {
+            color: #fff;
+            display: flex;
+        }
     }
 
     &__image {
@@ -114,4 +119,10 @@
         overflow: hidden;
     }
 
+}
+
+@media (min-width: 1280px) {
+    .auth-form__return--white {
+        display: none !important;
+    }
 }

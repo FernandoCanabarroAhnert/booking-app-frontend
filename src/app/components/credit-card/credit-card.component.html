@@ -2,7 +2,7 @@
     <div *ngIf="!isManagementMode" class="col-span-1 credit-card__radio">
         <mat-radio-button [value]="creditCard.id"></mat-radio-button>
     </div>
-    <div class="credit-card__infos" [ngClass]="{ 'col-span-5': !isManagementMode, 'col-span-6': isManagementMode }">
+    <div class="credit-card__infos py-4 px-2 sm:p-5 gap-3 sm:gap-5" [ngClass]="{ 'col-span-5': !isManagementMode, 'col-span-6': isManagementMode }">
         <div class="credit-card__header">
             <span class="credit-card__brand">{{ creditCard.brand | creditCardBrand | uppercase }}</span>
             <div *ngIf="isManagementMode" 
@@ -15,12 +15,12 @@
         <span class="credit-card__number text-base md:text-[1.1rem] xl:text-center xl:text-[1.425rem]">{{ creditCard.lastFourDigits }}</span>
         <div class="credit-card__row">
             <div class="credit-card__info">
-                <span class="credit-card__subtitle">Titular:</span> 
-                <span class="credit-card__text h-[40px]">{{ creditCard.holderName }}</span>
+                <span class="credit-card__subtitle text-[.9rem] sm:text-base">Titular:</span> 
+                <span class="credit-card__text text-[1.0825rem] sm:text-xl sm:h-[40px]">{{ creditCard.holderName }}</span>
             </div>
             <div class="credit-card__info">
-                <span class="credit-card__subtitle">Validade:</span>
-                <span class="credit-card__text">{{ creditCard.expirationDate }}</span>
+                <span class="credit-card__subtitle text-[.9rem] sm:text-base">Validade:</span>
+                <span class="credit-card__text text-[1.0825rem] sm:text-xl">{{ creditCard.expirationDate }}</span>
             </div>
         </div>
     </div>

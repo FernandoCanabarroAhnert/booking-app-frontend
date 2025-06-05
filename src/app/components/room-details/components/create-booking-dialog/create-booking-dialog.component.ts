@@ -135,6 +135,7 @@ export class CreateBookingDialogComponent implements OnInit {
           this.bookingData.patchValue({ checkOut: new Date(event.value.getTime() + this.milisecondsInDay)});
         }
       }
+      this.validateCheckInAndCheckOut();
     }
   
   onCheckOutChange(event: MatDatepickerInputEvent<Date>) {
@@ -144,9 +145,11 @@ export class CreateBookingDialogComponent implements OnInit {
         this.bookingData.patchValue({ checkOut: this.bookingData.value.checkIn, checkIn: event.value });
       }
     }
+    this.validateCheckInAndCheckOut();
   }
 
   closeDialog() {
+    this.validateCheckInAndCheckOut();
     if (this.bookingData.invalid || this.paymentData.invalid) {
       if (this.bookingData.invalid) {
         this.bookingData.markAllAsTouched();
@@ -174,6 +177,16 @@ export class CreateBookingDialogComponent implements OnInit {
 
   onInstallmentQuantitySelected(installmentQuantity: number) {
     this.paymentData.patchValue({ installmentQuantity });
+  }
+
+  private validateCheckInAndCheckOut() {
+    this.unavailableDates.map(dateStr => new Date(dateStr)).some(date => {
+      const invalidDate = this.checkIn.value < date && this.checkOut.value > date;
+      if (invalidDate) {
+        this.checkIn.setErrors({ matDatepickerFilter: true });
+        this.checkOut.setErrors({ matDatepickerFilter: true });
+      }
+    });
   }
 
 }

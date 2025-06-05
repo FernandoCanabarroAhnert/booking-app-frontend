@@ -1,6 +1,7 @@
 <div class="register auth-form">
-    <div class="auth-form__container grid grid-cols-5">
-        <div class="auth-form__content col-span-2 min-h-[100dvh]">
+    <div class="auth-form__container xl:grid xl:grid-cols-5">
+        <div class="auth-form__content xl:col-span-2 min-h-[100dvh]">
+            <mat-icon class="auth-form__return auth-form__return--login auth-form__return--white" routerLink="/">west</mat-icon>
             <img src="../../../assets/img/logo-branca.png" alt="Logo do Site na cor Branca" class="auth-form__logo">
             <h2 class="auth-form__title">Formulário de Cadastro</h2>
             <form class="auth-form__form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -50,7 +51,7 @@
             </form>
             <p class="auth-form__router">Já tem uma conta? <a class="auth-form__link" routerLink="/login">Efetuar login</a></p>
         </div>
-        <div class="auth-form__image col-span-3 h-[100dvh]">
+        <div class="auth-form__image hidden xl:block xl:col-span-3 xl:h-[100dvh]">
             <mat-icon class="auth-form__return auth-form__return--register" routerLink="/">west</mat-icon>
             <img src="../../../assets/img/logo-com-cor-sem-letras.png" alt="Logo do Site Colorido">
         </div>

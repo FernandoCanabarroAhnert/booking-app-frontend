@@ -102,6 +102,7 @@ export class BookingFormComponent {
         this.bookingForm.patchValue({ checkOut: new Date(event.value.getTime() + this.milisecondsInDay)});
       }
     }
+    this.validateCheckInAndCheckOut();
   }
 
   onCheckOutChange(event: MatDatepickerInputEvent<Date>) {
@@ -111,6 +112,7 @@ export class BookingFormComponent {
         this.bookingForm.patchValue({ checkOut: this.bookingForm.value.checkIn, checkIn: event.value });
       }
     }
+    this.validateCheckInAndCheckOut();
   }
 
   openDialog() {
@@ -124,8 +126,8 @@ export class BookingFormComponent {
       width: '750px',
       data: this.sendDialogData()
     });
-
     dialogRef.afterClosed().subscribe(result => {
+      if (!result) return
       const data: ICreateBooking = this.createBookingData(result);
       this._bookingService.createSelfBooking(data).subscribe({
         next: () => {
@@ -164,6 +166,16 @@ export class BookingFormComponent {
       } 
     }
     return data;
+  }
+
+  private validateCheckInAndCheckOut() {
+    this.unavailableDates.map(dateStr => new Date(dateStr)).some(date => {
+      const invalidDate = this.checkIn.value < date && this.checkOut.value > date;
+      if (invalidDate) {
+        this.checkIn.setErrors({ matDatepickerFilter: true });
+        this.checkOut.setErrors({ matDatepickerFilter: true });
+      }
+    });
   }
 
 

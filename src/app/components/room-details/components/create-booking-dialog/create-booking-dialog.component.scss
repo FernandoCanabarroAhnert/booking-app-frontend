@@ -58,3 +58,7 @@
     --mdc-radio-selected-pressed-icon-color: #2d2109;
     --mat-radio-checked-ripple-color: #2d2109;
 }
+
+:host ::ng-deep .mat-vertical-content {
+    padding: 0 10px 10px 5px !important;
+}

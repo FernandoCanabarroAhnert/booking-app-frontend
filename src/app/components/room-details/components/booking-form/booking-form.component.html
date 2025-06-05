@@ -21,10 +21,10 @@
                 </mat-form-field>
             </div>
             <div class="booking-form__errors">
-                @if (checkIn.hasError('matDatepickerFilter')) {
+                @if (checkIn.hasError('matDatepickerFilter') && (checkIn.touched || checkIn.dirty)) {
                     <p>Data de Check-In Inválida</p>
                 }
-                @if (checkOut.hasError('matDatepickerFilter')) {
+                @if (checkOut.hasError('matDatepickerFilter') && (checkOut.touched || checkOut.dirty)) {
                     <p>Data de Check-Out Inválida</p>
                 }
             </div>
