@@ -11,7 +11,7 @@ import { ICreditCardRequest } from '../interfaces/credit-card/credit-card-reques
 export class CreditCardService {
 
   private readonly _http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:8080/api/v1/credit-cards';
+  private readonly baseUrl = 'https://booking-api.fernandocanabarrodev.tech/api/v1/credit-cards';
 
   getMyCreditCards( page: number, size: number): Observable<IPageResponse<CreditCardList>> {
     return this._http.get<IPageResponse<CreditCardList>>(`${this.baseUrl}/my-credit-cards`, { params: { page: page - 1, size } });

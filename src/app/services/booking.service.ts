@@ -16,7 +16,7 @@ export class BookingService {
 
   private readonly _http = inject(HttpClient);
 
-  readonly _baseUrl = 'http://localhost:8080/api/v1/bookings';
+  readonly _baseUrl = 'https://booking-api.fernandocanabarrodev.tech/api/v1/bookings';
 
   findAllBookings(page: number = 1, size: number = 10, sort: string = 'id,asc', checkIn: string = '', checkOut: string = '',
       hotelId: number | string = '', minPrice: number | string = '', maxPrice: number | string = '', 

@@ -1,0 +1,62 @@
+name: Continuous Integration with Github Actions
+
+on:
+    push:
+      branches: 
+        - main 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📑 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 📩 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '21'
+
+      - name: 📩 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+            node-version: '21'
+  
+      - name: 📥 Installing Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+            context: .
+            dockerfile: Dockerfile
+            push: false
+            tags: |
+                ${{ secrets.DOCKER_HUB_USERNAME }}/booking-app-frontend:latest 
+                ${{ secrets.DOCKER_HUB_USERNAME }}/booking-app-frontend:${{ github.run_id }}
+    
+      - name: Push to Docker Hub Container Registry
+        run: |
+            docker image push ${{ secrets.DOCKER_HUB_USERNAME }}/booking-app-frontend:${{ github.run_id }}
+            docker image push ${{ secrets.DOCKER_HUB_USERNAME }}/booking-app-frontend:latest      
+
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+       - name: Update application image
+         run: |
+           cd /root
+           sudo docker compose pull booking-app-frontend
+           sudo docker compose rm -fs booking-app-frontend
+           sudo docker compose up -d booking-app-frontend
+
+
+    
