@@ -1,5 +1,5 @@
 <div class="cartao">
-    <span class="cartao__title text-center text-xl md:text-2xl">Pagamento via cartão de crédito</span>
+    <span class="cartao__title hidden md:flex text-center md:text-2xl">Pagamento via cartão de crédito</span>
     @if (creditCards$ | async; as response) {
         <app-credit-card 
             class="w-full md:w-3/4"

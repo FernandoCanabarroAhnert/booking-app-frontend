@@ -7,7 +7,6 @@
     align-items: center;
     gap: 1rem;
     text-align: center;
-    padding: 1.5rem;
 
     &__title {
         line-height: 2.25rem;
@@ -38,8 +37,6 @@
         border: 1px solid variables.$dark-brown-color;
         color: #fff;
         border-radius: 1rem;
-        padding: 1.25rem;
-        font-size: 1.1rem;
         font-weight: 500;
         margin-bottom: 1rem;
         transition: all 0.3s ease-in-out;

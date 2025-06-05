@@ -1,5 +1,5 @@
-<div class="boleto">
-    <span class="boleto__title text-xl sm:text-2xl">Pagamento via boleto</span>
+<div class="boleto p-3 sm:p-4 md:p-6">
+    <span class="boleto__title hidden md:flex md:text-2xl">Pagamento via boleto</span>
     <span class="boleto__subtitle text-base sm:text-lg">Para pagar pelo Internet Banking, copie a linha digitável ou escaneie
         o código de barras. Para pagar em qualquer banco, caixa eletrônico ou lotérica, por favor, imprima o boleto.</span>
     <img src="../../../../../../../assets/img/boleto/codigo-barra.png" alt="Código de Barras" class="w-full sm:w-3/4">
@@ -8,5 +8,5 @@
             <mat-icon (click)="copyText()" class="cursor-pointer">content_copy</mat-icon>
         </button>
     </span>
-    <button class="boleto__button" (click)="printBoletoEmit()">Imprimir Boleto</button>
+    <button class="boleto__button text-[.95rem] sm:text-[1.05rem] md:text-[1.1] p-4 md:p-[1.25rem]" (click)="printBoletoEmit()">Imprimir Boleto</button>
 </div>

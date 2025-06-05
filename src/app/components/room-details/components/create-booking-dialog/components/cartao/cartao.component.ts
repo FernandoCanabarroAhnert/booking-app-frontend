@@ -133,7 +133,7 @@ export class CartaoComponent implements OnInit, OnChanges {
     })
   }
 
-  private getMyCreditCards(page: number = 1, size: number = 2): void {
+  private getMyCreditCards(page: number = 1, size: number = 1): void {
     this.creditCards$ = this._creditCardService.getMyCreditCards(page, size);
   }
 

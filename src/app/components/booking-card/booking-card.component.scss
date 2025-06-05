@@ -41,7 +41,6 @@
         cursor: pointer;
         position: relative;
         transition: all 0.3s ease-in-out;
-        font-size: 1.1rem;
         font-weight: 500;
         &:hover  {
             transform: translateY(-1px) scale(1.05);  
@@ -52,7 +51,7 @@
         display: flex;
         justify-content: space-evenly;
         align-items: center;
-        padding: .625rem;
+        padding: .325rem;
         border-radius: .625rem;
         background-color: #f8f7f4;
     }
@@ -64,12 +63,10 @@
     }
 
     &__subtitle {
-        font-size: 1.15rem;
         color: variables.$light-brown-color;
     }
 
     &__text {
-        font-size: 0.95rem;
         color: variables.$dark-brown-color;
     }
 

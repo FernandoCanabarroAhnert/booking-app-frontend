@@ -7,17 +7,17 @@
                     <span class="booking-card__room-name">Quarto № {{ booking.room.number }}, {{ booking.room.type | roomType }}</span>
                     <span class="booking-card__hotel-name">{{ booking.room.hotelName }}</span>
                 </div>
-                <button (click)="onBookingInfosClick(booking.id)" class="booking-card__button">Ver Detalhes</button>
+                <button (click)="onBookingInfosClick(booking.id)" class="booking-card__button text-[.9rem] sm:text-[1.1rem]">Ver Detalhes</button>
             </div>
             <div class="booking-card__body">
                 <div class="booking-card__date">
-                    <span class="booking-card__subtitle">CHECK-IN</span>
-                    <span class="booking-card__text">{{ booking.checkIn | date: 'dd/MM/yyyy' }}</span>
+                    <span class="booking-card__subtitle sm:text-[1.15rem]">CHECK-IN</span>
+                    <span class="booking-card__text sm:text-[.95rem]">{{ booking.checkIn | date: 'dd/MM/yyyy' }}</span>
                 </div>
-                <span class="booking-card__button">{{ nights }} noite(s)</span>
+                <span class="booking-card__button text-[.9rem] sm:text-[1.1rem]">{{ nights }} noite(s)</span>
                 <div class="booking-card__date">
-                    <span class="booking-card__subtitle">CHECK-OUT</span>
-                    <span class="booking-card__text">{{ booking.checkOut | date: 'dd/MM/yyyy' }}</span>
+                    <span class="booking-card__subtitle sm:text-[1.15rem]">CHECK-OUT</span>
+                    <span class="booking-card__text sm:text-[.95rem]">{{ booking.checkOut | date: 'dd/MM/yyyy' }}</span>
                 </div>
             </div>
             <div class="booking-card__footer">
@@ -29,7 +29,7 @@
                         {{ booking.payment.paymentType| paymentType }}
                     </span>
                 </div>
-                <button (click)="onRoomRatingClick(booking.room.id)" class="booking-card__button">Avaliar Quarto</button>
+                <button (click)="onRoomRatingClick(booking.room.id)" class="booking-card__button text-[.9rem] sm:text-[1.1rem]">Avaliar Quarto</button>
             </div>
         </div>
     }
