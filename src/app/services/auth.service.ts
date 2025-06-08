@@ -17,7 +17,7 @@ import { INewPasswordRequest } from '../interfaces/user/new-password-request.int
 export class AuthService {
 
   private readonly _http = inject(HttpClient);
-  private readonly _baseUrl = 'http://localhost:8080/api/v1/auth';
+  private readonly _baseUrl = 'https://booking-api.fernandocanabarrodev.tech/api/v1/auth';
 
   static isAuthenticated(): boolean {
     const token = localStorage.getItem('access-token');
