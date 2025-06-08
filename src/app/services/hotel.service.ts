@@ -15,7 +15,7 @@ import { APPLY_AUTH_TOKEN } from '../interceptors/auth.interceptor';
 export class HotelService {
 
   private readonly _http = inject(HttpClient);
-  private readonly _baseUrl = 'https://booking-api.fernandocanabarrodev.tech/api/v1/hotels';
+  private readonly _baseUrl = 'http://localhost:8080/api/v1/hotels';
 
   findAllByName(name: string): Observable<IHotelSearchResponse[]> {
     return this._http.get<IHotelSearchResponse[]>(`${this._baseUrl}/search`, { params: { name } });

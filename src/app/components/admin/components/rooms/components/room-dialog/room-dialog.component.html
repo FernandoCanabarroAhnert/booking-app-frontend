@@ -1,7 +1,7 @@
 <div class="room-dialog">
     <span class="text-3xl font-thin">{{ dialogTitle }}</span>
     @if (isCreateForm || isUpdateForm) {
-        <form [formGroup]="roomForm" class="flex flex-col">
+        <form [formGroup]="roomForm" class="flex flex-col gap-y-4">
             <div class="flex gap-8">
                 <div class="room-dialog__field w-1/2">
                     <mat-form-field>
@@ -94,6 +94,7 @@
                 </div>
             }
             <div class="w-full flex gap-6">
+                <button class="room-dialog__button room-dialog__button--cancel" [mat-dialog-close]="false">Cancelar</button>
                 <button class="room-dialog__button" (click)="onCloseDialog()">{{ buttonAction }}</button>
             </div>
         </form>

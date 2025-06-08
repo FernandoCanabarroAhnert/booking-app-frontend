@@ -170,7 +170,7 @@ export class BookingFormComponent {
 
   private validateCheckInAndCheckOut() {
     this.unavailableDates.map(dateStr => new Date(dateStr)).some(date => {
-      const invalidDate = this.checkIn.value < date && this.checkOut.value > date;
+      const invalidDate = this.checkIn.value <= date && this.checkOut.value >= date;
       if (invalidDate) {
         this.checkIn.setErrors({ matDatepickerFilter: true });
         this.checkOut.setErrors({ matDatepickerFilter: true });

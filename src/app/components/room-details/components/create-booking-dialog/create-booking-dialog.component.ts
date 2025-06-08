@@ -127,6 +127,12 @@ export class CreateBookingDialogComponent implements OnInit {
   get isOnlinePayment(): FormControl {
     return this.paymentData.get('isOnlinePayment') as FormControl;
   }
+  get installmentQuantity(): FormControl {
+    return this.paymentData.get('installmentQuantity') as FormControl;
+  }
+  get creditCardId(): FormControl {
+    return this.paymentData.get('creditCardId') as FormControl;
+  }
 
   onCheckInChange(event: MatDatepickerInputEvent<Date>) {
       this.checkOutMinDate = new Date(this.bookingData.value.checkIn!.getTime() + this.milisecondsInDay);
@@ -150,6 +156,16 @@ export class CreateBookingDialogComponent implements OnInit {
 
   closeDialog() {
     this.validateCheckInAndCheckOut();
+    if (this.paymentType.value === 2) {
+      if (!this.installmentQuantity.value) {
+        this.paymentData.setErrors({ requiredInstallmentQuantity: true });
+        return;
+      }
+      if (!this.creditCardId.value) {
+        this.paymentData.setErrors({ requiredCreditCard: true });
+        return;
+      }
+    }
     if (this.bookingData.invalid || this.paymentData.invalid) {
       if (this.bookingData.invalid) {
         this.bookingData.markAllAsTouched();
@@ -181,7 +197,7 @@ export class CreateBookingDialogComponent implements OnInit {
 
   private validateCheckInAndCheckOut() {
     this.unavailableDates.map(dateStr => new Date(dateStr)).some(date => {
-      const invalidDate = this.checkIn.value < date && this.checkOut.value > date;
+      const invalidDate = this.checkIn.value <= date && this.checkOut.value >= date;
       if (invalidDate) {
         this.checkIn.setErrors({ matDatepickerFilter: true });
         this.checkOut.setErrors({ matDatepickerFilter: true });

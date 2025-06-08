@@ -65,7 +65,6 @@ export class UserInfosComponent implements OnInit {
 
   createUpdateInfosForm() {
     this._authService.getMe().subscribe(user => {
-      const birthDate = `${user.birthDate.substring(8)}/${user.birthDate.substring(5, 7)}/${user.birthDate.substring(0, 4)}`;
       this.updateInfosForm = this._fb.group({
         fullName: [user.fullName, [Validators.required]],
         email: [user.email, [Validators.required, Validators.pattern(this.emailPattern)]],
@@ -85,6 +84,9 @@ export class UserInfosComponent implements OnInit {
   }
 
   onUpdateInfosFormSubmit() {
+    if ((!this.fullName.touched || !this.fullName.dirty) && (!this.email.touched || !this.email.dirty) && (!this.phone.touched || !this.phone.dirty)) {
+      return;
+    }
     if (this.updateInfosForm.invalid) {
       this.updateInfosForm.markAllAsTouched();
       return;

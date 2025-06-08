@@ -14,7 +14,7 @@ import { IUserSearchResponse } from '../interfaces/user/user-search-response.int
 export class UserService {
 
   private readonly _http = inject(HttpClient);
-  private readonly _baseUrl = 'https://booking-api.fernandocanabarrodev.tech/api/v1/users';
+  private readonly _baseUrl = 'http://localhost:8080/api/v1/users';
 
   findAllByCpf(cpf: string): Observable<IUserSearchResponse[]> {
     return this._http.get<IUserSearchResponse[]>(`${this._baseUrl}/search`, { params: { cpf } });

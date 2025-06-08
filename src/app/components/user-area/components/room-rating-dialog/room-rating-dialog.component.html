@@ -45,7 +45,8 @@
                 <mat-error *ngIf="description.hasError('required')">Campo Requerido</mat-error>
             }
         </div>
-        <div class="w-full flex mt-3">
+        <div class="w-full flex gap-4 mt-3">
+            <button class="room-rating-dialog__button room-rating-dialog__button--cancel" [mat-dialog-close]="false">Cancelar</button>
             <button class="room-rating-dialog__button">{{ isCreate ? 'Adicionar' : 'Atualizar' }}</button>
         </div>
     </form>

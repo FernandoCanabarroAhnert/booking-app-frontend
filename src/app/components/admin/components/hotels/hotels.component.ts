@@ -93,7 +93,14 @@ export class HotelsComponent implements OnInit {
           this.findAllHotels();
         },
         error: (error: HttpErrorResponse) => {
-          console.error(error);
+          const INVALID_DATA_ERROR = error.status === 422;
+          const INTERNAL_SERVER_ERROR = error.status >= 500;
+          if (INVALID_DATA_ERROR) {
+            this._snackBarServce.showSnackBar('Dados inválidos. Verifique os campos e tente novamente.', 'Fechar');
+          }
+          if (INTERNAL_SERVER_ERROR) {
+            this._snackBarServce.showSnackBar('Ocorreu um erro inesperado. Tente novamente mais tarde.', 'Fechar');
+          }
         }
       })
     });
@@ -120,7 +127,18 @@ export class HotelsComponent implements OnInit {
               this.findAllHotels();
             },
             error: (error: HttpErrorResponse) => {
-              console.error(error);
+              const NOT_FOUND_ERROR = error.status === 404;
+              const INVALID_DATA_ERROR = error.status === 422;
+              const INTERNAL_SERVER_ERROR = error.status >= 500;
+              if (NOT_FOUND_ERROR) {
+                this._snackBarServce.showSnackBar('Hotel não encontrado.', 'Fechar');
+              }
+              if (INVALID_DATA_ERROR) {
+                this._snackBarServce.showSnackBar('Dados inválidos. Verifique os campos e tente novamente.', 'Fechar');
+              }
+              if (INTERNAL_SERVER_ERROR) {
+                this._snackBarServce.showSnackBar('Ocorreu um erro inesperado. Tente novamente mais tarde.', 'Fechar');
+              }
             }
           });
         });

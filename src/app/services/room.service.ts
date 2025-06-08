@@ -15,7 +15,7 @@ import { IRoomRatingResponse } from '../interfaces/room/room-rating-response.int
 export class RoomService {
 
   private readonly _http = inject(HttpClient);
-  private readonly baseUrl: string = 'https://booking-api.fernandocanabarrodev.tech/api/v1/rooms';
+  private readonly baseUrl: string = 'http://localhost:8080/api/v1/rooms';
 
   findAllRoomsWithFilter(page: number, size: number, checkIn: string, 
                         checkOut: string, city: string = '', 

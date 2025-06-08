@@ -4,7 +4,7 @@
     <mat-tab-group>
         <mat-tab label="Dados pessoais">
             @if (updateInfosForm) {
-                <form [formGroup]="updateInfosForm" class="md:grid md:grid-cols-2 gap-4 md:gap-6 p-6 pb-0" (ngSubmit)="onUpdateInfosFormSubmit()">
+                <form [formGroup]="updateInfosForm" class="flex flex-col gap-y-4 md:grid md:grid-cols-2 gap-4 md:gap-6 p-6 pb-0" (ngSubmit)="onUpdateInfosFormSubmit()">
                     <div class="user-infos__item">
                         <mat-form-field>
                             <mat-label>Nome Completo</mat-label>
@@ -34,10 +34,8 @@
                             <mat-error *ngIf="phone.hasError('mask')">Formato Inválido</mat-error>
                         }
                     </div>
-                    <div class="my-3">
-                        <mat-error *ngIf="updateInfosForm.hasError('invalidData')">Dados inválidos. Por favor revise-os.</mat-error>
-                        <mat-error *ngIf="updateInfosForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde.</mat-error>
-                    </div>
+                    <mat-error *ngIf="updateInfosForm.hasError('invalidData')">Dados inválidos. Por favor revise-os.</mat-error>
+                    <mat-error *ngIf="updateInfosForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde.</mat-error>
                     <div class="col-span-2">
                         <button class="user-infos__button user-infos__button--light-brown">Editar Dados</button>
                     </div>
@@ -46,7 +44,7 @@
         </mat-tab>
         <mat-tab label="Alterar senha">
             <div class="lg:w-2/4">
-                <form [formGroup]="updatePasswordForm" class="gap-6 p-6 pb-0" (ngSubmit)="onUpdatePasswordFormSubmit()">
+                <form [formGroup]="updatePasswordForm" class="flex flex-col gap-y-4 p-6 pb-0" (ngSubmit)="onUpdatePasswordFormSubmit()">
                     <div class="user-infos__item">
                         <mat-form-field>
                             <mat-label>Senha Atual</mat-label>
@@ -81,10 +79,8 @@
                             <mat-error *ngIf="passwordConfirmation.hasError('passwordMismatch')">As senhas devem ser iguais</mat-error>
                         }
                     </div>
-                    <div class="my-3">
-                        <mat-error *ngIf="updatePasswordForm.hasError('invalidData')">Dados inválidos. Por favor revise-os.</mat-error>
-                        <mat-error *ngIf="updatePasswordForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde.</mat-error>
-                    </div>
+                    <mat-error *ngIf="updatePasswordForm.hasError('invalidData')">Dados inválidos. Por favor revise-os.</mat-error>
+                    <mat-error *ngIf="updatePasswordForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde.</mat-error>
                     <div class="col-span-2">
                         <button class="user-infos__button user-infos__button--dark-brown">Alterar Senha</button>
                     </div>

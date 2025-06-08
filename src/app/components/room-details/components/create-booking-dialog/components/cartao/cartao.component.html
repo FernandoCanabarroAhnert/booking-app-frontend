@@ -92,8 +92,8 @@
     </div>
     <div class="w-full border-2 border-400-gray my-6"></div>
     <mat-form-field class="w-full">
-        <mat-label>Quantidade de Parcelas:</mat-label>
-        <mat-select formControlName="guestsQuantity">
+        <mat-label>Quantidade de Parcelas*</mat-label>
+        <mat-select>
             @for (value of installments.keys(); track value) {
                 <mat-option (onSelectionChange)="selectedInstallmentQuantityEmit($event)" [value]="value">{{value}}x de {{ installments.get(value) | currency: 'BRL' }}</mat-option>
             }

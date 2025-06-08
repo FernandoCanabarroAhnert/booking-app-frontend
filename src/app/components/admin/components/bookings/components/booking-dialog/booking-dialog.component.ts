@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { IBookingDetailResponse } from '../../../../../../interfaces/booking/booking-detail-response.interface';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,11 +13,12 @@ import { map, Observable, startWith } from 'rxjs';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { CommonModule } from '@angular/common';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { IAdminCreateBookingRequest } from '../../../../../../interfaces/booking/admin-create-booking-request.interface';
 import { IRoomDetailResponse } from '../../../../../../interfaces/room/room-detail-response.interface';
 import { RoomTypePipe } from '../../../../../../pipes/room-type.pipe';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { formatDateToISODate } from '../../../../../../utils/date-utils';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-booking-dialog',
@@ -33,7 +34,10 @@ import { formatDateToISODate } from '../../../../../../utils/date-utils';
     MatAutocompleteModule,
     CommonModule,
     RoomTypePipe,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatDialogModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [
     provideNativeDateAdapter()

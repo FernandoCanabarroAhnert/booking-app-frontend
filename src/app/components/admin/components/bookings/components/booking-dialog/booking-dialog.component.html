@@ -1,7 +1,12 @@
 <div class="booking-dialog p-4 gap-3 lg:p-10 lg:gap-6">
-    <span class="text-3xl font-thin">{{ dialogTitle }}</span>
+    <div class="flex items-center justify-between">
+        <span class="text-3xl font-thin">{{ dialogTitle }}</span>
+        @if (isView) {
+            <mat-icon class="booking-dialog__close" [mat-dialog-close]="false" matTooltip="Fechar">close</mat-icon>
+        }
+    </div>
     @if (isCreateForm || isUpdateForm) {
-        <form [formGroup]="bookingForm" class="flex flex-col">
+        <form [formGroup]="bookingForm" class="flex flex-col gap-y-4">
             <div class="flex gap-8">
                 <div class="booking-dialog__field w-1/2">
                     <mat-form-field class="w-full">
@@ -130,6 +135,7 @@
                 </div>
             </div>
             <div class="w-full flex gap-6">
+                <button class="booking-dialog__button booking-dialog__button--cancel" [mat-dialog-close]="false">Cancelar</button>
                 <button class="booking-dialog__button" (click)="onCloseDialog()">{{ buttonAction }}</button>
             </div>
         </form>

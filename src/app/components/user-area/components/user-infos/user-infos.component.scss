@@ -34,6 +34,7 @@
     &__item {
         display: flex;
         flex-direction: column;
+        gap: .5rem;
     }
 
     &__subtitle {
@@ -87,4 +88,9 @@
     --mat-tab-header-active-hover-label-text-color: #a89172 !important;
     --mat-tab-header-active-focus-indicator-color: #a89172 !important;
     --mat-tab-header-active-hover-indicator-color: #a89172 !important;
+}
+
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+    display: none;
 }

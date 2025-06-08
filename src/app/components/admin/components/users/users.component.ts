@@ -120,7 +120,26 @@ export class UsersComponent {
               this.findAllUsers();
             },
             error: (error: HttpErrorResponse) => {
-              console.error(error);
+              const NOT_FOUND_ERROR = error.status === 404;
+              const EMAIL_ALREADY_EXISTS_ERROR = error.status === 409 && error.error.message.includes('E-mail');
+              const CPF_ALREADY_EXISTS_ERROR = error.status === 409 && error.error.message.includes('CPF');
+              const INVALID_DATA_ERROR = error.status === 422;
+              const SERVER_ERROR = error.status >= 500;
+              if (NOT_FOUND_ERROR) {
+                this._snackBarServce.showSnackBar('Usuário não encontrado.', 'Fechar');
+              }
+              if (EMAIL_ALREADY_EXISTS_ERROR) {
+                this._snackBarServce.showSnackBar('Este E-mail já está em uso por outro usuário.', 'Fechar');
+              }
+              if (CPF_ALREADY_EXISTS_ERROR) {
+                this._snackBarServce.showSnackBar('Este CPF já está em uso por outro usuário.', 'Fechar');
+              }
+              if (INVALID_DATA_ERROR) {
+                this._snackBarServce.showSnackBar('Dados inválidos. Verifique os campos e tente novamente.', 'Fechar');
+              }
+              if (SERVER_ERROR) {
+                this._snackBarServce.showSnackBar('Ocorreu um erro inesperado. Tente novamente mais tarde.', 'Fechar');
+              }
             }
           });
         });

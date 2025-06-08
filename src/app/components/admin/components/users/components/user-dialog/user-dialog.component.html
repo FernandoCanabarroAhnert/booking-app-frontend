@@ -1,7 +1,7 @@
 <div class="user-dialog">
     <span class="text-3xl font-thin">{{ dialogTitle }}</span>
     @if (isCreateForm || isUpdateForm) {
-        <form [formGroup]="userForm" class="flex flex-col">
+        <form [formGroup]="userForm" class="flex flex-col gap-y-4">
             <div class="flex gap-8">
                 <div class="user-dialog__field w-1/2">
                     <mat-form-field>
@@ -111,6 +111,7 @@
                 </div>
             }
             <div class="w-full flex gap-6">
+                <button class="user-dialog__button user-dialog__button--cancel" [mat-dialog-close]="false">Cancelar</button>
                 <button class="user-dialog__button" (click)="onCloseDialog()">{{ buttonAction }}</button>
             </div>
         </form>

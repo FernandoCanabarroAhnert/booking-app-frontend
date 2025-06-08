@@ -58,7 +58,8 @@
             <mat-checkbox formControlName="pix" value="DINHEIRO">Pix</mat-checkbox>
             <mat-checkbox formControlName="boleto" value="DINHEIRO">Boleto</mat-checkbox>
         </div>
-        <div class="w-full flex justify-start">
+        <div class="w-full flex gap-4 justify-start">
+            <button class="booking-pdf-dialog__button booking-pdf-dialog__button--cancel" [mat-dialog-close]="false">Cancelar</button>
             <button class="booking-pdf-dialog__button" (click)="onSubmit()">Gerar PDF</button>
         </div>
     </form>

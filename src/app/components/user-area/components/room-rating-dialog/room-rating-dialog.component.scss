@@ -20,15 +20,22 @@
     &__button {
         background-color: variables.$light-brown-color;
         border-radius: .625rem;
-        padding: .5rem .75rem;
         color: #FFF;
         cursor: pointer;
         position: relative;
         transition: all 0.3s ease-in-out;
-        font-size: 1.1rem;
+        padding: .75rem 1rem;
+        font-size: 1.175rem;
         font-weight: 500;
         &:hover  {
             transform: translateY(-1px) scale(1.05);  
+        }
+        &:active {
+            bottom: -1px;
+        }
+        &--cancel {
+            background-color: variables.$light-color;
+            color: #000;
         }
     }
 

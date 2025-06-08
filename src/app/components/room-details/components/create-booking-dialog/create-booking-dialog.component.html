@@ -42,7 +42,8 @@
             </div>
         </form>
       </div>
-      <div class="flex gap-4">
+      <div class="flex gap-2 md:gap-4">
+        <button mat-raised-button [mat-dialog-close]="false">Fechar</button>
         <button mat-flat-button matStepperNext color="primary">Próximo</button>
       </div>
     </mat-step>
@@ -65,10 +66,11 @@
         <app-boleto *ngIf="paymentType.value === 4" (printBoletoEmitter)="printBoleto()"></app-boleto>
       </form>
       </div>
-      <div class="flex gap-4">
+      <div class="flex gap-2 md:gap-4">
+          <button mat-raised-button [mat-dialog-close]="false">Fechar</button>
           <button mat-stroked-button color="primary" matStepperPrevious>Voltar</button>
           <button mat-flat-button matStepperNext color="primary">Próximo</button>
-        </div>
+      </div>
     </mat-step>
     <mat-step class="create-booking-dialog__stepper" label="Confirmação dos Dados">
       <div class="create-booking-dialog__confirmation md:p-4">
@@ -102,11 +104,15 @@
       <div class="flex flex-col text-lg">
           <mat-error *ngIf="bookingData.hasError('invalidData')" class="create-booking-dialog__error">Dados da Reserva Inválidos. Por favor revise-os.</mat-error>
           <mat-error *ngIf="paymentData.hasError('invalidData')" class="create-booking-dialog__error">Dados do Pagamento Inválidos. Por favor revise-os.</mat-error>
-      </div>
-      <mat-dialog-actions class="flex gap-4">
+          <mat-error *ngIf="paymentData.hasError('requiredInstallmentQuantity')" class="create-booking-dialog__error">É necessário fornecer a quantidade de parcelas.</mat-error>
+          <mat-error *ngIf="paymentData.hasError('requiredCreditCard')" class="create-booking-dialog__error">É necessário selecionar um cartão para realizar o pagamento</mat-error>
+
+        </div>
+      <div class="flex gap-2 md:gap-4 my-3">
+        <button mat-raised-button [mat-dialog-close]="false">Fechar</button>
         <button mat-stroked-button color="primary" matStepperPrevious>Voltar</button>
         <button mat-flat-button matStepperNext color="primary" (click)="closeDialog()">Finalizar</button>
-      </mat-dialog-actions>
+      </div>
     </mat-step>
   </mat-stepper>
 </div>

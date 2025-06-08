@@ -240,18 +240,14 @@ export class UserDialogComponent {
         email: [
           '', 
           {
-            validators: [Validators.required, Validators.pattern(this.emailPattern)],
-            asyncValidators: [this.emailValidatorService.validate.bind(this.emailValidatorService)],
-            updateOn: 'blur'
+            validators: [Validators.required, Validators.pattern(this.emailPattern)]
           }
         ],
         phone: ['', Validators.required],
         cpf: [
           '',
           {
-            validators: [Validators.required],
-            asyncValidators: [this.cpfValidatorService.validate.bind(this.cpfValidatorService)],
-            updateOn: 'blur'
+            validators: [Validators.required]
           }
         ],
         birthDate: [null, Validators.required],

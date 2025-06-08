@@ -49,6 +49,10 @@
         &:active {
             bottom: -1px;
         }
+        &--cancel {
+            background-color: variables.$light-color;
+            color: #000;
+        }
     }
 
 }

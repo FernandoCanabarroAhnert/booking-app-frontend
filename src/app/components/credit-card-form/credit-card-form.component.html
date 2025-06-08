@@ -2,7 +2,7 @@
     <span class="text-4xl font-thin">Adicionar Cartão</span>
     <div class="w-[15%] border-2 border-gray-300 my-3"></div>
     <form [formGroup]="addCreditCardForm" (ngSubmit)="onSubmit()" class="p-6">
-        <div class="w-full flex flex-col md:flex-row md:justify-evenly">
+        <div class="w-full flex flex-col md:flex-row md:justify-evenly gap-y-4">
             <div class="credit-card-form__field">
                 <mat-form-field>
                     <mat-label>Nome do Titular</mat-label>
@@ -23,7 +23,7 @@
                 }
             </div>
         </div>
-        <div class="w-full flex flex-col md:flex-row md:justify-evenly">
+        <div class="w-full flex flex-col md:flex-row md:justify-evenly gap-y-4 mt-4">
             <div class="credit-card-form__field">
                 <mat-form-field>
                     <mat-label>CVV</mat-label>
@@ -58,6 +58,9 @@
         </div>
         <mat-error *ngIf="addCreditCardForm.hasError('invalidData')">Dados Inválidos. Por favor, revise-os</mat-error>
         <mat-error *ngIf="addCreditCardForm.hasError('serverError')">Ocorreu um erro inesperado. Tente novamente mais tarde</mat-error>
-        <button class="credit-card-form__submit" type="submit">Adicionar</button>
+        <div class="flex items-center gap-4">
+            <button class="credit-card-form__button credit-card-form__button--cancel" [mat-dialog-close]="false">Cancelar</button>
+            <button class="credit-card-form__button" type="submit">Adicionar</button>
+        </div>
     </form>
 </div>
