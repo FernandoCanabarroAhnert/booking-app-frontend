@@ -1,6 +1,6 @@
 <div class="admin-login h-[100dvh]">
     <div class="container mx-auto flex flex-col items-center justify-center h-full">
-        <img [src]="'../../../assets/img/logo-com-cor.svg'" alt="Logo do Hotel colorido" class="admin-login__logo" routerLink="/" matTooltip="Voltar à página inicial" matTooltipPosition="above"/>
+        <img src="../../../assets/img/LOGO COM COR.png" class="admin-login__logo" routerLink="/" matTooltip="Voltar à página inicial" matTooltipPosition="above"/>
         <form class="admin-login__form" [formGroup]="adminLoginForm" (ngSubmit)="onSubmit()">
             <input class="auth-form__input auth-form__input--dark-brown admin-login__input" type="text" placeholder="E-mail" formControlName="email">
             <div class="auth-form__error auth-form__error--dark-brown" *ngIf="email.invalid && (email.dirty || email.touched)">
