@@ -36,7 +36,7 @@ export class HotelsComponent implements OnInit {
 
   searchForm: FormGroup = {} as FormGroup;
   hotels$!: Observable<IPageResponse<HotelList>>;
-  displayedColumns = ['id', 'name', 'description', 'roomQuantity', 'fullAddress', 'actions'];
+  displayedColumns = ['id', 'name', 'description', 'fullAddress', 'actions'];
 
   private readonly _hotelService = inject(HotelService);
   private readonly _matDialog = inject(MatDialog);

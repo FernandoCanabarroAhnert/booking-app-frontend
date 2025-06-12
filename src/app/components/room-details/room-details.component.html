@@ -23,13 +23,15 @@
                         }
                     </div>
                 </div>
-                <div class="room-details__booking mt-6 lg:mt-0">
-                    <app-booking-form 
-                        [roomId]="room.id"
-                        [capacity]="room.capacity" 
-                        [pricePerNight]="room.pricePerNight"
-                        [unavailableDates]="room.unavailableDates"></app-booking-form>
-                </div>
+                @if(room && room.unavailableDates) {
+                    <div class="room-details__booking mt-6 lg:mt-0">
+                        <app-booking-form 
+                            [roomId]="room.id"
+                            [capacity]="room.capacity" 
+                            [pricePerNight]="room.pricePerNight"
+                            [unavailableDates]="room.unavailableDates"></app-booking-form>
+                    </div>
+                }
             </div>
         </div>
         @if (room.averageRating && room.ratingsQuantity) {

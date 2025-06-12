@@ -33,7 +33,9 @@ import { ICreateBooking } from '../../../../interfaces/booking/create-booking.in
   templateUrl: './booking-form.component.html',
   styleUrl: './booking-form.component.scss'
 })
-export class BookingFormComponent {
+export class BookingFormComponent implements OnInit {
+
+  bookingForm: FormGroup = {} as FormGroup;
 
   _capacity: number = 1;
 
@@ -47,7 +49,7 @@ export class BookingFormComponent {
     this.capacityOptions = Array.from({ length: this._capacity }, (_, i) => i + 1);
   }
   @Input({ required: true })
-  unavailableDates!: Date[];
+  unavailableDates!: string[];
 
   private readonly _bookingService = inject(BookingService);
   private readonly _matDialog = inject(MatDialog);
@@ -58,11 +60,13 @@ export class BookingFormComponent {
   milisecondsInDay = 86400000;
   checkOutMinDate = new Date(this.today.getTime() + this.milisecondsInDay);
 
-  bookingForm = new FormGroup({
-    checkIn: new FormControl<Date | null>(this.today),
-    checkOut: new FormControl<Date | null>(new Date(this.today.getTime() + this.milisecondsInDay)),
-    guestsQuantity: new FormControl(1, [Validators.required])
-  });
+  ngOnInit(): void {
+    this.bookingForm = new FormGroup({
+      checkIn: new FormControl<Date | null>(this.today),
+      checkOut: new FormControl<Date | null>(new Date(this.today.getTime() + this.milisecondsInDay)),
+      guestsQuantity: new FormControl(1, [Validators.required])
+    });
+  }
 
   capacityOptions = Array.from({ length: this._capacity }, (_, i) => i + 1);
 
@@ -96,20 +100,20 @@ export class BookingFormComponent {
   }
 
   onCheckInChange(event: MatDatepickerInputEvent<Date>) {
-    this.checkOutMinDate = new Date(this.bookingForm.value.checkIn!.getTime() + this.milisecondsInDay);
-    if (event.value && this.bookingForm.value.checkOut) {
-      if (event.value.getTime() >= this.bookingForm.value.checkOut.getTime()) {
+    this.checkOutMinDate = new Date(this.checkIn!.value.getTime() + this.milisecondsInDay);
+    if (event.value && this.checkOut) {
+      if (event.value.getTime() >= this.checkOut.value.getTime()) {
         this.bookingForm.patchValue({ checkOut: new Date(event.value.getTime() + this.milisecondsInDay)});
       }
     }
     this.validateCheckInAndCheckOut();
   }
-
+  
   onCheckOutChange(event: MatDatepickerInputEvent<Date>) {
-    this.checkOutMinDate = new Date(this.bookingForm.value.checkIn!.getTime() + this.milisecondsInDay);
-    if (event.value && this.bookingForm.value.checkIn) {
-      if (event.value.getTime() < this.bookingForm.value.checkIn.getTime()) {
-        this.bookingForm.patchValue({ checkOut: this.bookingForm.value.checkIn, checkIn: event.value });
+    this.checkOutMinDate = new Date(this.checkIn!.value.getTime() + this.milisecondsInDay);
+    if (event.value && this.checkIn) {
+      if (event.value.getTime() < this.checkIn.value.getTime()) {
+        this.bookingForm.patchValue({ checkOut: this.checkIn.value, checkIn: event.value });
       }
     }
     this.validateCheckInAndCheckOut();

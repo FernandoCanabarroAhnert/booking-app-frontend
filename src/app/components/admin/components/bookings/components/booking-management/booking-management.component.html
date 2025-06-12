@@ -38,7 +38,7 @@
                 <th mat-header-cell *matHeaderCellDef class="content-center">Ações</th>
                 <td mat-cell *matCellDef="let element" class="content-center">
                     <button class="booking-management__action-button booking-management__action-button--view" (click)="onViewButtonClick(element.id)"><mat-icon class="booking-management__icon">visibility</mat-icon></button>
-                    <button class="booking-management__action-button booking-management__action-button--edit mx-2" (click)="onEditButtonClick(element.id)"><mat-icon class="booking-management__icon">edit</mat-icon></button>
+                    <button class="booking-management__action-button booking-management__action-button--edit mx-1" (click)="onEditButtonClick(element.id)"><mat-icon class="booking-management__icon">edit</mat-icon></button>
                     <button class="booking-management__action-button booking-management__action-button--delete" (click)="onDeleteButtonClick(element.id)"><mat-icon class="booking-management__icon">delete</mat-icon></button>
                 </td>
             </ng-container>

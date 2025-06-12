@@ -8,7 +8,7 @@
             <p class="booking-form__text">Selecione a data de Check-in e de Check-Out:</p>
             <div class="booking-form__datepicker">
                 <mat-form-field>
-                    <mat-label>Data de Check-In:</mat-label>
+                  <mat-label>Data de Check-In:</mat-label>
                     <input matInput [matDatepickerFilter]="dateFilter" [matDatepicker]="checkin" formControlName="checkIn" [min]="today" (dateChange)="onCheckInChange($event)">
                     <mat-datepicker-toggle matIconSuffix [for]="checkin"></mat-datepicker-toggle>
                     <mat-datepicker #checkin></mat-datepicker>

@@ -4,6 +4,6 @@ import { IBaseRoomResponse } from "./base-room-response.interface";
 
 export interface IRoomDetailResponse extends IBaseRoomResponse {
     hotel: IHotelResponse;
-    unavailableDates: Date[];
+    unavailableDates: string[];
     images: IImageResponse[];
 }
