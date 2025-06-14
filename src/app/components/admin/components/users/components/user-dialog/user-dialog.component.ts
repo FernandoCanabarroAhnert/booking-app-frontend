@@ -137,7 +137,13 @@ export class UserDialogComponent {
   }   
 
   onCloseDialog() {
-    if (this.userForm.invalid) {
+    const isWorkingHotelIdRequired = this.isAdmin && (this.isCreateForm || this.isUpdateForm) && (this.roles.value.includes(2) || this.roles.value.includes(3)) && !this.hotel.value;
+    if (isWorkingHotelIdRequired) {
+      this.hotel.markAsTouched();
+      this.hotel.setErrors({ required: true });
+    }
+    else this.hotel.setErrors(null);
+    if (this.userForm.invalid || isWorkingHotelIdRequired) {
       this.userForm.markAllAsTouched();
       return;
     }
@@ -165,7 +171,6 @@ export class UserDialogComponent {
     const birthDateRaw = this.birthDate.value.replace('/', '');
     const birthDate = `${birthDateRaw.substring(4)}-${birthDateRaw.substring(2,4)}-${birthDateRaw.substring(0,2)}`.replace('/', '');
     const phone = /^\(\d{2}\)\s?\d{4,5}-\d{4}$/.test(this.phone.value.trim()) ? this.phone.value : `(${this.phone.value.substring(0,2)}) ${this.phone.value.substring(2, 7)}-${this.phone.value.substring(7)}`
-    console.log(this.userForm.value);
     return {
       fullName: this.fullName.value,
       email: this.email.value,

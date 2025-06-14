@@ -2,7 +2,7 @@
     <span class="text-3xl xl:text-5xl font-thin">Minhas Reservas</span>
     <div class="border-2 border-gray-300 w-[15%] my-2 md:my-4"></div>
     @if (bookings$ | async; as response) {
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-9">
+    <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
         @for (booking of response.content; track booking) {
             <app-booking-card [booking]="booking"
                 (onBookingInfosClickEmitter)="onBookingInfosClick($event)"

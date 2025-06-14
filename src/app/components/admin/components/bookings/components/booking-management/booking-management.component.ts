@@ -114,7 +114,6 @@ export class BookingManagementComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result: IBookingPdfFilterResponse) => {
       if (!result) return;
-      console.log(result);
       this._bookingService.exportToPdf(result.checkIn, result.checkOut, result.minAmount, result.maxAmount,
         result.dinheiro, result.cartao, result.pix, result.boleto, result.hotelId
       )

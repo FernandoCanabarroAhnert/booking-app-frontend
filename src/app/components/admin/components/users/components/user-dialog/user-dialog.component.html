@@ -78,6 +78,9 @@
                                 }
                             </mat-autocomplete>
                         </mat-form-field>
+                        @if (hotel.invalid && (hotel.touched || hotel.dirty)) {
+                            <mat-error *ngIf="hotel.hasError('required')">Campo Requerido</mat-error>
+                        }
                     </div>
                     }
                 </div>

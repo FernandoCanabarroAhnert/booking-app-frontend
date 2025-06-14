@@ -141,7 +141,7 @@
         </form>
     }
     @if (isView) {
-        <div class="grid grid-cols-2">
+        <div class="grid grid-cols-2 lg:grid-cols-3">
             <div class="booking-dialog__view-item p-2 md:p-4">
                 <span class="booking-dialog__subtitle text-base md:text-[1.25rem]">Check-In:</span>
                 <p class="booking-dialog__text text-base md:text-[1.125rem]">{{ bookingData.checkIn | date: 'dd/MM/yyyy' }}</p>
